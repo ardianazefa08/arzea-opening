@@ -23,7 +23,7 @@ body{
     position:relative;
     width:100%;
     min-height:100vh;
-    background: url("images/hero.png") 15% center/cover no-repeat;
+    background: url("images/hero.png") left center/cover no-repeat;
     display:flex;
     justify-content:center;
     align-items:center;
