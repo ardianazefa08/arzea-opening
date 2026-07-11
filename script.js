@@ -1,17 +1,25 @@
-document.addEventListener("DOMContentLoaded", () => {
+const targetDate = new Date("September 19, 2026 18:00:00").getTime();
 
-    const button = document.querySelector("button");
+const countdown = setInterval(() => {
 
-    button.addEventListener("click", () => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
 
-        button.innerHTML = "Welcome...";
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        button.style.transform = "scale(0.95)";
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
 
-        setTimeout(() => {
-            alert("Welcome to ARZEA Lounge & Garden ✨");
-        }, 600);
+    if (distance < 0) {
+        clearInterval(countdown);
 
-    });
+        document.getElementById("timer").innerHTML =
+        "<h2>Grand Opening Has Started</h2>";
+    }
 
-});
+},1000);
