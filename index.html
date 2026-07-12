@@ -223,36 +223,46 @@
 
 <form class="reserve-form">
 
-    <div class="row">
+  <div class="form-group">
+    <span>👤</span>
+    <input type="text" placeholder="Full Name">
+  </div>
 
-        <input type="text" placeholder="👤 Full Name">
+  <div class="form-group">
+    <span>📞</span>
+    <input type="tel" placeholder="Phone Number">
+  </div>
 
-        <input type="tel" placeholder="📞 Phone Number">
+  <div class="form-group">
+    <span>📧</span>
+    <input type="email" placeholder="Email Address">
+  </div>
 
-    </div>
+  <div class="form-group">
+    <span>📅</span>
+    <input type="datetime-local">
+  </div>
 
-    <div class="row">
-
-        <input type="date">
-
-        <input type="time">
-
-    </div>
-
+  <div class="form-group full">
+    <span>👥</span>
     <select>
-        <option>👥 Number of Guests</option>
-        <option>2 Guests</option>
-        <option>4 Guests</option>
-        <option>6 Guests</option>
-        <option>8 Guests</option>
-        <option>VIP Room</option>
+      <option selected disabled>Number of Guests</option>
+      <option>2 Guests</option>
+      <option>4 Guests</option>
+      <option>6 Guests</option>
+      <option>8 Guests</option>
+      <option>VIP Room</option>
     </select>
+  </div>
 
-    <textarea placeholder="💬 Special Request"></textarea>
+  <div class="form-group full textarea-group">
+    <span>💬</span>
+    <textarea placeholder="Special Request"></textarea>
+  </div>
 
-    <button type="submit">
-        Reserve Now
-    </button>
+  <button class="reserve-btn">
+    Reserve Now
+  </button>
 
 </form>
 
