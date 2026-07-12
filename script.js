@@ -23,3 +23,40 @@ const countdown = setInterval(() => {
     }
 
 },1000);
+
+// =======================
+// ARZEA Reservation Form
+// =======================
+
+const form = document.querySelector(".reserve-form");
+
+form.addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const fullName = form.querySelector('input[placeholder="Full Name"]').value;
+    const phone = form.querySelector('input[placeholder="Phone Number"]').value;
+    const email = form.querySelector('input[placeholder="Email Address"]').value;
+    const guests = form.querySelector("select").value;
+    const request = form.querySelector("textarea").value;
+
+    emailjs.send(
+        "service_yp1tkqq",
+        "template_zp0batn",
+        {
+            name: fullName,
+            phone: phone,
+            email: email,
+            guests: guests,
+            message: request
+        }
+    )
+    .then(function () {
+        alert("🎉 Reservation Successfully Sent!");
+
+        form.reset();
+    })
+    .catch(function(error) {
+        console.error(error);
+        alert("Failed to send reservation.");
+    });
+});

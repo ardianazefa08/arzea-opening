@@ -255,13 +255,19 @@
     <textarea placeholder="Special Request"></textarea>
   </div>
 
-  <button class="reserve-btn">
+  <button type="submit" class="reserve-btn">
     Reserve Now
-  </button>
-
+</button>
 </form>
 
 </section>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init({
+    publicKey: "-EkYc26ebwGzYOuJW",
+});
+</script>
 
 <script src="script.js"></script>
 
