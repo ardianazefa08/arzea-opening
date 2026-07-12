@@ -259,3 +259,58 @@ width:70px;
 }
 
 }
+
+/* =======================
+   GUEST STAR
+======================= */
+
+.guest-star{
+    background:#0b0b0b;
+    padding:100px 10%;
+    text-align:center;
+}
+
+.guest-star h2{
+    color:#d4af37;
+    font-size:48px;
+    margin-bottom:60px;
+}
+
+.guest-container{
+    display:flex;
+    justify-content:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.guest-card{
+    width:320px;
+    background:#111;
+    border:1px solid rgba(212,175,55,.35);
+    border-radius:20px;
+    overflow:hidden;
+    transition:.4s;
+}
+
+.guest-card:hover{
+    transform:translateY(-10px);
+    box-shadow:0 20px 40px rgba(212,175,55,.25);
+}
+
+.guest-card img{
+    width:100%;
+    height:420px;
+    object-fit:cover;
+    object-position:center;
+}
+
+.guest-card h3{
+    color:#d4af37;
+    margin-top:25px;
+    font-size:28px;
+}
+
+.guest-card p{
+    color:#ddd;
+    margin:15px 0 30px;
+}
