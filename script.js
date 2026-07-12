@@ -39,9 +39,23 @@ form.addEventListener("submit", function(e) {
     const guests = form.querySelector("select").value;
     const request = form.querySelector("textarea").value;
 
-    emailjs.send(
+emailjs.send(
+    "service_yp1tkqq",
+    "template_zp0batn",
+    {
+        name: fullName,
+        phone: phone,
+        email: email,
+        guests: guests,
+        message: request
+    }
+)
+.then(function () {
+
+    // Kirim Auto Reply ke customer
+    return emailjs.send(
         "service_yp1tkqq",
-        "template_zp0batn",
+        "template_ru3pmnr",
         {
             name: fullName,
             phone: phone,
@@ -49,14 +63,18 @@ form.addEventListener("submit", function(e) {
             guests: guests,
             message: request
         }
-    )
-    .then(function () {
-        alert("🎉 Reservation Successfully Sent!");
+    );
 
-        form.reset();
-    })
-    .catch(function(error) {
-        console.error(error);
-        alert("Failed to send reservation.");
-    });
+})
+.then(function () {
+
+    alert("🎉 Reservation Successfully Sent!");
+    form.reset();
+
+})
+.catch(function(error){
+
+    console.error(error);
+    alert("Failed to send reservation.");
+
 });
