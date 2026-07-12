@@ -594,3 +594,18 @@ width:70px;
     right:20px;
     cursor:pointer;
 }
+
+.form-group input[type="date"]{
+    color:#fff;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator{
+    filter:invert(1);
+    cursor:pointer;
+}
+
+.form-group select{
+    appearance:none;
+    -webkit-appearance:none;
+    background:#161616;
+}
