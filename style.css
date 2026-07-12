@@ -730,3 +730,29 @@ opacity:1;
 }
 
 }
+
+#reservationQR{
+
+margin:35px auto 10px;
+
+width:170px;
+
+background:white;
+
+padding:12px;
+
+border-radius:16px;
+
+}
+
+.scan-text{
+
+color:#c9a74d;
+
+font-size:14px;
+
+margin-top:15px;
+
+letter-spacing:1px;
+
+}

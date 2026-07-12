@@ -143,6 +143,11 @@ function showSuccess(name, guests, email){
             <p><b>Time</b><br>18.00 WIB</p>
 
         </div>
+        <div id="reservationQR"></div>
+
+<p class="scan-text">
+🖤 Scan this QR upon arrival
+</p>
 
         <button id="closePopup">
             Done
@@ -152,6 +157,25 @@ function showSuccess(name, guests, email){
     `;
 
     document.body.appendChild(popup);
+
+setTimeout(() => {
+
+    new QRCode(
+        document.getElementById("reservationQR"),
+        {
+            text:
+`Reservation ID : ${reservationID}
+Name : ${name}
+Email : ${email}
+Guests : ${guests}
+Date : 19 September 2026
+Time : 18.00 WIB`,
+            width:170,
+            height:170
+        }
+    );
+
+},100);
 
     document
         .getElementById("closePopup")
