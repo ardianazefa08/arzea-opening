@@ -78,3 +78,4 @@ emailjs.send(
     alert("Failed to send reservation.");
 
 });
+});
