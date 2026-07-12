@@ -85,8 +85,13 @@ if (form) {
 
         .then(function () {
 
-            alert("🎉 Reservation Successfully Sent!");
-            form.reset();
+            showSuccess(
+    fullName,
+    guests,
+    email
+);
+
+form.reset();
 
         })
 
@@ -98,5 +103,62 @@ if (form) {
         });
 
     });
+
+}
+
+function showSuccess(name, guests, email){
+
+    const reservationID =
+        "ARZEA-" +
+        new Date().getFullYear() +
+        String(Math.floor(Math.random()*9000)+1000);
+
+    const popup = document.createElement("div");
+
+    popup.className = "reservation-popup";
+
+    popup.innerHTML = `
+    <div class="popup-card">
+
+        <img src="images/logo.png" class="popup-logo">
+
+        <h2>Reservation Confirmed</h2>
+
+        <p>Thank you for choosing</p>
+
+        <h3>ARZEA Lounge & Garden</h3>
+
+        <div class="popup-info">
+
+            <p><b>Reservation ID</b><br>${reservationID}</p>
+
+            <p><b>Name</b><br>${name}</p>
+
+            <p><b>Email</b><br>${email}</p>
+
+            <p><b>Guests</b><br>${guests}</p>
+
+            <p><b>Date</b><br>19 September 2026</p>
+
+            <p><b>Time</b><br>18.00 WIB</p>
+
+        </div>
+
+        <button id="closePopup">
+            Done
+        </button>
+
+    </div>
+    `;
+
+    document.body.appendChild(popup);
+
+    document
+        .getElementById("closePopup")
+        .onclick = function(){
+
+            popup.remove();
+
+        };
 
 }
