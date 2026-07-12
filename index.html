@@ -1,325 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARZEA Lounge & Garden</title>
 
-<meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<title>ARZEA Lounge & Garden</title>
-
-<link rel="stylesheet" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <header class="hero">
 
-<div class="overlay"></div>
+    <div class="hero-overlay"></div>
 
-<img src="images/hero.png" class="hero-bg">
+    <nav class="navbar">
 
-<nav>
+        <img src="images/logo.png" class="logo" alt="ARZEA">
 
-<img src="images/logo.png" class="logo">
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#guest">Guest Star</a></li>
+            <li><a href="#meeting">Meeting Room</a></li>
+            <li><a href="#reservation">Reservation</a></li>
+        </ul>
 
-<ul>
+    </nav>
 
-<li><a href="#about">About</a></li>
+    <div class="hero-content">
 
-<li><a href="#gallery">Gallery</a></li>
+        <h4>GRAND OPENING</h4>
 
-<li><a href="#menu">Signature</a></li>
+        <h1>ARZEA</h1>
 
-<li><a href="#meeting">Meeting Room</a></li>
+        <h2>Lounge & Garden</h2>
 
-<li><a href="#reservation">Reservation</a></li>
+        <p>An Extraordinary Evening Awaits</p>
 
-</ul>
+        <div class="date">
+            19 September 2026
+        </div>
 
-</nav>
+        <a href="#about" class="btn">
+            Open Invitation
+        </a>
 
-<div class="hero-text">
-
-<p class="welcome">
-
-Grand Opening
-
-</p>
-
-<h1>
-
-ARZEA
-
-</h1>
-
-<h2>
-
-Lounge & Garden
-
-</h2>
-
-<span>
-
-An Extraordinary Evening Awaits
-
-</span>
-
-<div class="date">
-
-19 September 2026
-
-</div>
-
-<a href="#reservation" class="btn">
-
-Reserve Invitation
-
-</a>
-
-</div>
+    </div>
 
 </header>
 
-<section id="countdown">
+<section id="about">
 
-<h2>
+    <h2>About ARZEA</h2>
 
-Grand Opening Countdown
-
-</h2>
-
-<div id="timer">
-
-<div>
-
-<span id="days">00</span>
-
-<p>Days</p>
-
-</div>
-
-<div>
-
-<span id="hours">00</span>
-
-<p>Hours</p>
-
-</div>
-
-<div>
-
-<span id="minutes">00</span>
-
-<p>Minutes</p>
-
-</div>
-
-<div>
-
-<span id="seconds">00</span>
-
-<p>Seconds</p>
-
-</div>
-
-</div>
+    <p>
+        A luxury destination where modern architecture,
+        lush gardens, and exceptional dining experiences
+        come together to create unforgettable moments.
+    </p>
 
 </section>
-<section id="about" class="about">
-
-<div class="container">
-
-<div class="about-image">
-<img src="images/drone.jpeg" alt="Arzea Drone View">
-</div>
-
-<div class="about-text">
-
-<h2>Welcome to ARZEA</h2>
-
-<p>
-ARZEA Lounge & Garden menghadirkan pengalaman fine dining premium
-dengan perpaduan arsitektur modern, taman tropis yang elegan,
-dan pelayanan berkelas dunia.
-</p>
-
-<p>
-Dirancang sebagai destinasi eksklusif untuk romantic dinner,
-business meeting, private event, hingga family gathering,
-setiap sudut ARZEA dibuat untuk menciptakan pengalaman yang tak terlupakan.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-<section id="gallery" class="gallery">
-
-<h2>Gallery</h2>
-
-<div class="gallery-grid">
-
-<div class="big">
-<img src="images/hero.png" alt="">
-</div>
-
-<div>
-<img src="images/indoor.png" alt="">
-</div>
-
-<div>
-<img src="images/outdoor.jpeg" alt="">
-</div>
-
-<div>
-<img src="images/tambah indoor.jpeg" alt="">
-</div>
-
-<div>
-<img src="images/tambah outdoor.jpeg" alt="">
-</div>
-
-<div>
-<img src="images/meeting room.jpeg" alt="">
-</div>
-
-</div>
-
-</section>
-
-<section id="menu" class="menu">
-
-<h2>Signature Menu</h2>
-
-<div class="menu-image">
-
-<img src="images/food.png" alt="Signature Menu">
-
-</div>
-
-</section>
-
-<section id="meeting" class="meeting">
-
-<div class="container">
-
-<div class="meeting-image">
-
-<img src="images/meeting room.jpeg">
-
-</div>
-
-<div class="meeting-text">
-
-<h2>Private Meeting Room</h2>
-
-<p>
-
-Nikmati ruang meeting eksklusif dengan desain modern luxury,
-kapasitas hingga 20 tamu, dilengkapi smart display,
-high speed internet, premium hospitality,
-serta suasana yang nyaman untuk business meeting maupun private gathering.
-
-</p>
-
-</div>
-
-</div>
-
-</section>
-<section id="guest" class="guest">
-
-<h2>Special Guest Stars</h2>
-
-<div class="guest-grid">
-
-<div class="guest-card">
-<h3>Mahalini</h3>
-<p>Special Performance</p>
-</div>
-
-<div class="guest-card">
-<h3>Nagita Slavina</h3>
-<p>Special Guest</p>
-</div>
-
-<div class="guest-card">
-<h3>Raim Laode</h3>
-<p>Special Performance</p>
-</div>
-
-</div>
-
-</section>
-
-<section class="dresscode">
-
-<h2>Dress Code</h2>
-
-<div class="dress-box">
-
-<h3>BLACK ATTIRE</h3>
-
-<p>
-An all-black ensemble is kindly requested
-to complement the elegance of the evening.
-</p>
-
-</div>
-
-</section>
-
-<section id="reservation" class="reservation">
-
-<h2>Reserve Your Seat</h2>
-
-<form>
-
-<input type="text" placeholder="Full Name">
-
-<input type="tel" placeholder="Phone Number">
-
-<input type="number" placeholder="Number of Guests">
-
-<button type="submit">
-Reserve Now
-</button>
-
-</form>
-
-</section>
-
-<footer>
-
-<img src="images/logo.png" class="footer-logo">
-
-<h2>ARZEA</h2>
-
-<p>
-We Look Forward To Welcoming You
-</p>
-
-<p class="copyright">
-
-© 2026 ARZEA Lounge & Garden
-
-</p>
-
-</footer>
 
 <script src="script.js"></script>
 
 </body>
-
 </html>
