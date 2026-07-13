@@ -1,86 +1,101 @@
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
 body{
-background:#050505;
-font-family:Inter,sans-serif;
+
+margin:0;
+background:#0d0d0d;
+font-family:Arial,sans-serif;
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
-padding:40px;
+color:white;
+
 }
 
-.ticket{
+.success-card{
+
 width:420px;
-background:#111;
-border:1px solid #b9963b;
-border-radius:22px;
-padding:40px;
+background:#141414;
+border:1px solid #caa64b;
+border-radius:25px;
+padding:45px;
 text-align:center;
-box-shadow:0 20px 60px rgba(0,0,0,.65);
+
 }
 
-.ticket-logo{
+.logo{
+
+width:95px;
+margin-bottom:25px;
+
+}
+
+.checkmark{
+
 width:90px;
-margin-bottom:18px;
+height:90px;
+border-radius:50%;
+background:#d4af37;
+color:black;
+font-size:55px;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;
+margin-bottom:25px;
+font-weight:bold;
+
 }
 
 h1{
-font-family:"Cormorant Garamond",serif;
-font-size:34px;
+
 color:#d4af37;
-letter-spacing:2px;
+margin-bottom:15px;
+
 }
 
-h2{
-margin-top:5px;
-font-size:22px;
-color:white;
-font-weight:500;
+p{
+
+line-height:1.8;
+
 }
 
-.gold-line{
-height:1px;
-background:#b9963b;
-margin:25px 0;
-opacity:.5;
-}
+.note{
 
-.ticket-info{
-text-align:left;
-}
-
-.item{
-margin-bottom:18px;
-}
-
-.item label{
-display:block;
-color:#b9963b;
-font-size:13px;
-margin-bottom:5px;
-text-transform:uppercase;
-letter-spacing:1px;
-}
-
-.item p{
-color:white;
-font-size:17px;
-}
-
-#ticketQR{
-display:flex;
-justify-content:center;
-margin:30px 0;
-}
-
-.scan{
-color:#b9963b;
+color:#bbbbbb;
 font-size:14px;
-margin-bottom:30px;
-line-height:1.7;
+
+}
+
+.event-box{
+
+margin-top:35px;
+padding:20px;
+border:1px solid #d4af37;
+border-radius:18px;
+
+}
+
+.event-box h3{
+
+color:#d4af37;
+
+}
+
+.home-btn{
+
+display:block;
+margin-top:35px;
+padding:16px;
+background:#d4af37;
+color:black;
+text-decoration:none;
+font-weight:bold;
+border-radius:999px;
+
+}
+
+.home-btn:hover{
+
+background:#e6c55d;
+
 }
