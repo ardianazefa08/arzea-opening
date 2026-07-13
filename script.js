@@ -83,35 +83,43 @@ if (form) {
 
         })
 
-        .then(function () {
-
-            showSuccess(
-    fullName,
-    guests,
-    email
-);
-
-form.reset();
-
-        })
-
-        .catch(function (error) {
-
-            console.error(error);
-            alert("❌ Failed to send reservation.");
-
-        });
-
-    });
-
-}
-
-function showSuccess(name, guests, email){
+.then(function () {
 
     const reservationID =
         "ARZEA-" +
         new Date().getFullYear() +
-        String(Math.floor(Math.random()*9000)+1000);
+        String(Math.floor(Math.random() * 9000) + 1000);
+
+    localStorage.setItem(
+        "arzeaReservation",
+        JSON.stringify({
+            id: reservationID,
+            name: fullName,
+            phone: phone,
+            email: email,
+            guests: guests
+        })
+    );
+
+window.location.href = "ticket.html";
+
+})
+.catch(function(error){
+
+    console.error(error);
+    alert("❌ Failed to send reservation.");
+
+});
+
+    });   
+
+}         
+
+function showSuccess(name, guests, email){
+
+    const reservationID =
+"ARZEA-GO-260919-" +
+Math.floor(Math.random()*9000+1000);
 
     const popup = document.createElement("div");
 
@@ -143,15 +151,30 @@ function showSuccess(name, guests, email){
             <p><b>Time</b><br>18.00 WIB</p>
 
         </div>
-        <div id="reservationQR"></div>
+    <div class="qr-box">
+    <div id="reservationQR"></div>
+</div>
 
 <p class="scan-text">
 🖤 Scan this QR upon arrival
 </p>
 
-        <button id="closePopup">
-            Done
-        </button>
+<div class="dress-code">
+
+<b>Dress Code</b><br>
+
+Elegant Black Attire
+
+</div>
+
+<button id="closePopup">
+Done
+</button>
+
+<p class="popup-footer">
+✨ We look forward to welcoming you at
+ARZEA Lounge & Garden
+</p>
 
     </div>
     `;
@@ -161,19 +184,19 @@ function showSuccess(name, guests, email){
 setTimeout(() => {
 
     new QRCode(
-        document.getElementById("reservationQR"),
-        {
-            text:
-`Reservation ID : ${reservationID}
+    document.getElementById("reservationQR"),
+    {
+        text: `Reservation ID : ${reservationID}
 Name : ${name}
 Email : ${email}
 Guests : ${guests}
 Date : 19 September 2026
-Time : 18.00 WIB`,
-            width:170,
-            height:170
-        }
-    );
+Time : 18.00 WIB
+Dress Code : Elegant Black`,
+        width: 180,
+        height: 180
+    }
+);
 
 },100);
 
@@ -185,4 +208,5 @@ Time : 18.00 WIB`,
 
         };
 
-}
+    }
+

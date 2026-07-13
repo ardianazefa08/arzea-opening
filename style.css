@@ -756,3 +756,99 @@ margin-top:15px;
 letter-spacing:1px;
 
 }
+
+/* ===========================
+QR BOX
+=========================== */
+
+.qr-box{
+
+background:#fff;
+
+padding:18px;
+
+border-radius:18px;
+
+width:220px;
+
+margin:25px auto 10px;
+
+box-shadow:0 15px 35px rgba(0,0,0,.35);
+
+}
+
+.scan-text{
+
+margin-top:15px;
+
+font-size:14px;
+
+color:#ccc;
+
+text-align:center;
+
+}
+
+.dress-code{
+
+margin-top:18px;
+
+padding:15px;
+
+border:1px solid #C8A13A;
+
+border-radius:12px;
+
+color:white;
+
+text-align:center;
+
+line-height:1.8;
+
+background:rgba(255,255,255,.03);
+
+}
+
+.popup-footer{
+
+margin-top:25px;
+
+text-align:center;
+
+font-size:13px;
+
+color:#9b9b9b;
+
+}
+
+#closePopup{
+
+margin-top:20px;
+
+background:#C8A13A;
+
+color:white;
+
+border:none;
+
+padding:16px 45px;
+
+border-radius:50px;
+
+font-size:16px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+#closePopup:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 15px 30px rgba(200,161,58,.35);
+
+}

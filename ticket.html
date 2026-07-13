@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ARZEA E-Ticket</title>
+
+<link rel="stylesheet" href="ticket.css">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+<div class="ticket">
+
+<img src="images/logo.png" class="ticket-logo">
+
+<h1>GRAND OPENING</h1>
+
+<h2>ARZEA Lounge & Garden</h2>
+
+<div class="gold-line"></div>
+
+<div class="ticket-info">
+
+<div class="item">
+<label>Reservation ID</label>
+<p id="ticketID"></p>
+</div>
+
+<div class="item">
+<label>Guest Name</label>
+<p id="ticketName"></p>
+</div>
+
+<div class="item">
+<label>Email</label>
+<p id="ticketEmail"></p>
+</div>
+
+<div class="item">
+<label>Guests</label>
+<p id="ticketGuests"></p>
+</div>
+
+<div class="item">
+<label>Date</label>
+<p>19 September 2026</p>
+</div>
+
+<div class="item">
+<label>Time</label>
+<p>18.00 WIB</p>
+</div>
+
+<div class="item">
+<label>Dress Code</label>
+<p>🖤 Elegant Black Attire</p>
+</div>
+
+</div>
+
+<div class="gold-line"></div>
+
+<div id="ticketQR"></div>
+
+<p class="scan">
+
+Please present this QR Code upon arrival.
+
+</p>
+
+<button id="printTicket">
+
+Download / Print Ticket
+
+</button>
+
+</div>
+
+<script src="ticket.js"></script>
+
+</body>
+
+</html>
