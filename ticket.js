@@ -22,15 +22,3 @@ height:180
 );
 
 }
-
-// ==============================
-// Print Ticket
-// ==============================
-
-document
-.getElementById("printTicket")
-.onclick=function(){
-
-window.print();
-
-};

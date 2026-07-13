@@ -54,6 +54,13 @@ if (form) {
             alert("Please complete all required fields.");
             return;
         }
+        const reservationID =
+    "ARZEA-" +
+    new Date().getFullYear() +
+    String(Math.floor(Math.random() * 9000) + 1000);
+
+const qr =
+`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(reservationID)}`;
 
         emailjs.send(
             "service_yp1tkqq",
@@ -73,22 +80,20 @@ if (form) {
                 "service_yp1tkqq",
                 "template_ru3pmnr",
                 {
-                    name: fullName,
-                    phone: phone,
-                    email: email,
-                    guests: guests,
-                    message: request
-                }
+    name: fullName,
+    phone: phone,
+    email: email,
+    guests: guests,
+    message: request,
+    reservationID: reservationID,
+    qr: qr
+}
             );
 
         })
 
 .then(function () {
 
-    const reservationID =
-        "ARZEA-" +
-        new Date().getFullYear() +
-        String(Math.floor(Math.random() * 9000) + 1000);
 
     localStorage.setItem(
         "arzeaReservation",
