@@ -62,28 +62,37 @@ if (form) {
 const qr =
 `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(reservationID)}`;
 
-fetch("/api/send-email", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
+emailjs.send(
+    "service_yp1tkqq",
+    "template_zp0batn",
+    {
         name: fullName,
         phone: phone,
         email: email,
         guests: guests,
-        reservationId: reservationID,
         message: request
-    })
+    }
+)
+
+.then(function () {
+
+    return emailjs.send(
+        "service_yp1tkqq",
+        "template_ru3pmnr",
+        {
+            name: fullName,
+            phone: phone,
+            email: email,
+            guests: guests,
+            message: request,
+            reservationID: reservationID,
+            qr: qr
+        }
+    );
+
 })
 
-.then(response => response.json())
-
-.then(data => {
-
-    if (!data.success) {
-        throw new Error(data.error || "Failed to send email.");
-    }
+.then(function () {
 
     localStorage.setItem(
         "arzeaReservation",
@@ -100,7 +109,7 @@ fetch("/api/send-email", {
 
 })
 
-.catch(error => {
+.catch(function(error){
 
     console.error(error);
 
