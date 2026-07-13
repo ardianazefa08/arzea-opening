@@ -5,67 +5,172 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<title>Reservation Confirmed | ARZEA</title>
+<title>ARZEA VIP Invitation</title>
 
 <link rel="stylesheet" href="ticket.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="success-card">
+<div class="background-glow"></div>
 
-<img src="images/logo.png" class="logo">
+<div class="ticket">
 
-<div class="checkmark">
+<div class="gold-line"></div>
 
-✓
+<div class="logo-area">
 
-</div>
+<img
+src="images/logo.png"
+class="logo">
 
-<h1>Reservation Confirmed</h1>
+<h1>ARZEA</h1>
 
-<p>
-
-Thank you for choosing
-
-<b>ARZEA Lounge & Garden</b>
-
-</p>
-
-<p>
-
-Your official QR Invitation has been sent to your email.
-
-</p>
-
-<p class="note">
-
-Please check your Inbox or Spam folder.
-
-</p>
-
-<div class="event-box">
-
-<h3>Grand Opening</h3>
-
-<p>📅 19 September 2026</p>
-
-<p>🕕 18.00 WIB</p>
-
-<p>🖤 Elegant Black Attire</p>
+<p>Lounge & Garden</p>
 
 </div>
 
-<a href="index.html" class="home-btn">
+<div class="vip-title">
 
-Back to Home
+VIP INVITATION
+
+</div>
+
+<div class="welcome">
+
+Welcome,
+
+<h2 id="guestName">
+
+Guest Name
+
+</h2>
+
+</div>
+
+<div class="info">
+
+<div class="row">
+
+<span>Reservation ID</span>
+
+<b id="reservationID">
+ARZEA-XXXX
+</b>
+
+</div>
+
+<div class="row">
+
+<span>Email</span>
+
+<b id="guestEmail">
+
+guest@email.com
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>Guests</span>
+
+<b id="guestCount">
+
+2 Guests
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>Date</span>
+
+<b>
+
+19 September 2026
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>Time</span>
+
+<b>
+
+18.00 WIB
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>Dress Code</span>
+
+<b>
+
+Elegant Black
+
+</b>
+
+</div>
+
+</div>
+
+<div class="qr-area">
+
+<div id="qrcode"></div>
+
+<p>
+
+Present this QR Code
+upon arrival
+
+</p>
+
+</div>
+
+<div class="footer">
+
+This invitation is personal
+and non-transferable.
+
+</div>
+
+<div class="buttons">
+
+<button
+onclick="window.print()">
+
+Save as PDF
+
+</button>
+
+<a
+href="index.html">
+
+Back Home
 
 </a>
 
 </div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script src="ticket.js"></script>
 
 </body>
 

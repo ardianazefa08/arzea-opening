@@ -216,3 +216,54 @@ Dress Code : Elegant Black`,
 
     }
 
+    async function downloadTicket(){
+
+const { jsPDF } = window.jspdf;
+
+const doc = new jsPDF({
+orientation:"landscape",
+unit:"mm",
+format:[90,180]
+});
+
+doc.setFillColor(15,15,15);
+doc.rect(0,0,180,90,"F");
+
+doc.setDrawColor(212,175,55);
+doc.setLineWidth(1);
+
+doc.roundedRect(4,4,172,82,4,4);
+
+doc.setTextColor(212,175,55);
+doc.setFontSize(28);
+doc.text("ARZEA",90,20,{align:"center"});
+
+doc.setFontSize(12);
+doc.text("LOUNGE & GARDEN",90,28,{align:"center"});
+
+doc.setDrawColor(212,175,55);
+doc.line(20,35,160,35);
+
+doc.setTextColor(255);
+
+doc.setFontSize(18);
+doc.text("VIP INVITATION",90,47,{align:"center"});
+
+doc.setFontSize(11);
+
+doc.text("Grand Opening",20,60);
+
+doc.text("19 September 2026",20,68);
+
+doc.text("18.00 WIB",20,76);
+
+doc.text("Dress Code",105,60);
+
+doc.text("Elegant Black",105,68);
+
+doc.text("Attire",105,76);
+
+doc.save("ARZEA-VIP-Ticket.pdf");
+
+}
+
