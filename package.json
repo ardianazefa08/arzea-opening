@@ -1,8 +1,0 @@
-{
-  "name": "arzea-opening",
-  "version": "1.0.0",
-  "type": "module",
-  "dependencies": {
-    "resend": "^4.6.0"
-  }
-}

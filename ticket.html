@@ -4,234 +4,193 @@
 <head>
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="viewport"
-content="width=device-width,initial-scale=1.0">
+<title>ARZEA VIP Invitation</title>
 
-<title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-ARZEA VIP Invitation
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<link
-rel="stylesheet"
-href="ticket.css">
-
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-rel="stylesheet">
+<link rel="stylesheet" href="ticket.css">
 
 </head>
 
 <body>
 
-<div class="background"></div>
-
-<div class="gold-glow"></div>
-
-<div id="particles"></div>
-
 <div class="ticket-wrapper">
 
 <div class="ticket-card" id="ticketCard">
 
-<div class="ticket-header">
+<div class="ticket-left">
 
-<img
+<img src="images/logo.png" class="ticket-logo" alt="ARZEA">
 
-src="images/logo.png"
+<h1>VIP INVITATION</h1>
 
-class="ticket-logo">
+<p class="subtitle">
 
-<h1>
+Grand Opening
 
-ARZEA
+<br>
 
-</h1>
-
-<h2>
-
-Lounge & Garden
-
-</h2>
-
-<p>
-
-VIP INVITATION
+ARZEA Garden & Lounge
 
 </p>
 
-</div>
-
-<div class="guest-box">
-
-<h3 id="guestName">
-
-Guest Name
-
-</h3>
-
-<p>
-
-We look forward to welcoming you.
-
-</p>
-
-</div>
+<div class="gold-line"></div>
 
 <div class="ticket-info">
 
-<div>
+<div class="info-item">
 
-<span>
+<span>Guest Name</span>
 
-Reservation ID
-
-</span>
-
-<strong id="reservationID">
-
-ARZEA-0000
-
-</strong>
+<h2 id="ticketName">Loading...</h2>
 
 </div>
 
-<div>
+<div class="info-item">
 
-<span>
+<span>Reservation ID</span>
 
-Email
-
-</span>
-
-<strong id="guestEmail">
-
--
-
-</strong>
+<h3 id="ticketID">Loading...</h3>
 
 </div>
 
-<div>
+<div class="info-item">
 
-<span>
+<span>Date</span>
 
-Guests
-
-</span>
-
-<strong id="guestGuests">
-
--
-
-</strong>
+<h3>19 September 2026</h3>
 
 </div>
 
-<div>
+<div class="info-item">
 
-<span>
+<span>Time</span>
 
-Date
-
-</span>
-
-<strong>
-
-19 September 2026
-
-</strong>
+<h3>18.00 WIB</h3>
 
 </div>
 
-<div>
+<div class="info-item">
 
-<span>
+<span>Guests</span>
 
-Time
-
-</span>
-
-<strong>
-
-18.00 WIB
-
-</strong>
+<h3 id="ticketGuests">-</h3>
 
 </div>
 
-<div>
+<div class="info-item">
 
-<span>
+<span>Dress Code</span>
 
-Dress Code
-
-</span>
-
-<strong>
-
-Elegant Black
-
-</strong>
+<h3>Black & Gold</h3>
 
 </div>
 
 </div>
 
-<div class="ticket-qr">
+<div class="gold-line"></div>
+
+<p class="ticket-note">
+
+Please present this VIP invitation together with a valid identification upon arrival.
+
+</p>
+
+</div>
+
+<div class="ticket-right">
+
+<h2>SCAN TO ENTER</h2>
 
 <div id="qrcode"></div>
 
-<p>
+<p class="qr-text">
 
-Scan this QR Code upon arrival
+Exclusive access for invited guests only.
 
 </p>
+
+<div class="ticket-details">
+
+<div class="detail-box">
+
+<span class="label">Venue</span>
+
+<span class="value">
+
+ARZEA Garden & Lounge
+
+</span>
 
 </div>
 
-<div class="ticket-note">
+<div class="detail-box">
 
-<p>
+<span class="label">Location</span>
 
-Please present this VIP Invitation together with a valid identification upon arrival.
+<span class="value">
 
-</p>
+Jl. Senopati, Jakarta
+
+</span>
+
+</div>
+
+<div class="detail-box">
+
+<span class="label">Access</span>
+
+<span class="value">
+
+VIP Invitation Only
+
+</span>
+
+</div>
+
+</div>
+
+<div class="ticket-seal">
+
+EXCLUSIVE VIP
+
+</div>
+
+</div>
 
 </div>
 
 <div class="ticket-buttons">
 
-<button id="downloadTicket">
+<button id="downloadPDF">
 
-Download VIP Ticket
+📄 Download PDF
 
 </button>
 
 <button id="downloadPNG">
 
-Save as Image
+🖼 Save Image
 
 </button>
 
-<a href="index.html">
+<button id="printTicket">
 
-Back to Home
+🖨 Print Ticket
+
+</button>
+
+<a href="index.html" class="back-home">
+
+🏠 Back Home
 
 </a>
-
-</div>
 
 </div>
 
@@ -248,3 +207,4 @@ Back to Home
 </body>
 
 </html>
+

@@ -1,13 +1,18 @@
-/*==================================================
-ARZEA VIP TICKET V3
-==================================================*/
+/*======================================================
+ARZEA V6
+TICKET.CSS
+======================================================*/
 
 :root{
 
---gold:#d4af37;
---gold2:#f4d77a;
---black:#070707;
---glass:rgba(255,255,255,.05);
+--gold:#D4AF37;
+--gold-light:#F8E7A2;
+--black:#050505;
+--white:#ffffff;
+--text:#d8d8d8;
+
+--shadow:
+0 25px 70px rgba(0,0,0,.45);
 
 }
 
@@ -21,11 +26,19 @@ box-sizing:border-box;
 
 body{
 
-font-family:'Inter',sans-serif;
+font-family:'Poppins',sans-serif;
 
-background:#050505;
+background:
+radial-gradient(circle at top,
+rgba(212,175,55,.12),
+transparent 45%),
 
-color:#fff;
+linear-gradient(
+180deg,
+#090909,
+#040404);
+
+color:white;
 
 min-height:100vh;
 
@@ -35,210 +48,503 @@ justify-content:center;
 
 align-items:center;
 
-padding:40px;
+padding:50px 20px;
 
 overflow-x:hidden;
 
-position:relative;
-
 }
 
 
 
-/*==================================
-BACKGROUND
-==================================*/
-
-.background{
-
-position:fixed;
-
-inset:0;
-
-background:
-
-radial-gradient(circle at top,
-
-rgba(212,175,55,.10),
-
-transparent 45%),
-
-linear-gradient(
-
-180deg,
-
-#090909,
-
-#030303);
-
-z-index:-5;
-
-}
-
-.gold-glow{
-
-position:fixed;
-
-left:50%;
-
-top:-320px;
-
-transform:translateX(-50%);
-
-width:900px;
-
-height:900px;
-
-background:
-
-radial-gradient(circle,
-
-rgba(212,175,55,.18),
-
-transparent 70%);
-
-filter:blur(100px);
-
-z-index:-4;
-
-animation:glow 8s ease infinite;
-
-}
-
-@keyframes glow{
-
-0%,100%{
-
-opacity:.45;
-
-transform:
-
-translateX(-50%)
-
-scale(1);
-
-}
-
-50%{
-
-opacity:1;
-
-transform:
-
-translateX(-50%)
-
-scale(1.15);
-
-}
-
-}
-
-
-
-/*==================================
-PARTICLES
-==================================*/
-
-#particles{
-
-position:fixed;
-
-inset:0;
-
-pointer-events:none;
-
-z-index:-3;
-
-}
-
-.particle{
-
-position:absolute;
-
-bottom:-30px;
-
-width:4px;
-
-height:4px;
-
-border-radius:50%;
-
-background:var(--gold);
-
-box-shadow:0 0 10px var(--gold);
-
-animation:particle linear infinite;
-
-}
-
-@keyframes particle{
-
-0%{
-
-transform:
-
-translateY(0);
-
-opacity:0;
-
-}
-
-20%{
-
-opacity:.8;
-
-}
-
-100%{
-
-transform:
-
-translateY(-120vh);
-
-opacity:0;
-
-}
-
-}
-
-
-
-/*==================================
+/*=================================
 WRAPPER
-==================================*/
+=================================*/
 
 .ticket-wrapper{
 
 width:100%;
 
-max-width:560px;
-
-animation:fadeUp .9s ease;
+max-width:1300px;
 
 }
 
+
+
+/*=================================
+CARD
+=================================*/
+
 .ticket-card{
 
-position:relative;
+display:grid;
 
-overflow:hidden;
+grid-template-columns:2fr 1fr;
 
-background:
-
-rgba(20,20,20,.95);
+background:#101010;
 
 border-radius:32px;
 
-padding:42px;
+overflow:hidden;
 
 border:1px solid rgba(212,175,55,.18);
 
-backdrop-filter:blur(18px);
+box-shadow:var(--shadow);
+
+}
+
+
+
+/*=================================
+LEFT
+=================================*/
+
+.ticket-left{
+
+padding:55px;
+
+position:relative;
+
+}
+
+.ticket-logo{
+
+width:95px;
+
+margin-bottom:18px;
+
+}
+
+.ticket-left h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:58px;
+
+letter-spacing:4px;
+
+color:var(--gold);
+
+margin-bottom:12px;
+
+}
+
+.subtitle{
+
+font-size:18px;
+
+line-height:34px;
+
+color:#d4d4d4;
+
+margin-bottom:35px;
+
+}
+
+.gold-line{
+
+width:100%;
+
+height:2px;
+
+margin:28px 0;
+
+background:linear-gradient(
+
+90deg,
+
+transparent,
+
+var(--gold),
+
+transparent
+
+);
+
+}
+
+
+
+/*=================================
+INFO
+=================================*/
+
+.ticket-info{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:24px;
+
+}
+
+.info-item{
+
+padding:22px;
+
+background:rgba(255,255,255,.04);
+
+border-radius:20px;
+
+border:1px solid rgba(212,175,55,.10);
+
+transition:.35s;
+
+}
+
+.info-item:hover{
+
+transform:translateY(-6px);
+
+border-color:var(--gold);
 
 box-shadow:
 
-0 35px 80px rgba(0,0,0,.45);
+0 18px 45px rgba(212,175,55,.18);
 
+}
+
+.info-item span{
+
+display:block;
+
+font-size:12px;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+color:#bcbcbc;
+
+margin-bottom:10px;
+
+}
+
+.info-item h2{
+
+font-size:30px;
+
+font-family:'Cormorant Garamond',serif;
+
+color:white;
+
+}
+
+.info-item h3{
+
+font-size:20px;
+
+font-weight:500;
+
+color:var(--gold);
+
+}
+
+/*======================================================
+RIGHT SIDE
+======================================================*/
+
+.ticket-right{
+
+background:linear-gradient(
+180deg,
+#111,
+#070707);
+
+padding:55px 35px;
+
+display:flex;
+
+flex-direction:column;
+
+justify-content:center;
+
+align-items:center;
+
+text-align:center;
+
+position:relative;
+
+}
+
+.ticket-right::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:
+
+radial-gradient(circle,
+rgba(212,175,55,.08),
+transparent 70%);
+
+pointer-events:none;
+
+}
+
+.ticket-right h2{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:34px;
+
+letter-spacing:3px;
+
+color:var(--gold);
+
+margin-bottom:35px;
+
+}
+
+#qrcode{
+
+background:white;
+
+padding:18px;
+
+border-radius:18px;
+
+box-shadow:
+
+0 18px 45px rgba(0,0,0,.35);
+
+margin-bottom:25px;
+
+}
+
+.qr-text{
+
+font-size:14px;
+
+line-height:28px;
+
+color:#d4d4d4;
+
+max-width:250px;
+
+}
+
+
+
+/*======================================================
+EVENT DETAILS
+======================================================*/
+
+.ticket-details{
+
+margin-top:35px;
+
+display:flex;
+
+flex-direction:column;
+
+gap:16px;
+
+width:100%;
+
+}
+
+.detail-box{
+
+padding:18px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(212,175,55,.12);
+
+transition:.35s;
+
+}
+
+.detail-box:hover{
+
+transform:translateY(-5px);
+
+border-color:var(--gold);
+
+box-shadow:
+
+0 15px 35px rgba(212,175,55,.18);
+
+}
+
+.detail-box .label{
+
+display:block;
+
+font-size:12px;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+color:#bfbfbf;
+
+margin-bottom:8px;
+
+}
+
+.detail-box .value{
+
+font-size:16px;
+
+color:white;
+
+}
+
+
+
+/*======================================================
+VIP SEAL
+======================================================*/
+
+.ticket-seal{
+
+margin-top:35px;
+
+padding:14px 28px;
+
+border-radius:999px;
+
+background:linear-gradient(
+
+135deg,
+
+var(--gold-light),
+
+var(--gold),
+
+#a57d19
+
+);
+
+color:#111;
+
+font-weight:700;
+
+letter-spacing:2px;
+
+font-size:13px;
+
+box-shadow:
+
+0 18px 45px rgba(212,175,55,.25);
+
+animation:sealGlow 3s ease-in-out infinite;
+
+}
+
+
+
+/*======================================================
+BUTTONS
+======================================================*/
+
+.ticket-buttons{
+
+margin-top:40px;
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+flex-wrap:wrap;
+
+}
+
+.ticket-buttons button,
+
+.ticket-buttons a{
+
+padding:16px 28px;
+
+border:none;
+
+border-radius:999px;
+
+text-decoration:none;
+
+cursor:pointer;
+
+font-size:15px;
+
+font-weight:600;
+
+transition:.35s;
+
+background:linear-gradient(
+
+135deg,
+
+var(--gold-light),
+
+var(--gold)
+
+);
+
+color:#111;
+
+box-shadow:
+
+0 15px 35px rgba(212,175,55,.18);
+
+}
+
+.ticket-buttons button:hover,
+
+.ticket-buttons a:hover{
+
+transform:translateY(-5px);
+
+box-shadow:
+
+0 22px 50px rgba(212,175,55,.28);
+
+}
+
+
+
+/*======================================================
+ANIMATION
+======================================================*/
+
+@keyframes sealGlow{
+
+0%,100%{
+
+transform:scale(1);
+
+}
+
+50%{
+
+transform:scale(1.04);
+
+}
+
+}
+
+/*======================================================
+PART 3
+PREMIUM EFFECT
+======================================================*/
+
+.ticket-card{
+position:relative;
+overflow:hidden;
 }
 
 .ticket-card::before{
@@ -247,543 +553,207 @@ content:"";
 
 position:absolute;
 
-top:-120%;
+top:-120px;
+left:-120px;
 
-left:-45%;
-
-width:45%;
-
-height:260%;
+width:320px;
+height:320px;
 
 background:
 
-linear-gradient(
+radial-gradient(circle,
+rgba(212,175,55,.16),
+transparent 70%);
 
-90deg,
+filter:blur(10px);
 
-transparent,
+animation:goldMove 12s linear infinite;
 
-rgba(255,255,255,.18),
+pointer-events:none;
 
-transparent
+}
 
-);
+.ticket-card::after{
 
-transform:rotate(20deg);
+content:"ARZEA";
 
-transition:1.2s;
+position:absolute;
+
+right:-30px;
+
+bottom:-20px;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:180px;
+
+font-weight:700;
+
+color:rgba(255,255,255,.03);
+
+pointer-events:none;
+
+user-select:none;
+
+}
+
+
+
+/*=====================================
+NOTE
+=====================================*/
+
+.ticket-note{
+
+margin-top:30px;
+
+line-height:30px;
+
+font-size:15px;
+
+color:#d8d8d8;
+
+}
+
+
+
+/*=====================================
+PERFORATED EDGE
+=====================================*/
+
+.ticket-right{
+
+border-left:
+
+2px dashed rgba(212,175,55,.30);
+
+}
+
+
+
+/*=====================================
+LOGO
+=====================================*/
+
+.ticket-logo{
+
+filter:
+
+drop-shadow(0 0 18px rgba(212,175,55,.28));
+
+}
+
+
+
+/*=====================================
+INFO TITLE
+=====================================*/
+
+.ticket-info h2,
+.ticket-info h3{
+
+word-break:break-word;
+
+}
+
+
+
+/*=====================================
+SHINE EFFECT
+=====================================*/
+
+.ticket-card:hover{
+
+box-shadow:
+
+0 30px 90px rgba(212,175,55,.18);
 
 }
 
 .ticket-card:hover::before{
 
-left:170%;
+animation-duration:6s;
 
 }
 
 
 
-/*==================================
-HEADER
-==================================*/
-
-.ticket-header{
-
-text-align:center;
-
-margin-bottom:35px;
-
-}
-
-.ticket-logo{
-
-width:90px;
-
-margin-bottom:18px;
-
-filter:
-
-drop-shadow(
-
-0 0 15px rgba(212,175,55,.30)
-
-);
-
-animation:floatLogo 4s ease infinite;
-
-}
-
-.ticket-header h1{
-
-font-family:'Cormorant Garamond',serif;
-
-font-size:58px;
-
-letter-spacing:7px;
-
-color:var(--gold);
-
-}
-
-.ticket-header h2{
-
-font-size:20px;
-
-letter-spacing:5px;
-
-font-weight:300;
-
-margin-top:-5px;
-
-}
-
-.ticket-header p{
-
-margin-top:12px;
-
-font-size:13px;
-
-letter-spacing:4px;
-
-color:var(--gold);
-
-text-transform:uppercase;
-
-}
-
-
-
-/*==================================
-GUEST
-==================================*/
-
-.guest-box{
-
-text-align:center;
-
-margin-bottom:35px;
-
-}
-
-.guest-box h3{
-
-font-family:'Cormorant Garamond',serif;
-
-font-size:42px;
-
-margin-bottom:10px;
-
-}
-
-.guest-box p{
-
-color:#cfcfcf;
-
-font-size:15px;
-
-}
-
-
-
-/*==================================
-INFO
-==================================*/
-
-.ticket-info{
-
-display:grid;
-
-gap:15px;
-
-margin-bottom:35px;
-
-}
-
-.ticket-info div{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-padding:16px 18px;
-
-border-radius:14px;
-
-background:rgba(255,255,255,.04);
-
-border:1px solid rgba(212,175,55,.10);
-
-}
-
-.ticket-info span{
-
-color:#bfbfbf;
-
-font-size:14px;
-
-}
-
-.ticket-info strong{
-
-color:white;
-
-font-weight:600;
-
-text-align:right;
-
-}
-
-/*==================================================
-QR CODE
-==================================================*/
-
-.ticket-qr{
-
-display:flex;
-
-flex-direction:column;
-
-align-items:center;
-
-margin:40px 0;
-
-}
-
-#qrcode{
-
-background:white;
-
-padding:16px;
-
-border-radius:18px;
-
-box-shadow:
-
-0 20px 45px rgba(0,0,0,.35);
-
-animation:fadeUp .8s ease;
-
-}
-
-.ticket-qr p{
-
-margin-top:18px;
-
-color:var(--gold);
-
-font-size:14px;
-
-letter-spacing:1px;
-
-}
-
-
-
-/*==================================
-NOTE
-==================================*/
-
-.ticket-note{
-
-margin:35px 0;
-
-padding:18px;
-
-border-radius:18px;
-
-background:rgba(255,255,255,.04);
-
-border:1px solid rgba(212,175,55,.10);
-
-text-align:center;
-
-}
-
-.ticket-note p{
-
-font-size:14px;
-
-line-height:28px;
-
-color:#d0d0d0;
-
-}
-
-
-
-/*==================================
-BUTTONS
-==================================*/
-
-.ticket-buttons{
-
-display:flex;
-
-flex-direction:column;
-
-gap:18px;
-
-margin-top:35px;
-
-}
-
-.ticket-buttons button{
-
-border:none;
-
-cursor:pointer;
-
-padding:18px;
-
-border-radius:999px;
-
-font-size:16px;
-
-font-weight:700;
-
-background:
-
-linear-gradient(
-
-135deg,
-
-var(--gold2),
-
-var(--gold),
-
-#a97918
-
-);
-
-color:#111;
-
-transition:.35s;
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.ticket-buttons button:hover{
-
-transform:translateY(-4px);
-
-box-shadow:
-
-0 20px 50px rgba(212,175,55,.28);
-
-}
-
-.ticket-buttons a{
-
-text-decoration:none;
-
-text-align:center;
-
-padding:18px;
-
-border-radius:999px;
-
-border:1px solid rgba(212,175,55,.30);
-
-color:var(--gold);
-
-transition:.35s;
-
-}
-
-.ticket-buttons a:hover{
-
-background:rgba(212,175,55,.08);
-
-}
-
-.ticket-buttons button::before{
-
-content:"";
-
-position:absolute;
-
-top:-120%;
-
-left:-40%;
-
-width:45%;
-
-height:260%;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,.35),
-
-transparent
-
-);
-
-transform:rotate(20deg);
-
-transition:1.2s;
-
-}
-
-.ticket-buttons button:hover::before{
-
-left:170%;
-
-}
-
-
-
-/*==================================
-GOLD BORDER
-==================================*/
-
-.ticket-card::after{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-padding:1px;
-
-border-radius:32px;
-
-background:
-
-linear-gradient(
-
-135deg,
-
-transparent,
-
-rgba(212,175,55,.45),
-
-transparent
-
-);
-
--webkit-mask:
-
-linear-gradient(#fff 0 0) content-box,
-
-linear-gradient(#fff 0 0);
-
--webkit-mask-composite:xor;
-
-mask-composite:exclude;
-
-opacity:.8;
-
-}
-
-
-
-/*==================================
+/*=====================================
 ANIMATION
-==================================*/
+=====================================*/
 
-@keyframes fadeUp{
+@keyframes goldMove{
 
-from{
+0%{
 
-opacity:0;
+transform:
 
-transform:translateY(40px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-@keyframes floatLogo{
-
-0%,100%{
-
-transform:translateY(0);
+translate(-80px,-50px);
 
 }
 
 50%{
 
-transform:translateY(-8px);
+transform:
+
+translate(220px,90px);
+
+}
+
+100%{
+
+transform:
+
+translate(-80px,-50px);
 
 }
 
 }
 
+/*======================================================
+PART 4
+RESPONSIVE • BUTTON • PRINT
+======================================================*/
 
+/*=====================================
+BUTTON ICON
+=====================================*/
 
-/*==================================
-RESPONSIVE
-==================================*/
+.ticket-buttons button,
+.ticket-buttons a{
 
-@media(max-width:768px){
+display:flex;
 
-body{
+align-items:center;
 
-padding:20px;
+justify-content:center;
 
-}
+gap:10px;
 
-.ticket-card{
+min-width:190px;
 
-padding:28px;
+height:58px;
 
-}
+font-size:15px;
 
-.ticket-header h1{
+font-weight:600;
 
-font-size:48px;
-
-}
-
-.guest-box h3{
-
-font-size:32px;
-
-}
-
-.ticket-info div{
-
-flex-direction:column;
-
-align-items:flex-start;
-
-gap:8px;
+letter-spacing:.5px;
 
 }
 
-.ticket-info strong{
+.ticket-buttons button:active,
+.ticket-buttons a:active{
 
-text-align:left;
-
-}
+transform:scale(.97);
 
 }
 
 
 
-/*==================================
+/*=====================================
 SCROLLBAR
-==================================*/
+=====================================*/
 
 ::-webkit-scrollbar{
 
@@ -793,13 +763,21 @@ width:10px;
 
 ::-webkit-scrollbar-track{
 
-background:#080808;
+background:#090909;
 
 }
 
 ::-webkit-scrollbar-thumb{
 
-background:var(--gold);
+background:linear-gradient(
+
+180deg,
+
+#d4af37,
+
+#8d6b11
+
+);
 
 border-radius:999px;
 
@@ -807,14 +785,349 @@ border-radius:999px;
 
 
 
-/*==================================
-SELECTION
-==================================*/
+/*=====================================
+PRINT
+=====================================*/
+
+@media print{
+
+body{
+
+background:#fff;
+
+padding:0;
+
+}
+
+.ticket-buttons{
+
+display:none;
+
+}
+
+.ticket-card{
+
+box-shadow:none;
+
+border:none;
+
+width:100%;
+
+max-width:none;
+
+}
+
+}
+
+
+
+/*=====================================
+TABLET
+=====================================*/
+
+@media(max-width:992px){
+
+.ticket-card{
+
+grid-template-columns:1fr;
+
+}
+
+.ticket-right{
+
+border-left:none;
+
+border-top:2px dashed rgba(212,175,55,.30);
+
+}
+
+.ticket-left{
+
+padding:40px;
+
+}
+
+.ticket-right{
+
+padding:40px;
+
+}
+
+.ticket-info{
+
+grid-template-columns:1fr;
+
+}
+
+.ticket-buttons{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+.ticket-buttons button,
+.ticket-buttons a{
+
+width:100%;
+
+max-width:420px;
+
+}
+
+}
+
+
+
+/*=====================================
+MOBILE
+=====================================*/
+
+@media(max-width:600px){
+
+body{
+
+padding:25px 15px;
+
+}
+
+.ticket-left h1{
+
+font-size:42px;
+
+}
+
+.subtitle{
+
+font-size:16px;
+
+line-height:28px;
+
+}
+
+.ticket-logo{
+
+width:75px;
+
+}
+
+.info-item h2{
+
+font-size:24px;
+
+}
+
+.info-item h3{
+
+font-size:18px;
+
+}
+
+.ticket-right h2{
+
+font-size:28px;
+
+}
+
+#qrcode{
+
+padding:12px;
+
+}
+
+.ticket-note{
+
+font-size:14px;
+
+line-height:26px;
+
+}
+
+}
+
+/*======================================================
+PART 5
+FINAL EFFECT
+======================================================*/
+
+/*=====================================
+FLOATING
+=====================================*/
+
+.ticket-card{
+
+animation:ticketFloat 6s ease-in-out infinite;
+
+}
+
+@keyframes ticketFloat{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-10px);
+
+}
+
+}
+
+
+
+/*=====================================
+GOLD SHINE
+=====================================*/
+
+.ticket-card::before{
+
+animation:shineMove 8s linear infinite;
+
+}
+
+@keyframes shineMove{
+
+0%{
+
+transform:translateX(-120%);
+
+}
+
+100%{
+
+transform:translateX(220%);
+
+}
+
+}
+
+
+
+/*=====================================
+QR HOVER
+=====================================*/
+
+#qrcode{
+
+transition:.35s;
+
+}
+
+#qrcode:hover{
+
+transform:scale(1.06);
+
+box-shadow:
+
+0 20px 50px rgba(212,175,55,.30);
+
+}
+
+
+
+/*=====================================
+BUTTON HOVER
+=====================================*/
+
+.ticket-buttons button:hover,
+.ticket-buttons a:hover{
+
+transform:
+
+translateY(-6px)
+
+scale(1.03);
+
+}
+
+
+
+/*=====================================
+GLASS
+=====================================*/
+
+.info-item,
+.detail-box{
+
+backdrop-filter:blur(12px);
+
+-webkit-backdrop-filter:blur(12px);
+
+}
+
+
+
+/*=====================================
+TEXT SELECTION
+=====================================*/
 
 ::selection{
 
-background:var(--gold);
+background:#D4AF37;
 
 color:#111;
 
 }
+
+
+
+/*=====================================
+SMOOTH
+=====================================*/
+
+*{
+
+scroll-behavior:smooth;
+
+}
+
+
+
+/*=====================================
+LOGO
+=====================================*/
+
+.ticket-logo{
+
+transition:.35s;
+
+}
+
+.ticket-logo:hover{
+
+transform:rotate(-3deg) scale(1.05);
+
+}
+
+
+
+/*=====================================
+SEAL
+=====================================*/
+
+.ticket-seal{
+
+user-select:none;
+
+cursor:default;
+
+}
+
+
+
+/*=====================================
+READY
+=====================================*/
+
+body::after{
+
+content:"";
+
+display:none;
+
+}
+

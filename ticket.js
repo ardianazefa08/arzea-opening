@@ -1,260 +1,248 @@
-/*==================================================
-ARZEA LOUNGE & GARDEN
-VIP TICKET
-==================================================*/
+/*======================================================
+ARZEA V6
+TICKET.JS
+PART 1
+======================================================*/
 
-/*========================================
-LOAD RESERVATION
-========================================*/
+document.addEventListener("DOMContentLoaded",()=>{
 
-const reservation = JSON.parse(
+const reservation=JSON.parse(
 
-localStorage.getItem("arzeaReservation")
+localStorage.getItem("reservation")
 
 );
 
+
+
+/*====================================
+CHECK DATA
+====================================*/
+
 if(!reservation){
 
-alert("Reservation data not found.");
+alert("Reservation not found.");
 
 window.location.href="index.html";
+
+return;
 
 }
 
 
 
-/*========================================
+/*====================================
 FILL DATA
-========================================*/
+====================================*/
 
-document.getElementById("guestName").textContent=
+document.getElementById("ticketName").textContent=
 
 reservation.name;
 
-document.getElementById("reservationID").textContent=
+
+
+document.getElementById("ticketID").textContent=
 
 reservation.id;
 
-document.getElementById("guestEmail").textContent=
 
-reservation.email;
 
-document.getElementById("guestGuests").textContent=
+document.getElementById("ticketGuests").textContent=
 
 reservation.guests;
 
 
 
-/*========================================
-PARTICLES
-========================================*/
-
-const particles=document.getElementById("particles");
-
-if(particles){
-
-for(let i=0;i<70;i++){
-
-const p=document.createElement("span");
-
-p.className="particle";
-
-p.style.left=Math.random()*100+"vw";
-
-p.style.animationDuration=
-
-5+Math.random()*8+"s";
-
-p.style.animationDelay=
-
-Math.random()*5+"s";
-
-p.style.opacity=Math.random();
-
-particles.appendChild(p);
-
-}
-
-}
-
-
-
-/*========================================
+/*====================================
 QR CODE
-========================================*/
+====================================*/
 
-window.addEventListener("load",()=>{
+new QRCode(
 
-const qrTarget=document.getElementById("qrcode");
+document.getElementById("qrcode"),
 
-if(qrTarget && typeof QRCode!=="undefined"){
+{
 
-new QRCode(qrTarget,{
+text:JSON.stringify(reservation),
 
-text:JSON.stringify({
+width:180,
 
-id:reservation.id,
+height:180,
 
-name:reservation.name,
-
-email:reservation.email,
-
-guests:reservation.guests,
-
-date:"19 September 2026",
-
-time:"18.00 WIB"
-
-}),
-
-width:220,
-
-height:220,
-
-colorDark:"#000000",
+colorDark:"#111111",
 
 colorLight:"#ffffff",
 
 correctLevel:QRCode.CorrectLevel.H
 
-});
-
 }
 
-});
-
-/*========================================
-DOWNLOAD PDF
-========================================*/
-
-document.getElementById("downloadTicket").onclick = async () => {
-
-const card = document.getElementById("ticketCard");
-
-const canvas = await html2canvas(card,{
-    scale:2,
-    useCORS:true,
-    allowTaint:true
-});
-
-const img = canvas.toDataURL("image/png");
-
-const { jsPDF } = window.jspdf;
-
-const pdf = new jsPDF("p","mm","a4");
-
-const pageWidth = pdf.internal.pageSize.getWidth();
-
-const imgWidth = pageWidth - 20;
-
-const imgHeight = canvas.height * imgWidth / canvas.width;
-
-pdf.addImage(
-    img,
-    "PNG",
-    10,
-    10,
-    imgWidth,
-    imgHeight
 );
 
-pdf.save("ARZEA-VIP-TICKET.pdf");
+
+
+/*====================================
+PRINT
+====================================*/
+
+const printBtn=document.getElementById("printTicket");
+
+if(printBtn){
+
+printBtn.onclick=()=>{
+
+window.print();
 
 };
 
+}
 
 
-/*========================================
-DOWNLOAD PNG
-========================================*/
 
-document.getElementById("downloadPNG").onclick = async ()=>{
+/*====================================
+PDF
+====================================*/
+
+const pdfBtn=document.getElementById("downloadPDF");
+
+pdfBtn.addEventListener("click",async()=>{
 
 const card=document.getElementById("ticketCard");
 
 const canvas=await html2canvas(card,{
-    scale:2,
-    useCORS:true,
-    allowTaint:true
+
+scale:2,
+
+useCORS:true
+
 });
 
-const a=document.createElement("a");
+const img=canvas.toDataURL("image/png");
 
-a.href=canvas.toDataURL("image/png");
+const {jsPDF}=window.jspdf;
 
-a.download="ARZEA-VIP-TICKET.png";
+const pdf=new jsPDF("p","mm","a4");
 
-a.click();
+const pageWidth=pdf.internal.pageSize.getWidth();
 
-};
+const imgWidth=pageWidth-20;
 
+const imgHeight=
 
+canvas.height*imgWidth/canvas.width;
 
-/*========================================
-RIPPLE EFFECT
-========================================*/
+pdf.addImage(
 
-document
+img,
 
-.querySelectorAll(".ticket-buttons button")
+"PNG",
 
-.forEach(button=>{
+10,
 
-button.addEventListener("click",function(e){
+10,
 
-const ripple=document.createElement("span");
+imgWidth,
 
-ripple.className="ripple";
-
-const size=Math.max(
-
-this.clientWidth,
-
-this.clientHeight
+imgHeight
 
 );
 
-ripple.style.width=size+"px";
+pdf.save(
 
-ripple.style.height=size+"px";
+reservation.id+".pdf"
 
-ripple.style.left=
-
-e.offsetX-size/2+"px";
-
-ripple.style.top=
-
-e.offsetY-size/2+"px";
-
-this.appendChild(ripple);
-
-setTimeout(()=>{
-
-ripple.remove();
-
-},700);
+);
 
 });
 
-});
+/*====================================
+SAVE PNG
+====================================*/
 
+const pngBtn=document.getElementById("downloadPNG");
 
+if(pngBtn){
 
-/*========================================
-CARD ANIMATION
-========================================*/
-
-window.addEventListener("load",()=>{
+pngBtn.addEventListener("click",async()=>{
 
 const card=document.getElementById("ticketCard");
 
-card.animate([
+const canvas=await html2canvas(card,{
+
+scale:3,
+
+useCORS:true,
+
+backgroundColor:null
+
+});
+
+const link=document.createElement("a");
+
+link.download=reservation.id+".png";
+
+link.href=canvas.toDataURL("image/png");
+
+link.click();
+
+});
+
+}
+
+
+
+/*====================================
+SUCCESS SOUND
+====================================*/
+
+const successAudio=new Audio("audio/success.mp3");
+
+successAudio.volume=.30;
+
+
+
+/*====================================
+HOVER SOUND
+====================================*/
+
+document.querySelectorAll(
+
+".ticket-buttons button,.ticket-buttons a"
+
+).forEach(btn=>{
+
+btn.addEventListener("mouseenter",()=>{
+
+btn.style.transform="translateY(-5px)";
+
+});
+
+btn.addEventListener("mouseleave",()=>{
+
+btn.style.transform="translateY(0px)";
+
+});
+
+});
+
+
+
+/*====================================
+CARD FADE IN
+====================================*/
+
+const card=document.getElementById("ticketCard");
+
+if(card){
+
+card.animate(
+
+[
 
 {
 
 opacity:0,
 
-transform:"translateY(80px) scale(.95)"
+transform:"translateY(40px)"
 
 },
 
@@ -262,33 +250,44 @@ transform:"translateY(80px) scale(.95)"
 
 opacity:1,
 
-transform:"translateY(0) scale(1)"
+transform:"translateY(0)"
 
 }
 
-],{
+],
+
+{
 
 duration:900,
 
-easing:"ease-out"
+fill:"forwards",
+
+easing:"ease"
+
+}
+
+);
+
+}
+
+
+
+/*====================================
+AUTO PLAY SUCCESS SOUND
+====================================*/
+
+window.addEventListener("load",()=>{
+
+successAudio.play().catch(()=>{});
 
 });
 
+
+
+/*====================================
+READY
+====================================*/
+
+console.log("ARZEA VIP Ticket Ready");
+
 });
-
-
-
-/*========================================
-PRELOAD
-========================================*/
-
-const logo=new Image();
-
-logo.src="images/logo.png";
-
-
-
-/*========================================
-END
-========================================*/
-
