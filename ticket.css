@@ -1,249 +1,111 @@
+/* ===========================
+   RESET
+=========================== */
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
 }
 
+html{
+scroll-behavior:smooth;
+}
+
 body{
 
-background:#070707;
 font-family:'Inter',sans-serif;
+background:
+radial-gradient(circle at top,#2b2108 0%,#090909 35%,#050505 100%);
+min-height:100vh;
+
 display:flex;
 justify-content:center;
 align-items:center;
-min-height:100vh;
+
+padding:60px 20px;
+
 overflow-x:hidden;
+
 color:white;
 
 }
+
+
+/* ===========================
+   BACKGROUND
+=========================== */
 
 .background-glow{
 
 position:fixed;
+
 width:700px;
 height:700px;
-background:radial-gradient(circle,#d4af3740,transparent 70%);
+
+background:
+radial-gradient(circle,
+rgba(212,175,55,.28),
+transparent 70%);
+
 filter:blur(90px);
-z-index:-1;
+
+z-index:-2;
+
+animation:glow 7s ease-in-out infinite;
 
 }
+
+@keyframes glow{
+
+0%{
+transform:scale(1);
+opacity:.5;
+}
+
+50%{
+transform:scale(1.15);
+opacity:.9;
+}
+
+100%{
+transform:scale(1);
+opacity:.5;
+}
+
+}
+
+
+/* ===========================
+   TICKET
+=========================== */
 
 .ticket{
 
+position:relative;
+
+overflow:hidden;
+
 width:430px;
-background:rgba(18,18,18,.95);
-border:1px solid rgba(212,175,55,.55);
+
+background:
+rgba(18,18,18,.93);
+
+border:1px solid rgba(212,175,55,.45);
+
 border-radius:28px;
-padding:42px 34px;
-backdrop-filter:blur(20px);
+
+padding:45px 34px;
+
+backdrop-filter:blur(22px);
+
 box-shadow:
-0 0 60px rgba(212,175,55,.12),
-0 30px 60px rgba(0,0,0,.45);
+
+0 0 45px rgba(212,175,55,.15),
+
+0 25px 80px rgba(0,0,0,.55);
+
 animation:fadeUp .8s ease;
-
-}
-
-.gold-line{
-
-height:3px;
-background:linear-gradient(
-90deg,
-transparent,
-#d4af37,
-transparent
-);
-
-margin-bottom:35px;
-
-}
-
-.logo-area{
-
-text-align:center;
-
-}
-
-.logo{
-
-width:95px;
-margin-bottom:18px;
-filter:drop-shadow(0 0 18px rgba(212,175,55,.4));
-
-}
-
-.logo-area h1{
-
-font-family:'Cormorant Garamond',serif;
-font-size:46px;
-letter-spacing:4px;
-color:#d4af37;
-
-}
-
-.logo-area p{
-
-letter-spacing:6px;
-font-size:13px;
-color:#bdbdbd;
-text-transform:uppercase;
-
-}
-
-.vip-title{
-
-margin:35px auto;
-width:max-content;
-padding:10px 24px;
-border:1px solid rgba(212,175,55,.5);
-border-radius:999px;
-color:#d4af37;
-letter-spacing:3px;
-font-size:13px;
-
-}
-
-.welcome{
-
-text-align:center;
-margin-bottom:35px;
-
-}
-
-.welcome h2{
-
-margin-top:12px;
-font-size:32px;
-font-family:'Cormorant Garamond',serif;
-color:white;
-
-}
-
-.info{
-
-border-top:1px solid rgba(212,175,55,.3);
-border-bottom:1px solid rgba(212,175,55,.3);
-padding:25px 0;
-
-}
-
-.row{
-
-display:flex;
-justify-content:space-between;
-padding:12px 0;
-border-bottom:1px solid rgba(255,255,255,.06);
-
-}
-
-.row:last-child{
-
-border-bottom:none;
-
-}
-
-.row span{
-
-color:#bdbdbd;
-
-}
-
-.row b{
-
-color:white;
-font-weight:600;
-
-}
-
-.qr-area{
-
-margin-top:35px;
-text-align:center;
-
-}
-
-#qrcode{
-
-display:flex;
-justify-content:center;
-margin-bottom:18px;
-
-}
-
-#qrcode img{
-
-background:white;
-padding:16px;
-border-radius:18px;
-
-}
-
-.scan-text{
-
-font-size:13px;
-color:#a7a7a7;
-line-height:24px;
-
-}
-
-.footer{
-
-margin-top:35px;
-text-align:center;
-font-size:12px;
-color:#888;
-line-height:22px;
-
-}
-
-.buttons{
-
-margin-top:35px;
-display:flex;
-flex-direction:column;
-gap:15px;
-
-}
-
-.buttons button,
-.buttons a{
-
-text-decoration:none;
-border:none;
-cursor:pointer;
-padding:16px;
-border-radius:999px;
-font-size:15px;
-font-weight:600;
-transition:.3s;
-
-}
-
-.buttons button{
-
-background:#d4af37;
-color:#111;
-
-}
-
-.buttons button:hover{
-
-transform:translateY(-2px);
-box-shadow:0 12px 25px rgba(212,175,55,.3);
-
-}
-
-.buttons a{
-
-background:#1b1b1b;
-color:white;
-border:1px solid rgba(212,175,55,.35);
-text-align:center;
-
-}
-
-.buttons a:hover{
-
-background:#252525;
 
 }
 
@@ -252,37 +114,646 @@ background:#252525;
 from{
 
 opacity:0;
-transform:translateY(30px);
+
+transform:
+translateY(35px)
+scale(.97);
 
 }
 
 to{
 
 opacity:1;
-transform:translateY(0);
+
+transform:
+translateY(0)
+scale(1);
 
 }
 
 }
+
+
+/* ===========================
+   WATERMARK
+=========================== */
+
+.watermark{
+
+position:absolute;
+
+left:50%;
+
+top:50%;
+
+transform:translate(-50%,-50%);
+
+opacity:.035;
+
+pointer-events:none;
+
+z-index:0;
+
+}
+
+.watermark img{
+
+width:300px;
+
+}
+
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header{
+
+position:relative;
+
+z-index:2;
+
+text-align:center;
+
+}
+
+.logo{
+
+width:90px;
+
+margin-bottom:18px;
+
+filter:
+
+drop-shadow(0 0 18px rgba(212,175,55,.35));
+
+}
+
+.header h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:46px;
+
+letter-spacing:5px;
+
+color:#d4af37;
+
+}
+
+.header h2{
+
+margin-top:8px;
+
+font-size:13px;
+
+letter-spacing:7px;
+
+font-weight:400;
+
+color:#d2d2d2;
+
+text-transform:uppercase;
+
+}
+
+.vip-badge{
+
+display:inline-block;
+
+margin-top:30px;
+
+padding:
+
+11px 28px;
+
+border:
+
+1px solid rgba(212,175,55,.45);
+
+border-radius:999px;
+
+color:#d4af37;
+
+font-size:12px;
+
+letter-spacing:3px;
+
+background:
+rgba(212,175,55,.05);
+
+}
+
+/* ===========================
+   WELCOME
+=========================== */
+
+.welcome{
+
+position:relative;
+
+z-index:2;
+
+text-align:center;
+
+margin:38px 0;
+
+}
+
+.welcome-text{
+
+font-size:15px;
+
+color:#b8b8b8;
+
+letter-spacing:2px;
+
+}
+
+.welcome h3{
+
+margin-top:12px;
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:34px;
+
+font-weight:700;
+
+color:white;
+
+}
+
+
+/* ===========================
+   INFO CARD
+=========================== */
+
+.info{
+
+position:relative;
+
+z-index:2;
+
+margin-top:25px;
+
+padding:22px;
+
+background:
+
+rgba(255,255,255,.03);
+
+border:
+
+1px solid rgba(212,175,55,.15);
+
+border-radius:20px;
+
+backdrop-filter:blur(10px);
+
+}
+
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:15px 0;
+
+border-bottom:
+
+1px solid rgba(255,255,255,.07);
+
+}
+
+.row:last-child{
+
+border:none;
+
+}
+
+.row span{
+
+font-size:14px;
+
+color:#adadad;
+
+}
+
+.row b{
+
+font-size:15px;
+
+font-weight:600;
+
+color:white;
+
+text-align:right;
+
+max-width:58%;
+
+word-break:break-word;
+
+}
+
+
+/* ===========================
+   QR AREA
+=========================== */
+
+.qr-area{
+
+position:relative;
+
+z-index:2;
+
+margin-top:35px;
+
+text-align:center;
+
+}
+
+#qrcode{
+
+display:inline-block;
+
+padding:18px;
+
+background:white;
+
+border-radius:22px;
+
+box-shadow:
+
+0 0 25px rgba(212,175,55,.25);
+
+}
+
+#qrcode img{
+
+display:block;
+
+}
+
+.qr-area p{
+
+margin-top:18px;
+
+font-size:13px;
+
+color:#9d9d9d;
+
+letter-spacing:1px;
+
+line-height:22px;
+
+}
+
+
+/* ===========================
+   COUNTDOWN
+=========================== */
+
+.countdown-box{
+
+position:relative;
+
+z-index:2;
+
+margin-top:35px;
+
+padding:22px;
+
+border-radius:20px;
+
+background:
+
+rgba(212,175,55,.04);
+
+border:
+
+1px solid rgba(212,175,55,.12);
+
+}
+
+.countdown-box h4{
+
+text-align:center;
+
+font-size:14px;
+
+font-weight:500;
+
+letter-spacing:2px;
+
+color:#d4af37;
+
+margin-bottom:22px;
+
+}
+
+.countdown{
+
+display:flex;
+
+justify-content:space-between;
+
+gap:10px;
+
+}
+
+.countdown div{
+
+flex:1;
+
+background:
+
+rgba(255,255,255,.03);
+
+border-radius:14px;
+
+padding:15px 8px;
+
+text-align:center;
+
+}
+
+.countdown span{
+
+display:block;
+
+font-size:24px;
+
+font-weight:700;
+
+color:#d4af37;
+
+margin-bottom:6px;
+
+}
+
+.countdown small{
+
+font-size:11px;
+
+color:#b8b8b8;
+
+letter-spacing:1px;
+
+text-transform:uppercase;
+
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+
+.buttons{
+
+position:relative;
+z-index:2;
+
+margin-top:35px;
+
+display:flex;
+flex-direction:column;
+gap:16px;
+
+}
+
+.buttons button,
+.buttons a{
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+width:100%;
+
+padding:17px;
+
+border-radius:999px;
+
+font-size:15px;
+
+font-weight:600;
+
+text-decoration:none;
+
+transition:.35s;
+
+cursor:pointer;
+
+}
+
+.buttons button{
+
+border:none;
+
+background:linear-gradient(
+135deg,
+#f3d27a,
+#d4af37,
+#a77918
+);
+
+color:#111;
+
+box-shadow:
+0 12px 30px rgba(212,175,55,.25);
+
+}
+
+.buttons button:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 18px 40px rgba(212,175,55,.35);
+
+}
+
+.calendar-btn{
+
+background:#1b1b1b;
+
+color:white;
+
+border:
+1px solid rgba(212,175,55,.35);
+
+}
+
+.calendar-btn:hover{
+
+background:#262626;
+
+border-color:#d4af37;
+
+}
+
+
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer{
+
+position:relative;
+z-index:2;
+
+margin-top:38px;
+
+text-align:center;
+
+font-size:12px;
+
+color:#888;
+
+line-height:22px;
+
+letter-spacing:1px;
+
+}
+
+
+/* ===========================
+   GOLD SHIMMER
+=========================== */
+
+.ticket::before{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+left:-35%;
+
+width:60%;
+height:250%;
+
+background:
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.12),
+
+transparent
+
+);
+
+transform:rotate(20deg);
+
+animation:shine 8s linear infinite;
+
+pointer-events:none;
+
+}
+
+@keyframes shine{
+
+100%{
+
+left:150%;
+
+}
+
+}
+
+
+/* ===========================
+   PRINT
+=========================== */
+
+@media print{
+
+body{
+
+background:white;
+
+padding:0;
+
+}
+
+.background-glow{
+
+display:none;
+
+}
+
+.buttons{
+
+display:none;
+
+}
+
+.ticket{
+
+width:100%;
+
+max-width:none;
+
+border:1px solid #000;
+
+box-shadow:none;
+
+margin:0;
+
+}
+
+}
+
+
+/* ===========================
+   MOBILE
+=========================== */
 
 @media(max-width:480px){
 
 .ticket{
 
-width:92%;
-padding:32px 24px;
+width:100%;
+
+padding:30px 22px;
+
+border-radius:22px;
 
 }
 
-.logo-area h1{
+.header h1{
 
 font-size:38px;
 
 }
 
-.welcome h2{
+.welcome h3{
 
 font-size:28px;
+
+}
+
+.countdown{
+
+gap:6px;
+
+}
+
+.countdown span{
+
+font-size:20px;
+
+}
+
+.logo{
+
+width:78px;
 
 }
 

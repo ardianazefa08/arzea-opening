@@ -80,14 +80,14 @@ emailjs.send(
         "service_yp1tkqq",
         "template_ru3pmnr",
         {
-            name: fullName,
-            phone: phone,
-            email: email,
-            guests: guests,
-            message: request,
-            reservationID: reservationID,
-            qr: qr
+        name: fullName,
+        reservationID: reservationID,
+        email: email,
+        phone: phone,
+        guests: guests
         }
+)
+}
     );
 
 })
@@ -117,9 +117,8 @@ emailjs.send(
 
 });
 
-});
+};
 
-}         
 
 function showSuccess(name, guests, email){
 
@@ -266,4 +265,3 @@ doc.text("Attire",105,76);
 doc.save("ARZEA-VIP-Ticket.pdf");
 
 }
-

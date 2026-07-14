@@ -2,18 +2,13 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARZEA VIP Invitation</title>
 
-<meta charset="UTF-8">
+    <link rel="stylesheet" href="ticket.css">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>ARZEA VIP Invitation</title>
-
-<link rel="stylesheet" href="ticket.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 </head>
 
 <body>
@@ -22,156 +17,149 @@ content="width=device-width, initial-scale=1.0">
 
 <div class="ticket">
 
-<div class="gold-line"></div>
+    <!-- Watermark -->
+    <div class="watermark">
+        <img src="images/logo.png" alt="ARZEA">
+    </div>
 
-<div class="logo-area">
+    <!-- Header -->
+    <div class="header">
 
-<img
-src="images/logo.png"
-class="logo">
+        <img class="logo" src="images/logo.png" alt="ARZEA">
 
-<h1>ARZEA</h1>
+        <h1>ARZEA</h1>
 
-<p>Lounge & Garden</p>
+        <h2>LOUNGE & GARDEN</h2>
 
-</div>
+        <div class="vip-badge">
+            VIP INVITATION
+        </div>
 
-<div class="vip-title">
+    </div>
 
-VIP INVITATION
+    <!-- Welcome -->
+    <div class="welcome">
 
-</div>
+        <p class="welcome-text">
+            Welcome,
+        </p>
 
-<div class="welcome">
+        <h3 id="guestName">
+            Guest Name
+        </h3>
 
-Welcome,
+    </div>
 
-<h2 id="guestName">
+    <!-- Information -->
+    <div class="info">
 
-Guest Name
-
-</h2>
-
-</div>
-
-<div class="info">
-
-<div class="row">
-
-<span>Reservation ID</span>
-
-<b id="reservationID">
-ARZEA-XXXX
-</b>
-
+        <div class="row">
+    <span>Reservation ID</span>
+    <b id="reservationID"></b>
 </div>
 
 <div class="row">
-
-<span>Email</span>
-
-<b id="guestEmail">
-
-guest@email.com
-
-</b>
-
+    <span>Email</span>
+    <b id="email"></b>
 </div>
 
-<div class="row">
+        <div class="row">
+            <span>Email</span>
+            <b id="email"></b>
+        </div>
 
-<span>Guests</span>
+        <div class="row">
+            <span>Guests</span>
+            <b id="guests"></b>
+        </div>
 
-<b id="guestCount">
+        <div class="row">
+            <span>Date</span>
+            <b>19 September 2026</b>
+        </div>
 
-2 Guests
+        <div class="row">
+            <span>Time</span>
+            <b>18.00 WIB</b>
+        </div>
 
-</b>
+        <div class="row">
+            <span>Dress Code</span>
+            <b>Elegant Black</b>
+        </div>
+
+    </div>
+
+    <!-- QR -->
+    <div class="qr-area">
+
+        <div id="qrcode"></div>
+
+        <p>
+            Present this QR Code upon arrival
+        </p>
+
+    </div>
+
+    <!-- Countdown -->
+    <div class="countdown-box">
+
+        <h4>Grand Opening Begins In</h4>
+
+        <div class="countdown">
+
+            <div>
+                <span id="days">00</span>
+                <small>Days</small>
+            </div>
+
+            <div>
+                <span id="hours">00</span>
+                <small>Hours</small>
+            </div>
+
+            <div>
+                <span id="minutes">00</span>
+                <small>Minutes</small>
+            </div>
+
+            <div>
+                <span id="seconds">00</span>
+                <small>Seconds</small>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons">
+
+        <button onclick="window.print()">
+            Save as PDF
+        </button>
+
+        <a
+            class="calendar-btn"
+            target="_blank"
+            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ARZEA+Grand+Opening&dates=20260919T110000Z/20260919T140000Z">
+
+            Add to Calendar
+
+        </a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+
+        This invitation is personal and non-transferable.
+
+    </div>
 
 </div>
-
-<div class="row">
-
-<span>Date</span>
-
-<b>
-
-19 September 2026
-
-</b>
-
-</div>
-
-<div class="row">
-
-<span>Time</span>
-
-<b>
-
-18.00 WIB
-
-</b>
-
-</div>
-
-<div class="row">
-
-<span>Dress Code</span>
-
-<b>
-
-Elegant Black
-
-</b>
-
-</div>
-
-</div>
-
-<div class="qr-area">
-
-<div id="qrcode"></div>
-
-<p>
-
-Present this QR Code
-upon arrival
-
-</p>
-
-</div>
-
-<div class="footer">
-
-This invitation is personal
-and non-transferable.
-
-</div>
-
-<div class="buttons">
-
-<button
-onclick="window.print()">
-
-Save as PDF
-
-</button>
-
-<a
-href="index.html">
-
-Back Home
-
-</a>
-
-</div>
-
-</div>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script src="ticket.js"></script>
 
 </body>
-
 </html>
