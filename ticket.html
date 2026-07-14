@@ -5,81 +5,43 @@
 
 <meta charset="UTF-8">
 
-<meta
-name="viewport"
-content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>
+<title>ARZEA VIP Invitation</title>
 
-ARZEA VIP Ticket
+<link rel="stylesheet" href="ticket.css">
 
-</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
-<link
-rel="stylesheet"
-href="ticket.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-rel="preconnect"
-href="https://fonts.googleapis.com">
-
-<link
-rel="preconnect"
-href="https://fonts.gstatic.com"
-crossorigin>
-
-<link
-href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
-rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="background-glow"></div>
+<div class="background"></div>
 
-<div class="ticket">
+<div class="gold-glow"></div>
 
-<div class="watermark">
+<div class="ticket-wrapper">
 
-<img
-src="images/logo.png">
+<div class="ticket-card">
 
-</div>
+<div class="ticket-header">
 
+<img src="images/logo.png" class="ticket-logo">
 
+<h1>ARZEA</h1>
 
-<div class="header">
+<h2>LOUNGE & GARDEN</h2>
 
-<img
-src="images/logo.png"
-class="logo">
-
-<h1>
-
-ARZEA
-
-</h1>
-
-<h2>
-
-LOUNGE & GARDEN
-
-</h2>
-
-<div class="vip">
-
-VIP INVITATION
+<p>VIP INVITATION</p>
 
 </div>
 
-</div>
-
-
-
-<div class="guest">
+<div class="guest-name">
 
 <h3 id="guestName">
 
@@ -95,112 +57,83 @@ We look forward to welcoming you.
 
 </div>
 
+<div class="ticket-info">
 
+<div>
 
-<div class="details">
+<span>Reservation ID</span>
 
-<div class="row">
-
-<span>
-
-Reservation ID
-
-</span>
-
-<b id="reservationID">
+<strong id="reservationID">
 
 ARZEA-0000
 
-</b>
+</strong>
 
 </div>
 
-<div class="row">
+<div>
 
-<span>
+<span>Email</span>
 
-Email
-
-</span>
-
-<b id="guestEmail">
+<strong id="guestEmail">
 
 -
 
-</b>
+</strong>
 
 </div>
 
-<div class="row">
+<div>
 
-<span>
+<span>Guests</span>
 
-Guests
-
-</span>
-
-<b id="guestGuests">
+<strong id="guestCount">
 
 -
 
-</b>
+</strong>
 
 </div>
 
-<div class="row">
+<div>
 
-<span>
+<span>Date</span>
 
-Date
-
-</span>
-
-<b>
+<strong>
 
 19 September 2026
 
-</b>
+</strong>
 
 </div>
 
-<div class="row">
+<div>
 
-<span>
+<span>Time</span>
 
-Time
-
-</span>
-
-<b>
+<strong>
 
 18.00 WIB
 
-</b>
+</strong>
 
 </div>
 
-<div class="row">
+<div>
 
-<span>
+<span>Dress Code</span>
 
-Dress Code
-
-</span>
-
-<b>
+<strong>
 
 Elegant Black
 
-</b>
+</strong>
 
 </div>
 
 </div>
-<!-- ===========================
-QR CODE
-=========================== -->
 
-<div class="qr-section">
+<div class="ticket-qr">
 
 <div id="qrcode"></div>
 
@@ -212,120 +145,31 @@ Present this QR Code upon arrival
 
 </div>
 
-
-
-<!-- ===========================
-COUNTDOWN
-=========================== -->
-
-<div class="countdown-box">
-
-<h3>
-
-Grand Opening Begins In
-
-</h3>
-
-<div class="countdown">
-
-<div>
-
-<span id="days">
-
-00
-
-</span>
-
-<small>Days</small>
-
-</div>
-
-<div>
-
-<span id="hours">
-
-00
-
-</span>
-
-<small>Hours</small>
-
-</div>
-
-<div>
-
-<span id="minutes">
-
-00
-
-</span>
-
-<small>Minutes</small>
-
-</div>
-
-<div>
-
-<span id="seconds">
-
-00
-
-</span>
-
-<small>Seconds</small>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- ===========================
-BUTTONS
-=========================== -->
-
 <div class="ticket-buttons">
 
-<button
-onclick="window.print()">
+<button id="downloadTicket">
 
-Save as PDF
+Download VIP Ticket
 
 </button>
 
-<a
+<a href="index.html">
 
-class="calendar-btn"
-
-target="_blank"
-
-href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ARZEA+Grand+Opening&dates=20260919T110000Z/20260919T140000Z">
-
-Add To Calendar
+Back Home
 
 </a>
 
 </div>
 
-
-
-<!-- ===========================
-FOOTER
-=========================== -->
-
-<div class="footer">
-
-This invitation is personal,
-exclusive,
-and non-transferable.
-
 </div>
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <script src="ticket.js"></script>
 
