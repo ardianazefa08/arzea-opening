@@ -668,24 +668,34 @@ async function sendReservationEmail(data){
             "template_ru3pmnr",
 
             {
+    reservation_id : data.id,
 
-                reservation_id : data.id,
+    guest_name : data.name,
 
-                guest_name : data.name,
+    guest_email : data.email,
 
-                guest_email : data.email,
+    guest_phone : data.phone,
 
-                guest_phone : data.phone,
+    guest_count : data.guests,
 
-                guest_count : data.guests,
+    reservation_date : data.date,
 
-                reservation_date : data.date,
+    reservation_time : data.time,
 
-                reservation_time : data.time,
+    dress_code : data.dress,
 
-                dress_code : data.dress
+    special_request : data.request,
 
-            }
+    logo_url : "https://arzea-opening.vercel.app/images/logo.png",
+
+    hero_url : "https://arzea-opening.vercel.app/images/hero.png",
+
+    website_url : "https://arzea-opening.vercel.app/",
+
+    vip_ticket_url :
+    "https://arzea-opening.vercel.app/ticket.html?id=" +
+    encodeURIComponent(data.id)
+}
 
         );
 
