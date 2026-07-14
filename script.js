@@ -1,7 +1,11 @@
 /*==================================================
-ARZEA V3
-script.js
+ARZEA LOUNGE & GARDEN
+SCRIPT.JS V3 PREMIUM
 ==================================================*/
+
+/*========================================
+EMAILJS
+========================================*/
 
 emailjs.init({
     publicKey: "-EkYc26ebwGzYOuJW"
@@ -11,84 +15,206 @@ emailjs.init({
 LOADER
 ========================================*/
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
 
-const loader=document.getElementById("loader");
+    const loader = document.getElementById("loader");
 
-setTimeout(()=>{
+    if (loader) {
 
-loader.style.opacity="0";
+        setTimeout(() => {
 
-setTimeout(()=>{
+            loader.style.opacity = "0";
 
-loader.style.display="none";
+            loader.style.pointerEvents = "none";
 
-},700);
+            setTimeout(() => {
 
-},1800);
+                loader.remove();
+
+            }, 800);
+
+        }, 1800);
+
+    }
 
 });
+
+
+/*========================================
+AOS
+========================================*/
+
+if (typeof AOS !== "undefined") {
+
+    AOS.init({
+
+        duration:1000,
+
+        once:true,
+
+        offset:120
+
+    });
+
+}
 
 
 /*========================================
 COUNTDOWN
 ========================================*/
 
-const targetDate=new Date("2026-09-19T18:00:00+07:00").getTime();
+const targetDate = new Date("2026-09-19T18:00:00+07:00").getTime();
 
-const day=document.getElementById("days");
-const hour=document.getElementById("hours");
-const minute=document.getElementById("minutes");
-const second=document.getElementById("seconds");
+const day = document.getElementById("days");
+const hour = document.getElementById("hours");
+const minute = document.getElementById("minutes");
+const second = document.getElementById("seconds");
 
-if(day){
+function updateCountdown(){
 
-setInterval(()=>{
+    if(!day) return;
 
-const now=new Date().getTime();
+    const now = new Date().getTime();
 
-const distance=targetDate-now;
+    const distance = targetDate - now;
 
-if(distance<0){
+    if(distance <= 0){
 
-day.innerHTML="00";
-hour.innerHTML="00";
-minute.innerHTML="00";
-second.innerHTML="00";
+        day.textContent="00";
+        hour.textContent="00";
+        minute.textContent="00";
+        second.textContent="00";
 
-return;
+        return;
+
+    }
+
+    day.textContent=Math.floor(distance/(1000*60*60*24));
+
+    hour.textContent=Math.floor(
+
+        (distance%(1000*60*60*24))
+
+        /(1000*60*60)
+
+    );
+
+    minute.textContent=Math.floor(
+
+        (distance%(1000*60*60))
+
+        /(1000*60)
+
+    );
+
+    second.textContent=Math.floor(
+
+        (distance%(1000*60))
+
+        /1000
+
+    );
 
 }
 
-day.innerHTML=Math.floor(distance/86400000);
+updateCountdown();
 
-hour.innerHTML=Math.floor(distance%86400000/3600000);
-
-minute.innerHTML=Math.floor(distance%3600000/60000);
-
-second.innerHTML=Math.floor(distance%60000/1000);
-
-},1000);
-
-}
+setInterval(updateCountdown,1000);
 
 
 /*========================================
-RESERVATION
+NAVBAR
+========================================*/
+
+const navbar=document.querySelector(".navbar");
+
+window.addEventListener("scroll",()=>{
+
+    if(!navbar) return;
+
+    if(window.scrollY>60){
+
+        navbar.style.background="rgba(0,0,0,.85)";
+
+        navbar.style.padding="16px 8%";
+
+        navbar.style.boxShadow=
+
+        "0 15px 40px rgba(0,0,0,.35)";
+
+    }
+
+    else{
+
+        navbar.style.background="rgba(0,0,0,.35)";
+
+        navbar.style.padding="22px 8%";
+
+        navbar.style.boxShadow="none";
+
+    }
+
+});
+
+
+/*========================================
+SMOOTH SCROLL
+========================================*/
+
+document
+
+.querySelectorAll('a[href^="#"]')
+
+.forEach(anchor=>{
+
+    anchor.addEventListener("click",function(e){
+
+        e.preventDefault();
+
+        const target=document.querySelector(
+
+            this.getAttribute("href")
+
+        );
+
+        if(target){
+
+            target.scrollIntoView({
+
+                behavior:"smooth"
+
+            });
+
+        }
+
+    });
+
+});
+
+
+/*========================================
+RESERVATION FORM
 ========================================*/
 
 const form=document.querySelector(".reserve-form");
 
 if(form){
 
-form.addEventListener("submit",sendReservation);
+    form.addEventListener(
+
+        "submit",
+
+        submitReservation
+
+    );
 
 }
+
 /*========================================
-SEND RESERVATION
+SUBMIT RESERVATION
 ========================================*/
 
-async function sendReservation(e){
+async function submitReservation(e){
 
 e.preventDefault();
 
@@ -104,25 +230,71 @@ const guests=form.querySelector("select").value;
 
 const request=form.querySelector("textarea").value.trim();
 
-if(!fullName||!phone||!email){
+if(!fullName){
 
-alert("Please complete all required fields.");
+alert("Please enter your full name.");
 
 return;
 
 }
 
-const reservationID=
+if(!phone){
 
-"ARZEA-"+
+alert("Please enter your phone number.");
 
-Date.now().toString().slice(-8);
+return;
 
-button.classList.add("loading");
+}
+
+if(!email){
+
+alert("Please enter your email.");
+
+return;
+
+}
+
+if(guests==="Number of Guests"){
+
+alert("Please select number of guests.");
+
+return;
+
+}
 
 button.disabled=true;
 
+button.classList.add("loading");
+
 button.innerHTML="Sending...";
+
+const reservationID=
+
+"ARZEA-GO-"+
+
+new Date().getFullYear()+"-"+
+
+Math.floor(Math.random()*9000+1000);
+
+const reservation={
+
+id:reservationID,
+
+name:fullName,
+
+phone:phone,
+
+email:email,
+
+guests:guests,
+
+message:request,
+
+date:"19 September 2026",
+
+time:"18.00 WIB"
+
+};
 
 try{
 
@@ -134,15 +306,15 @@ await emailjs.send(
 
 {
 
-name:fullName,
+name:reservation.name,
 
-phone:phone,
+phone:reservation.phone,
 
-email:email,
+email:reservation.email,
 
-guests:guests,
+guests:reservation.guests,
 
-message:request
+message:reservation.message
 
 }
 
@@ -156,21 +328,15 @@ await emailjs.send(
 
 {
 
-name:fullName,
+name:reservation.name,
 
-email:email,
+email:reservation.email,
 
-phone:phone,
+phone:reservation.phone,
 
-guests:guests,
+guests:reservation.guests,
 
-reservationID:reservationID,
-
-download_link:
-
-window.location.origin+
-
-"/ticket.html"
+reservationID:reservation.id
 
 }
 
@@ -180,19 +346,7 @@ localStorage.setItem(
 
 "arzeaReservation",
 
-JSON.stringify({
-
-id:reservationID,
-
-name:fullName,
-
-phone:phone,
-
-email:email,
-
-guests:guests
-
-})
+JSON.stringify(reservation)
 
 );
 
@@ -202,23 +356,13 @@ button.disabled=false;
 
 button.innerHTML="Reserve Now";
 
-showSuccess(
-
-fullName,
-
-email,
-
-guests,
-
-reservationID
-
-);
+showSuccess(reservation);
 
 }
 
-catch(err){
+catch(error){
 
-console.error(err);
+console.error(error);
 
 button.classList.remove("loading");
 
@@ -231,21 +375,12 @@ alert("Reservation failed. Please try again.");
 }
 
 }
+
 /*========================================
 SUCCESS POPUP
 ========================================*/
 
-function showSuccess(
-
-name,
-
-email,
-
-guests,
-
-reservationID
-
-){
+function showSuccess(reservation){
 
 const popup=document.createElement("div");
 
@@ -283,7 +418,7 @@ ARZEA Lounge & Garden
 
 <b>Reservation ID</b><br>
 
-${reservationID}
+${reservation.id}
 
 </p>
 
@@ -291,7 +426,7 @@ ${reservationID}
 
 <b>Name</b><br>
 
-${name}
+${reservation.name}
 
 </p>
 
@@ -299,7 +434,7 @@ ${name}
 
 <b>Email</b><br>
 
-${email}
+${reservation.email}
 
 </p>
 
@@ -307,7 +442,7 @@ ${email}
 
 <b>Guests</b><br>
 
-${guests}
+${reservation.guests}
 
 </p>
 
@@ -315,7 +450,7 @@ ${guests}
 
 <b>Date</b><br>
 
-19 September 2026
+${reservation.date}
 
 </p>
 
@@ -323,7 +458,7 @@ ${guests}
 
 <b>Time</b><br>
 
-18.00 WIB
+${reservation.time}
 
 </p>
 
@@ -337,19 +472,21 @@ ${guests}
 
 <p class="scan-text">
 
-Scan this QR upon arrival
+🖤 Scan this QR upon arrival
 
 </p>
 
-<div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
+<div class="popup-buttons">
 
-<button id="downloadTicketPopup">
+<button
+id="downloadTicketPopup">
 
 Download Ticket
 
 </button>
 
-<button id="closePopup">
+<button
+id="continuePopup">
 
 Continue
 
@@ -364,30 +501,19 @@ Continue
 document.body.appendChild(popup);
 
 
+/*==========================
+QR CODE
+==========================*/
 
 setTimeout(()=>{
 
-new QRCode(
+const qrTarget=document.getElementById("reservationQR");
 
-document.getElementById("reservationQR"),
+if(qrTarget && typeof QRCode!=="undefined"){
 
-{
+new QRCode(qrTarget,{
 
-text:JSON.stringify({
-
-id:reservationID,
-
-name:name,
-
-email:email,
-
-guests:guests,
-
-date:"19 September 2026",
-
-time:"18.00 WIB"
-
-}),
+text:JSON.stringify(reservation),
 
 width:180,
 
@@ -399,129 +525,71 @@ colorLight:"#ffffff",
 
 correctLevel:QRCode.CorrectLevel.H
 
+});
+
 }
 
-);
-
-},150);
+},200);
 
 
+/*==========================
+DOWNLOAD
+==========================*/
 
 document
 
 .getElementById("downloadTicketPopup")
 
-.onclick=function(){
-
-window.open(
-
-"ticket.html",
-
-"_blank"
-
-);
-
-};
-
-
-
-document
-
-.getElementById("closePopup")
-
-.onclick=function(){
+.addEventListener("click",()=>{
 
 window.location.href="ticket.html";
 
-};
-
-}
-
-/*========================================
-DOWNLOAD FROM POPUP
-========================================*/
-
-document.addEventListener("click",async function(e){
-
-if(e.target.id==="downloadTicketPopup"){
-
-const reservation=JSON.parse(
-
-localStorage.getItem("arzeaReservation")
-
-);
-
-if(!reservation){
-
-return;
-
-}
-
-window.open(
-
-"ticket.html",
-
-"_blank"
-
-);
-
-}
-
 });
 
 
-/*========================================
-NAVBAR SCROLL EFFECT
-========================================*/
+/*==========================
+CONTINUE
+==========================*/
 
-const navbar=document.querySelector(".navbar");
+document
 
-window.addEventListener("scroll",()=>{
+.getElementById("continuePopup")
 
-if(window.scrollY>80){
+.addEventListener("click",()=>{
 
-navbar.style.background="rgba(0,0,0,.82)";
+popup.classList.add("hide");
 
-navbar.style.padding="16px 8%";
+setTimeout(()=>{
 
-navbar.style.boxShadow=
+window.location.href="ticket.html";
 
-"0 10px 40px rgba(0,0,0,.35)";
-
-}
-
-else{
-
-navbar.style.background="rgba(0,0,0,.35)";
-
-navbar.style.padding="22px 8%";
-
-navbar.style.boxShadow="none";
-
-}
+},300);
 
 });
 
+}
 
 /*========================================
-BUTTON RIPPLE
+RIPPLE EFFECT
 ========================================*/
 
 document
 
 .querySelectorAll(
 
-".hero-btn,.reserve-btn"
+".hero-btn,.reserve-btn,#continuePopup,#downloadTicketPopup"
 
 )
 
-.forEach(btn=>{
+.forEach(button=>{
 
-btn.addEventListener("click",function(e){
+button.addEventListener("click",function(e){
 
-const circle=document.createElement("span");
+const ripple=document.createElement("span");
 
-const d=Math.max(
+ripple.className="ripple";
+
+const size=Math.max(
 
 this.clientWidth,
 
@@ -529,25 +597,23 @@ this.clientHeight
 
 );
 
-circle.style.width=d+"px";
+ripple.style.width=size+"px";
 
-circle.style.height=d+"px";
+ripple.style.height=size+"px";
 
-circle.style.left=
+ripple.style.left=
 
-e.offsetX-d/2+"px";
+e.offsetX-size/2+"px";
 
-circle.style.top=
+ripple.style.top=
 
-e.offsetY-d/2+"px";
+e.offsetY-size/2+"px";
 
-circle.className="ripple";
-
-this.appendChild(circle);
+this.appendChild(ripple);
 
 setTimeout(()=>{
 
-circle.remove();
+ripple.remove();
 
 },700);
 
@@ -557,14 +623,252 @@ circle.remove();
 
 
 /*========================================
-SMOOTH APPEAR
+CURSOR GLOW
+========================================*/
+
+const glow=document.createElement("div");
+
+glow.className="cursor-glow";
+
+document.body.appendChild(glow);
+
+window.addEventListener("mousemove",(e)=>{
+
+glow.style.left=e.clientX+"px";
+
+glow.style.top=e.clientY+"px";
+
+});
+
+
+/*========================================
+PARTICLES
+========================================*/
+
+const particleContainer=document.getElementById("particles");
+
+if(particleContainer){
+
+for(let i=0;i<80;i++){
+
+const p=document.createElement("span");
+
+p.className="particle";
+
+p.style.left=Math.random()*100+"vw";
+
+p.style.animationDelay=Math.random()*8+"s";
+
+p.style.animationDuration=
+
+6+Math.random()*8+"s";
+
+p.style.opacity=Math.random();
+
+particleContainer.appendChild(p);
+
+}
+
+}
+
+
+/*========================================
+WINDOW LOAD
 ========================================*/
 
 window.addEventListener("load",()=>{
 
-document.body.style.opacity="1";
+document.body.classList.add("loaded");
 
 });
+
+
+/*========================================
+END SCRIPT
+========================================*/
+
+/*========================================
+GOLD CONFETTI
+========================================*/
+
+function launchConfetti(){
+
+for(let i=0;i<60;i++){
+
+const confetti=document.createElement("div");
+
+confetti.className="gold-confetti";
+
+confetti.style.left=Math.random()*100+"vw";
+
+confetti.style.animationDuration=
+
+2+Math.random()*3+"s";
+
+confetti.style.animationDelay=
+
+Math.random()*.5+"s";
+
+document.body.appendChild(confetti);
+
+setTimeout(()=>{
+
+confetti.remove();
+
+},5000);
+
+}
+
+}
+
+
+
+/*========================================
+SUCCESS SOUND
+========================================*/
+
+function playSuccessSound(){
+
+try{
+
+const audio=new Audio(
+
+"https://assets.mixkit.co/active_storage/sfx/2013/2013-preview.mp3"
+
+);
+
+audio.volume=.25;
+
+audio.play();
+
+}
+
+catch(e){
+
+console.log(e);
+
+}
+
+}
+
+
+
+/*========================================
+SHOW SUCCESS EXTENSION
+========================================*/
+
+const oldShowSuccess=showSuccess;
+
+showSuccess=function(reservation){
+
+playSuccessSound();
+
+launchConfetti();
+
+oldShowSuccess(reservation);
+
+};
+
+
+
+/*========================================
+DISABLE FORM AFTER SUCCESS
+========================================*/
+
+window.addEventListener("pageshow",()=>{
+
+const form=document.querySelector(".reserve-form");
+
+if(form){
+
+form.reset();
+
+}
+
+});
+
+
+
+/*========================================
+ANTI DOUBLE SUBMIT
+========================================*/
+
+let sending=false;
+
+document.addEventListener("submit",(e)=>{
+
+if(sending){
+
+e.preventDefault();
+
+return;
+
+}
+
+sending=true;
+
+setTimeout(()=>{
+
+sending=false;
+
+},4000);
+
+});
+
+
+
+/*========================================
+PRELOAD IMAGES
+========================================*/
+
+[
+
+"images/logo.png",
+
+"images/hero.png",
+
+"images/indoor.png",
+
+"images/outdoor.jpeg",
+
+"images/wagyu.jpg",
+
+"images/pasta.jpg",
+
+"images/prawn.jpg",
+
+"images/dessert.jpg"
+
+]
+
+.forEach(src=>{
+
+const img=new Image();
+
+img.src=src;
+
+});
+
+
+
+/*========================================
+CONSOLE
+========================================*/
+
+console.log(
+
+"%cARZEA Lounge & Garden V3 Premium",
+
+"color:#d4af37;font-size:18px;font-weight:bold;"
+
+);
+
+console.log(
+
+"Developed with ❤️"
+
+);
+
 
 
 /*========================================

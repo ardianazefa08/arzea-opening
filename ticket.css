@@ -1,11 +1,22 @@
-/* =====================================================
-   ARZEA VIP TICKET
-===================================================== */
+/*==================================================
+ARZEA VIP TICKET V3
+==================================================*/
+
+:root{
+
+--gold:#d4af37;
+--gold2:#f4d77a;
+--black:#070707;
+--glass:rgba(255,255,255,.05);
+
+}
 
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
+
 }
 
 body{
@@ -32,6 +43,12 @@ position:relative;
 
 }
 
+
+
+/*==================================
+BACKGROUND
+==================================*/
+
 .background{
 
 position:fixed;
@@ -39,15 +56,22 @@ position:fixed;
 inset:0;
 
 background:
+
 radial-gradient(circle at top,
+
 rgba(212,175,55,.10),
+
 transparent 45%),
+
 linear-gradient(
+
 180deg,
+
 #090909,
+
 #030303);
 
-z-index:-3;
+z-index:-5;
 
 }
 
@@ -55,26 +79,29 @@ z-index:-3;
 
 position:fixed;
 
-width:850px;
-
-height:850px;
-
 left:50%;
 
 top:-320px;
 
 transform:translateX(-50%);
 
+width:900px;
+
+height:900px;
+
 background:
+
 radial-gradient(circle,
-rgba(212,175,55,.20),
+
+rgba(212,175,55,.18),
+
 transparent 70%);
 
 filter:blur(100px);
 
-z-index:-2;
+z-index:-4;
 
-animation:glow 8s ease-in-out infinite;
+animation:glow 8s ease infinite;
 
 }
 
@@ -85,7 +112,9 @@ animation:glow 8s ease-in-out infinite;
 opacity:.45;
 
 transform:
+
 translateX(-50%)
+
 scale(1);
 
 }
@@ -95,12 +124,88 @@ scale(1);
 opacity:1;
 
 transform:
+
 translateX(-50%)
+
 scale(1.15);
 
 }
 
 }
+
+
+
+/*==================================
+PARTICLES
+==================================*/
+
+#particles{
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+z-index:-3;
+
+}
+
+.particle{
+
+position:absolute;
+
+bottom:-30px;
+
+width:4px;
+
+height:4px;
+
+border-radius:50%;
+
+background:var(--gold);
+
+box-shadow:0 0 10px var(--gold);
+
+animation:particle linear infinite;
+
+}
+
+@keyframes particle{
+
+0%{
+
+transform:
+
+translateY(0);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:.8;
+
+}
+
+100%{
+
+transform:
+
+translateY(-120vh);
+
+opacity:0;
+
+}
+
+}
+
+
+
+/*==================================
+WRAPPER
+==================================*/
 
 .ticket-wrapper{
 
@@ -108,9 +213,15 @@ width:100%;
 
 max-width:560px;
 
+animation:fadeUp .9s ease;
+
 }
 
 .ticket-card{
+
+position:relative;
+
+overflow:hidden;
 
 background:
 
@@ -118,19 +229,15 @@ rgba(20,20,20,.95);
 
 border-radius:32px;
 
+padding:42px;
+
 border:1px solid rgba(212,175,55,.18);
-
-padding:45px;
-
-box-shadow:
-
-0 30px 70px rgba(0,0,0,.45);
 
 backdrop-filter:blur(18px);
 
-position:relative;
+box-shadow:
 
-overflow:hidden;
+0 35px 80px rgba(0,0,0,.45);
 
 }
 
@@ -156,7 +263,7 @@ linear-gradient(
 
 transparent,
 
-rgba(255,255,255,.16),
+rgba(255,255,255,.18),
 
 transparent
 
@@ -164,15 +271,21 @@ transparent
 
 transform:rotate(20deg);
 
-transition:1.3s;
+transition:1.2s;
 
 }
 
 .ticket-card:hover::before{
 
-left:160%;
+left:170%;
 
 }
+
+
+
+/*==================================
+HEADER
+==================================*/
 
 .ticket-header{
 
@@ -184,7 +297,7 @@ margin-bottom:35px;
 
 .ticket-logo{
 
-width:85px;
+width:90px;
 
 margin-bottom:18px;
 
@@ -192,9 +305,11 @@ filter:
 
 drop-shadow(
 
-0 0 15px rgba(212,175,55,.25)
+0 0 15px rgba(212,175,55,.30)
 
 );
+
+animation:floatLogo 4s ease infinite;
 
 }
 
@@ -202,11 +317,11 @@ drop-shadow(
 
 font-family:'Cormorant Garamond',serif;
 
-font-size:60px;
+font-size:58px;
 
-letter-spacing:6px;
+letter-spacing:7px;
 
-color:#d4af37;
+color:var(--gold);
 
 }
 
@@ -214,9 +329,9 @@ color:#d4af37;
 
 font-size:20px;
 
-font-weight:300;
+letter-spacing:5px;
 
-letter-spacing:6px;
+font-weight:300;
 
 margin-top:-5px;
 
@@ -224,19 +339,25 @@ margin-top:-5px;
 
 .ticket-header p{
 
-margin-top:10px;
+margin-top:12px;
+
+font-size:13px;
 
 letter-spacing:4px;
 
-color:#d4af37;
-
-font-size:13px;
+color:var(--gold);
 
 text-transform:uppercase;
 
 }
 
-.guest-name{
+
+
+/*==================================
+GUEST
+==================================*/
+
+.guest-box{
 
 text-align:center;
 
@@ -244,19 +365,17 @@ margin-bottom:35px;
 
 }
 
-.guest-name h3{
+.guest-box h3{
 
 font-family:'Cormorant Garamond',serif;
 
-font-size:40px;
+font-size:42px;
 
 margin-bottom:10px;
 
-color:#fff;
-
 }
 
-.guest-name p{
+.guest-box p{
 
 color:#cfcfcf;
 
@@ -264,15 +383,17 @@ font-size:15px;
 
 }
 
-/* =====================================================
-   TICKET INFO
-===================================================== */
+
+
+/*==================================
+INFO
+==================================*/
 
 .ticket-info{
 
 display:grid;
 
-gap:16px;
+gap:15px;
 
 margin-bottom:35px;
 
@@ -288,7 +409,11 @@ align-items:center;
 
 padding:16px 18px;
 
-border-bottom:1px solid rgba(255,255,255,.08);
+border-radius:14px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(212,175,55,.10);
 
 }
 
@@ -302,7 +427,7 @@ font-size:14px;
 
 .ticket-info strong{
 
-color:#fff;
+color:white;
 
 font-weight:600;
 
@@ -310,11 +435,9 @@ text-align:right;
 
 }
 
-
-
-/* =====================================================
-   QR CODE
-===================================================== */
+/*==================================================
+QR CODE
+==================================================*/
 
 .ticket-qr{
 
@@ -330,15 +453,17 @@ margin:40px 0;
 
 #qrcode{
 
-padding:14px;
+background:white;
 
-background:#fff;
+padding:16px;
 
 border-radius:18px;
 
 box-shadow:
 
-0 15px 40px rgba(0,0,0,.30);
+0 20px 45px rgba(0,0,0,.35);
+
+animation:fadeUp .8s ease;
 
 }
 
@@ -346,7 +471,7 @@ box-shadow:
 
 margin-top:18px;
 
-color:#d4af37;
+color:var(--gold);
 
 font-size:14px;
 
@@ -356,9 +481,41 @@ letter-spacing:1px;
 
 
 
-/* =====================================================
-   BUTTONS
-===================================================== */
+/*==================================
+NOTE
+==================================*/
+
+.ticket-note{
+
+margin:35px 0;
+
+padding:18px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(212,175,55,.10);
+
+text-align:center;
+
+}
+
+.ticket-note p{
+
+font-size:14px;
+
+line-height:28px;
+
+color:#d0d0d0;
+
+}
+
+
+
+/*==================================
+BUTTONS
+==================================*/
 
 .ticket-buttons{
 
@@ -376,6 +533,8 @@ margin-top:35px;
 
 border:none;
 
+cursor:pointer;
+
 padding:18px;
 
 border-radius:999px;
@@ -384,17 +543,15 @@ font-size:16px;
 
 font-weight:700;
 
-cursor:pointer;
-
 background:
 
 linear-gradient(
 
 135deg,
 
-#f4d77a,
+var(--gold2),
 
-#d4af37,
+var(--gold),
 
 #a97918
 
@@ -404,6 +561,10 @@ color:#111;
 
 transition:.35s;
 
+position:relative;
+
+overflow:hidden;
+
 }
 
 .ticket-buttons button:hover{
@@ -412,7 +573,7 @@ transform:translateY(-4px);
 
 box-shadow:
 
-0 18px 45px rgba(212,175,55,.30);
+0 20px 50px rgba(212,175,55,.28);
 
 }
 
@@ -422,13 +583,13 @@ text-decoration:none;
 
 text-align:center;
 
-padding:17px;
+padding:18px;
 
 border-radius:999px;
 
-border:1px solid rgba(212,175,55,.35);
+border:1px solid rgba(212,175,55,.30);
 
-color:#d4af37;
+color:var(--gold);
 
 transition:.35s;
 
@@ -436,15 +597,55 @@ transition:.35s;
 
 .ticket-buttons a:hover{
 
-background:rgba(212,175,55,.10);
+background:rgba(212,175,55,.08);
+
+}
+
+.ticket-buttons button::before{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-40%;
+
+width:45%;
+
+height:260%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.35),
+
+transparent
+
+);
+
+transform:rotate(20deg);
+
+transition:1.2s;
+
+}
+
+.ticket-buttons button:hover::before{
+
+left:170%;
 
 }
 
 
 
-/* =====================================================
-   GOLD BORDER
-===================================================== */
+/*==================================
+GOLD BORDER
+==================================*/
 
 .ticket-card::after{
 
@@ -454,9 +655,9 @@ position:absolute;
 
 inset:0;
 
-border-radius:32px;
-
 padding:1px;
+
+border-radius:32px;
 
 background:
 
@@ -488,9 +689,51 @@ opacity:.8;
 
 
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+/*==================================
+ANIMATION
+==================================*/
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@keyframes floatLogo{
+
+0%,100%{
+
+transform:translateY(0);
+
+}
+
+50%{
+
+transform:translateY(-8px);
+
+}
+
+}
+
+
+
+/*==================================
+RESPONSIVE
+==================================*/
 
 @media(max-width:768px){
 
@@ -502,7 +745,7 @@ padding:20px;
 
 .ticket-card{
 
-padding:30px;
+padding:28px;
 
 }
 
@@ -512,9 +755,9 @@ font-size:48px;
 
 }
 
-.guest-name h3{
+.guest-box h3{
 
-font-size:30px;
+font-size:32px;
 
 }
 
@@ -538,21 +781,13 @@ text-align:left;
 
 
 
-/* =====================================================
-   SCROLLBAR
-===================================================== */
+/*==================================
+SCROLLBAR
+==================================*/
 
 ::-webkit-scrollbar{
 
 width:10px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:#d4af37;
-
-border-radius:999px;
 
 }
 
@@ -562,15 +797,23 @@ background:#080808;
 
 }
 
+::-webkit-scrollbar-thumb{
+
+background:var(--gold);
+
+border-radius:999px;
+
+}
 
 
-/* =====================================================
-   SELECTION
-===================================================== */
+
+/*==================================
+SELECTION
+==================================*/
 
 ::selection{
 
-background:#d4af37;
+background:var(--gold);
 
 color:#111;
 

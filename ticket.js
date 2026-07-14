@@ -1,16 +1,21 @@
-// =====================================================
-// ARZEA VIP TICKET
-// =====================================================
+/*==================================================
+ARZEA LOUNGE & GARDEN
+VIP TICKET
+==================================================*/
 
-// ==========================
-// LOAD RESERVATION
-// ==========================
+/*========================================
+LOAD RESERVATION
+========================================*/
 
 const reservation = JSON.parse(
+
 localStorage.getItem("arzeaReservation")
+
 );
 
 if(!reservation){
+
+alert("Reservation data not found.");
 
 window.location.href="index.html";
 
@@ -18,51 +23,89 @@ window.location.href="index.html";
 
 
 
-// ==========================
-// FILL DATA
-// ==========================
+/*========================================
+FILL DATA
+========================================*/
 
 document.getElementById("guestName").textContent=
+
 reservation.name;
 
 document.getElementById("reservationID").textContent=
+
 reservation.id;
 
 document.getElementById("guestEmail").textContent=
+
 reservation.email;
 
-document.getElementById("guestCount").textContent=
+document.getElementById("guestGuests").textContent=
+
 reservation.guests;
 
 
 
-// ==========================
-// QR CODE
-// ==========================
+/*========================================
+PARTICLES
+========================================*/
 
-new QRCode(
+const particles=document.getElementById("particles");
 
-document.getElementById("qrcode"),
+if(particles){
 
-{
+for(let i=0;i<70;i++){
 
-text:
+const p=document.createElement("span");
 
-`ARZEA Lounge & Garden
+p.className="particle";
 
-Reservation ID : ${reservation.id}
+p.style.left=Math.random()*100+"vw";
 
-Name : ${reservation.name}
+p.style.animationDuration=
 
-Email : ${reservation.email}
+5+Math.random()*8+"s";
 
-Guests : ${reservation.guests}
+p.style.animationDelay=
 
-Date : 19 September 2026
+Math.random()*5+"s";
 
-Time : 18.00 WIB
+p.style.opacity=Math.random();
 
-Dress Code : Elegant Black`,
+particles.appendChild(p);
+
+}
+
+}
+
+
+
+/*========================================
+QR CODE
+========================================*/
+
+window.addEventListener("load",()=>{
+
+const qrTarget=document.getElementById("qrcode");
+
+if(qrTarget && typeof QRCode!=="undefined"){
+
+new QRCode(qrTarget,{
+
+text:JSON.stringify({
+
+id:reservation.id,
+
+name:reservation.name,
+
+email:reservation.email,
+
+guests:reservation.guests,
+
+date:"19 September 2026",
+
+time:"18.00 WIB"
+
+}),
 
 width:220,
 
@@ -74,53 +117,39 @@ colorLight:"#ffffff",
 
 correctLevel:QRCode.CorrectLevel.H
 
+});
+
 }
 
-);
+});
 
-
-
-// ==========================
-// DOWNLOAD PDF
-// ==========================
+/*========================================
+DOWNLOAD PDF
+========================================*/
 
 document
 
 .getElementById("downloadTicket")
 
-.addEventListener(
+.addEventListener("click",async()=>{
 
-"click",
+const card=document.getElementById("ticketCard");
 
-async function(){
+const canvas=await html2canvas(card,{
 
-const ticket=
+scale:3,
 
-document.querySelector(".ticket-card");
-
-const canvas=
-
-await html2canvas(ticket,{
-
-scale:2,
+useCORS:true,
 
 backgroundColor:null
 
 });
 
-const img=
+const img=canvas.toDataURL("image/png");
 
-canvas.toDataURL("image/png");
+const {jsPDF}=window.jspdf;
 
-const{
-
-jsPDF
-
-}=window.jspdf;
-
-const pdf=
-
-new jsPDF({
+const pdf=new jsPDF({
 
 orientation:"portrait",
 
@@ -130,13 +159,13 @@ format:"a4"
 
 });
 
-const width=190;
+const pdfWidth=190;
 
-const height=
+const pdfHeight=
 
 canvas.height*
 
-width/
+pdfWidth/
 
 canvas.width;
 
@@ -150,90 +179,155 @@ img,
 
 10,
 
-width,
+pdfWidth,
 
-height
+pdfHeight
 
 );
 
 pdf.save(
 
-`ARZEA-${reservation.id}.pdf`
+`${reservation.id}.pdf`
 
 );
 
-}
+});
+
+
+
+/*========================================
+DOWNLOAD PNG
+========================================*/
+
+document
+
+.getElementById("downloadPNG")
+
+.addEventListener("click",async()=>{
+
+const card=document.getElementById("ticketCard");
+
+const canvas=await html2canvas(card,{
+
+scale:3,
+
+useCORS:true,
+
+backgroundColor:null
+
+});
+
+const link=document.createElement("a");
+
+link.download=`${reservation.id}.png`;
+
+link.href=canvas.toDataURL("image/png");
+
+link.click();
+
+});
+
+
+
+/*========================================
+RIPPLE EFFECT
+========================================*/
+
+document
+
+.querySelectorAll(".ticket-buttons button")
+
+.forEach(button=>{
+
+button.addEventListener("click",function(e){
+
+const ripple=document.createElement("span");
+
+ripple.className="ripple";
+
+const size=Math.max(
+
+this.clientWidth,
+
+this.clientHeight
 
 );
 
+ripple.style.width=size+"px";
 
+ripple.style.height=size+"px";
 
-// ==========================
-// PRINT
-// ==========================
+ripple.style.left=
 
-window.addEventListener(
+e.offsetX-size/2+"px";
 
-"beforeprint",
+ripple.style.top=
 
-()=>{
+e.offsetY-size/2+"px";
 
-document.body.style.background="#ffffff";
+this.appendChild(ripple);
 
-}
+setTimeout(()=>{
 
-);
+ripple.remove();
 
-window.addEventListener(
+},700);
 
-"afterprint",
+});
 
-()=>{
-
-document.body.style.background="#050505";
-
-}
-
-);
+});
 
 
 
-// ==========================
-// COUNTDOWN
-// ==========================
+/*========================================
+CARD ANIMATION
+========================================*/
 
-const eventDate=
+window.addEventListener("load",()=>{
 
-new Date(
+const card=document.getElementById("ticketCard");
 
-"September 19, 2026 18:00:00"
+card.animate([
 
-).getTime();
+{
 
-const timer=
+opacity:0,
 
-setInterval(()=>{
+transform:"translateY(80px) scale(.95)"
 
-const now=
+},
 
-new Date().getTime();
+{
 
-const distance=
+opacity:1,
 
-eventDate-now;
-
-if(distance<=0){
-
-clearInterval(timer);
-
-return;
+transform:"translateY(0) scale(1)"
 
 }
 
-},1000);
+],{
+
+duration:900,
+
+easing:"ease-out"
+
+});
+
+});
 
 
 
-// ==========================
-// END
-// ==========================
+/*========================================
+PRELOAD
+========================================*/
+
+const logo=new Image();
+
+logo.src="images/logo.png";
+
+
+
+/*========================================
+END
+========================================*/
+
