@@ -1,3 +1,9 @@
+// ======================================================
+// ARZEA Lounge & Garden
+// script.js
+// PART 1
+// ======================================================
+
 // ===========================
 // Countdown
 // ===========================
@@ -11,56 +17,138 @@ const seconds = document.getElementById("seconds");
 const timer = document.getElementById("timer");
 
 if (days && hours && minutes && seconds) {
+
     setInterval(() => {
 
         const now = new Date().getTime();
+
         const distance = targetDate - now;
 
         if (distance <= 0) {
+
             if (timer) {
-                timer.innerHTML = "<h2>Grand Opening Has Started</h2>";
+
+                timer.innerHTML =
+                "<h2>Grand Opening Has Started</h2>";
+
             }
+
             return;
+
         }
 
-        days.textContent = Math.floor(distance / (1000 * 60 * 60 * 24));
-        hours.textContent = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        minutes.textContent = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        seconds.textContent = Math.floor((distance % (1000 * 60)) / 1000);
+        days.textContent =
+        Math.floor(distance / (1000 * 60 * 60 * 24));
 
-    }, 1000);
+        hours.textContent =
+        Math.floor(
+            (distance % (1000 * 60 * 60 * 24))
+            / (1000 * 60 * 60)
+        );
+
+        minutes.textContent =
+        Math.floor(
+            (distance % (1000 * 60 * 60))
+            / (1000 * 60)
+        );
+
+        seconds.textContent =
+        Math.floor(
+            (distance % (1000 * 60))
+            / 1000
+        );
+
+    },1000);
+
 }
+
 
 
 // ===========================
 // Reservation Form
 // ===========================
 
-const form = document.querySelector(".reserve-form");
+const form =
+document.querySelector(".reserve-form");
 
-if (form) {
+if(form){
 
-    form.addEventListener("submit", function (e) {
+form.addEventListener(
+"submit",
 
-        e.preventDefault();
+function(e){
 
-        const fullName = form.querySelector('input[placeholder="Full Name"]').value.trim();
-        const phone = form.querySelector('input[placeholder="Phone Number"]').value.trim();
-        const email = form.querySelector('input[placeholder="Email Address"]').value.trim();
-        const guests = form.querySelector("select").value;
-        const request = form.querySelector("textarea").value.trim();
+e.preventDefault();
 
-        if (!fullName || !phone || !email) {
-            alert("Please complete all required fields.");
-            return;
-        }
-        const reservationID =
-    "ARZEA-" +
-    new Date().getFullYear() +
-    String(Math.floor(Math.random() * 9000) + 1000);
+const fullName =
+form.querySelector(
+'input[placeholder="Full Name"]'
+).value.trim();
 
-const qr =
-`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(reservationID)}`;
+const phone =
+form.querySelector(
+'input[placeholder="Phone Number"]'
+).value.trim();
+
+const email =
+form.querySelector(
+'input[placeholder="Email Address"]'
+).value.trim();
+
+const guests =
+form.querySelector("select").value;
+
+const request =
+form.querySelector("textarea").value.trim();
+
+if(
+!fullName ||
+!phone ||
+!email
+){
+
+alert(
+"Please complete all required fields."
+);
+
+return;
+
+}
+
+const reservationID =
+"ARZEA-" +
+new Date().getFullYear() +
+"-" +
+Math.floor(
+Math.random()*9000+1000
+);
+
+const reservationData={
+
+id:reservationID,
+
+name:fullName,
+
+phone:phone,
+
+email:email,
+
+guests:guests,
+
+request:request
+
+};
+
+localStorage.setItem(
+"arzeaReservation",
+JSON.stringify(
+reservationData
+)
+);
+
+// ===========================
+// Send Email
+// ===========================
 
 emailjs.send(
     "service_yp1tkqq",
@@ -74,7 +162,7 @@ emailjs.send(
     }
 )
 
-.then(function () {
+.then(() => {
 
     return emailjs.send(
         "service_yp1tkqq",
@@ -90,76 +178,96 @@ emailjs.send(
 
 })
 
-.then(function () {
+.then(() => {
 
-    localStorage.setItem(
-        "arzeaReservation",
-        JSON.stringify({
-            id: reservationID,
-            name: fullName,
-            phone: phone,
-            email: email,
-            guests: guests
-        })
+    showSuccess(
+        fullName,
+        guests,
+        email,
+        reservationID
     );
-
-    showSuccess(fullName, guests, email);
 
 })
 
-.catch(function(error){
+.catch((error) => {
 
-    console.error(error);
+    console.error("EmailJS Error:", error);
 
-    alert("❌ Failed to send reservation.");
+    alert(
+        error.text ||
+        error.message ||
+        "Failed to send reservation."
+    );
 
 });
+
 });
+
 }
 
-function showSuccess(name, guests, email) {
 
 
-    const reservationID =
-"ARZEA-GO-260919-" +
-Math.floor(Math.random()*9000+1000);
-}
-    const popup = document.createElement("div");
+// ===========================
+// Success Popup
+// ===========================
 
-    popup.className = "reservation-popup";
+function showSuccess(
+name,
+guests,
+email,
+reservationID
+){
 
-    popup.innerHTML = `
-    <div class="popup-card">
+const popup=document.createElement("div");
 
-        <img src="images/logo.png" class="popup-logo">
+popup.className="reservation-popup";
 
-        <h2>Reservation Confirmed</h2>
+popup.innerHTML=`
 
-        <p>Thank you for choosing</p>
+<div class="popup-card">
 
-        <h3>ARZEA Lounge & Garden</h3>
+<img
+src="images/logo.png"
+class="popup-logo">
 
-        <div class="popup-info">
+<h2>
+Reservation Confirmed
+</h2>
 
-            <p><b>Reservation ID</b><br>${reservationID}</p>
+<p>
+Thank you for choosing
+</p>
 
-            <p><b>Name</b><br>${name}</p>
+<h3>
+ARZEA Lounge & Garden
+</h3>
 
-            <p><b>Email</b><br>${email}</p>
+<div class="popup-info">
 
-            <p><b>Guests</b><br>${guests}</p>
+<p><b>Reservation ID</b><br>${reservationID}</p>
 
-            <p><b>Date</b><br>19 September 2026</p>
+<p><b>Name</b><br>${name}</p>
 
-            <p><b>Time</b><br>18.00 WIB</p>
+<p><b>Email</b><br>${email}</p>
 
-        </div>
-    <div class="qr-box">
-    <div id="reservationQR"></div>
+<p><b>Guests</b><br>${guests}</p>
+
+<p><b>Date</b><br>19 September 2026</p>
+
+<p><b>Time</b><br>18.00 WIB</p>
+
+</div>
+
+<div class="qr-box">
+
+<div id="reservationQR"></div>
+
 </div>
 
 <p class="scan-text">
+
 🖤 Scan this QR upon arrival
+
 </p>
 
 <div class="dress-code">
@@ -171,49 +279,84 @@ Elegant Black Attire
 </div>
 
 <button id="closePopup">
+
 Done
+
 </button>
 
 <p class="popup-footer">
+
 ✨ We look forward to welcoming you at
 ARZEA Lounge & Garden
+
 </p>
 
-    </div>
-    `;
+</div>
 
-    document.body.appendChild(popup);
+`;
+
+document.body.appendChild(popup);
+
+// ===========================
+// QR Code
+// ===========================
 
 setTimeout(() => {
 
     new QRCode(
-    document.getElementById("reservationQR"),
-    {
-        text: `Reservation ID : ${reservationID}
+        document.getElementById("reservationQR"),
+        {
+            text:
+`ARZEA Lounge & Garden
+
+Reservation ID : ${reservationID}
+
 Name : ${name}
+
 Email : ${email}
+
 Guests : ${guests}
+
 Date : 19 September 2026
+
 Time : 18.00 WIB
-Dress Code : Elegant Black`,
-        width: 180,
-        height: 180
-    }
-);
+
+Dress Code : Elegant Black Attire`,
+
+            width:180,
+            height:180,
+            colorDark:"#000000",
+            colorLight:"#ffffff",
+            correctLevel:QRCode.CorrectLevel.H
+        }
+    );
 
 },100);
 
-    document
-        .getElementById("closePopup")
-        .onclick = function(){
 
-            popup.remove();
+// ===========================
+// Close Popup
+// ===========================
 
-        };
+document
+.getElementById("closePopup")
+.onclick=function(){
 
-    
+    popup.remove();
 
-    async function downloadTicket(){
+    window.location.href="ticket.html";
+
+};
+
+}
+
+
+
+// ===========================
+// Download Ticket
+// ===========================
+
+async function downloadTicket(){
 
 const { jsPDF } = window.jspdf;
 
@@ -228,7 +371,6 @@ doc.rect(0,0,180,90,"F");
 
 doc.setDrawColor(212,175,55);
 doc.setLineWidth(1);
-
 doc.roundedRect(4,4,172,82,4,4);
 
 doc.setTextColor(212,175,55);
@@ -247,18 +389,12 @@ doc.setFontSize(18);
 doc.text("VIP INVITATION",90,47,{align:"center"});
 
 doc.setFontSize(11);
-
 doc.text("Grand Opening",20,60);
-
 doc.text("19 September 2026",20,68);
-
 doc.text("18.00 WIB",20,76);
 
 doc.text("Dress Code",105,60);
-
 doc.text("Elegant Black",105,68);
-
-doc.text("Attire",105,76);
 
 doc.save("ARZEA-VIP-Ticket.pdf");
 
