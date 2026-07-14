@@ -203,19 +203,24 @@ position:relative;
 
 padding:0 20px;
 
+background:
+linear-gradient(
+rgba(0,0,0,.60),
+rgba(0,0,0,.70)
+),
+url("images/hero.png");
+
+background-size:cover;
+
+background-position:center;
+
+background-repeat:no-repeat;
+
 }
 
 .hero-overlay{
 
-position:absolute;
-
-inset:0;
-
-background:
-linear-gradient(
-180deg,
-rgba(0,0,0,.45),
-rgba(0,0,0,.75));
+display:none;
 
 }
 
