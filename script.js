@@ -117,10 +117,13 @@ emailjs.send(
 });
 }
 
+function showSuccess(name, guests, email) {
+
+
     const reservationID =
 "ARZEA-GO-260919-" +
 Math.floor(Math.random()*9000+1000);
-
+}
     const popup = document.createElement("div");
 
     popup.className = "reservation-popup";
