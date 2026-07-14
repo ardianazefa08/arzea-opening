@@ -1,6 +1,7 @@
 /*======================================================
-ARZEA V6
+ARZEA V7
 script.js
+PART 1
 ======================================================*/
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -23,6 +24,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const loader = document.getElementById("loader");
 
+    function showMusicPopup() {
+
+        const popup = document.getElementById("musicPopup");
+
+        if (!popup) return;
+
+        const saved = localStorage.getItem("music");
+
+        if (saved === "play") {
+
+            const bgMusic = document.getElementById("bgMusic");
+
+            if (bgMusic) {
+
+                bgMusic.volume = 0.25;
+                bgMusic.play().catch(() => {});
+
+            }
+
+            popup.style.display = "none";
+            return;
+
+        }
+
+        if (saved === "mute") {
+
+            popup.style.display = "none";
+            return;
+
+        }
+
+        popup.style.display = "flex";
+
+    }
+
     if (loader) {
 
         setTimeout(() => {
@@ -37,15 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }, 700);
 
-        }, 2000);
+        }, 2200);
 
     }
 
     /*==================================================
     MUSIC
     ==================================================*/
-
-    const musicPopup = document.getElementById("musicPopup");
 
     const bgMusic = document.getElementById("bgMusic");
 
@@ -55,45 +89,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const musicToggle = document.getElementById("musicToggle");
 
-    function showMusicPopup() {
-
-        const saved = localStorage.getItem("music");
-
-        if (saved === "play") {
-
-            bgMusic.volume = 0.2;
-
-            bgMusic.play().catch(() => { });
-
-            musicPopup.style.display = "none";
-
-            return;
-
-        }
-
-        if (saved === "mute") {
-
-            musicPopup.style.display = "none";
-
-            return;
-
-        }
-
-        musicPopup.style.display = "flex";
-
-    }
-
     if (playMusic) {
 
         playMusic.addEventListener("click", () => {
 
-            bgMusic.volume = 0.2;
+            bgMusic.volume = 0.25;
 
-            bgMusic.play().catch(() => { });
+            bgMusic.play().catch(() => {});
 
             localStorage.setItem("music", "play");
 
-            musicPopup.style.display = "none";
+            document.getElementById("musicPopup").style.display = "none";
 
         });
 
@@ -105,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             localStorage.setItem("music", "mute");
 
-            musicPopup.style.display = "none";
+            document.getElementById("musicPopup").style.display = "none";
 
         });
 
@@ -117,14 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if (bgMusic.paused) {
 
-                bgMusic.play();
-
+                bgMusic.play().catch(() => {});
                 musicToggle.innerHTML = "🔊";
 
             } else {
 
                 bgMusic.pause();
-
                 musicToggle.innerHTML = "🔇";
 
             }
@@ -149,19 +153,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const days = Math.floor(distance / (1000 * 60 * 60 * 24));
 
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) /
+            (1000 * 60 * 60)
+        );
 
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const minutes = Math.floor(
+            (distance % (1000 * 60 * 60)) /
+            (1000 * 60)
+        );
 
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        const seconds = Math.floor(
+            (distance % (1000 * 60)) /
+            1000
+        );
 
-        document.getElementById("days").textContent = days;
+        const d = document.getElementById("days");
+        const h = document.getElementById("hours");
+        const m = document.getElementById("minutes");
+        const s = document.getElementById("seconds");
 
-        document.getElementById("hours").textContent = hours;
-
-        document.getElementById("minutes").textContent = minutes;
-
-        document.getElementById("seconds").textContent = seconds;
+        if (d) d.textContent = days;
+        if (h) h.textContent = hours;
+        if (m) m.textContent = minutes;
+        if (s) s.textContent = seconds;
 
     }
 
@@ -172,13 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /*======================================================
-PART 2
-NAVBAR • SMOOTH SCROLL • PARTICLES • PARALLAX
+NAVBAR
 ======================================================*/
-
-/*=========================
-NAVBAR SCROLL
-=========================*/
 
 const navbar = document.querySelector(".navbar");
 
@@ -189,9 +199,9 @@ window.addEventListener("scroll", () => {
     if (window.scrollY > 80) {
 
         navbar.style.background = "rgba(0,0,0,.85)";
-        navbar.style.backdropFilter = "blur(20px)";
-        navbar.style.padding = "16px 8%";
-        navbar.style.boxShadow = "0 10px 35px rgba(0,0,0,.45)";
+        navbar.style.backdropFilter = "blur(18px)";
+        navbar.style.padding = "18px 8%";
+        navbar.style.boxShadow = "0 10px 40px rgba(0,0,0,.45)";
 
     } else {
 
@@ -203,25 +213,26 @@ window.addEventListener("scroll", () => {
 
 });
 
-
-/*=========================
+/*======================================================
 SMOOTH SCROLL
-=========================*/
+======================================================*/
 
 document.querySelectorAll('a[href^="#"]').forEach(link => {
 
-    link.addEventListener("click", function(e){
+    link.addEventListener("click", function (e) {
 
         e.preventDefault();
 
-        const target = document.querySelector(this.getAttribute("href"));
+        const target = document.querySelector(
+            this.getAttribute("href")
+        );
 
-        if(target){
+        if (target) {
 
             target.scrollIntoView({
 
-                behavior:"smooth",
-                block:"start"
+                behavior: "smooth",
+                block: "start"
 
             });
 
@@ -231,169 +242,420 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
 });
 
+console.log("ARZEA Part 1 Loaded");
 
-/*=========================
+/*======================================================
+ARZEA V7
+PART 2
+Particles • Hero • Hover • Animation
+======================================================*/
+
+/*==================================================
 PARTICLES
-=========================*/
+==================================================*/
 
-const particleBox = document.getElementById("particles");
+const particleContainer = document.getElementById("particles");
 
-if(particleBox){
+if (particleContainer) {
 
-    for(let i=0;i<60;i++){
+    for (let i = 0; i < 60; i++) {
 
         const particle = document.createElement("span");
 
         particle.className = "particle";
 
-        particle.style.left = Math.random()*100 + "%";
+        particle.style.left = Math.random() * 100 + "%";
 
-        particle.style.animationDuration =
-        (6 + Math.random()*8) + "s";
+        particle.style.width =
+            (2 + Math.random() * 4) + "px";
 
-        particle.style.animationDelay =
-        Math.random()*5 + "s";
+        particle.style.height =
+            particle.style.width;
 
         particle.style.opacity =
-        0.3 + Math.random()*0.7;
+            0.2 + Math.random() * 0.8;
 
-        particleBox.appendChild(particle);
+        particle.style.animationDuration =
+            (6 + Math.random() * 8) + "s";
+
+        particle.style.animationDelay =
+            Math.random() * 5 + "s";
+
+        particleContainer.appendChild(particle);
 
     }
 
 }
 
-
-/*=========================
+/*==================================================
 HERO PARALLAX
-=========================*/
+==================================================*/
 
 const hero = document.querySelector(".hero");
 
-window.addEventListener("scroll",()=>{
+window.addEventListener("scroll", () => {
 
-    if(!hero) return;
+    if (!hero) return;
 
     hero.style.backgroundPositionY =
-    -(window.scrollY*0.25)+"px";
+        -(window.scrollY * 0.25) + "px";
 
 });
 
+/*==================================================
+MENU CARD HOVER
+==================================================*/
 
-/*=========================
-IMAGE HOVER
-=========================*/
+document.querySelectorAll(".menu-card").forEach(card => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.style.transform =
+            "translateY(-12px)";
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform =
+            "translateY(0px)";
+
+    });
+
+});
+
+/*==================================================
+GALLERY HOVER
+==================================================*/
+
+document.querySelectorAll(".gallery-card").forEach(card => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.style.transform =
+            "translateY(-10px)";
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform =
+            "translateY(0px)";
+
+    });
+
+});
+
+/*==================================================
+FEATURE CARD HOVER
+==================================================*/
+
+document.querySelectorAll(".feature-card").forEach(card => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.style.transform =
+            "translateY(-8px)";
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform =
+            "translateY(0px)";
+
+    });
+
+});
+
+/*==================================================
+GUEST CARD HOVER
+==================================================*/
+
+document.querySelectorAll(".guest-card").forEach(card => {
+
+    card.addEventListener("mouseenter", () => {
+
+        card.style.transform =
+            "translateY(-12px)";
+
+    });
+
+    card.addEventListener("mouseleave", () => {
+
+        card.style.transform =
+            "translateY(0px)";
+
+    });
+
+});
+
+/*==================================================
+IMAGE ZOOM
+==================================================*/
 
 document.querySelectorAll(
 
-".gallery-card img,.menu-card img,.guest-card img"
+".gallery-card img, .menu-card img, .guest-card img"
 
-).forEach(img=>{
+).forEach(img => {
 
-    img.addEventListener("mouseenter",()=>{
+    img.addEventListener("mouseenter", () => {
 
-        img.style.transform="scale(1.08)";
+        img.style.transform = "scale(1.08)";
 
     });
 
-    img.addEventListener("mouseleave",()=>{
+    img.addEventListener("mouseleave", () => {
 
-        img.style.transform="scale(1)";
+        img.style.transform = "scale(1)";
 
     });
 
 });
 
+/*==================================================
+FADE SECTION ON SCROLL
+==================================================*/
 
-/*=========================
+const sections = document.querySelectorAll(
+
+"section"
+
+);
+
+window.addEventListener("scroll", () => {
+
+    const trigger = window.innerHeight * 0.85;
+
+    sections.forEach(section => {
+
+        const top = section.getBoundingClientRect().top;
+
+        if (top < trigger) {
+
+            section.style.opacity = "1";
+            section.style.transform = "translateY(0)";
+
+        }
+
+    });
+
+});
+
+/*==================================================
 PAGE READY
-=========================*/
+==================================================*/
 
 console.log("ARZEA Part 2 Loaded");
 
 /*======================================================
+ARZEA V7
 PART 3
 RESERVATION SYSTEM
 ======================================================*/
 
-const reservationForm = document.getElementById("reservationForm");
+const reservationForm =
+document.getElementById("reservationForm");
 
-function generateReservationID() {
+/*==================================================
+GENERATE RESERVATION ID
+==================================================*/
 
-    return "ARZEA-" + Date.now();
+function generateReservationID(){
 
-}
+    const random =
+    Math.floor(1000 + Math.random()*9000);
 
-function showSuccessPopup(data) {
-
-    const popup = document.getElementById("successPopup");
-
-    if (!popup) return;
-
-    popup.style.display = "flex";
-
-    const guestName = document.getElementById("popupGuestName");
-    const reservationId = document.getElementById("popupReservationID");
-
-    if (guestName) guestName.textContent = data.name;
-    if (reservationId) reservationId.textContent = data.id;
+    return "ARZEA-" +
+    Date.now() +
+    "-" +
+    random;
 
 }
 
-if (reservationForm) {
+/*==================================================
+SAVE LOCAL STORAGE
+==================================================*/
 
-    reservationForm.addEventListener("submit", function (e) {
+function saveReservation(data){
 
-        e.preventDefault();
+    localStorage.setItem(
 
-        const data = {
+        "reservation",
 
-            id: generateReservationID(),
+        JSON.stringify(data)
 
-            name: document.getElementById("fullName").value,
+    );
 
-            email: document.getElementById("email").value,
+}
 
-            phone: document.getElementById("phone").value,
+/*==================================================
+GET LOCAL STORAGE
+==================================================*/
 
-            guests: document.getElementById("guests").value,
+function getReservation(){
 
-            request: document.getElementById("message").value,
+    const data =
+    localStorage.getItem("reservation");
 
-            date: "19 September 2026",
+    if(!data) return null;
 
-            time: "18:00 WIB",
+    return JSON.parse(data);
 
-            dress: "Black & Gold"
+}
 
-        };
+/*==================================================
+SUCCESS POPUP
+==================================================*/
 
-        localStorage.setItem(
+function showSuccessPopup(data){
 
-            "reservation",
+    const popup =
+    document.getElementById("successPopup");
 
-            JSON.stringify(data)
+    if(!popup) return;
 
-        );
+    popup.style.display="flex";
 
-        showSuccessPopup(data);
+    const guest =
+    document.getElementById("popupGuestName");
 
+    const id =
+    document.getElementById("popupReservationID");
+
+    if(guest){
+
+        guest.textContent=data.name;
+
+    }
+
+    if(id){
+
+        id.textContent=data.id;
+
+    }
+
+}
+
+/*==================================================
+CLOSE POPUP
+==================================================*/
+
+window.addEventListener("click",(e)=>{
+
+    const popup =
+    document.getElementById("successPopup");
+
+    if(!popup) return;
+
+    if(e.target===popup){
+
+        popup.style.display="none";
+
+    }
+
+});
+
+/*==================================================
+RESERVATION FORM
+==================================================*/
+
+if(reservationForm){
+
+reservationForm.addEventListener(
+
+"submit",
+
+function(e){
+
+e.preventDefault();
+
+const data={
+
+id:generateReservationID(),
+
+name:
+document.getElementById("fullName").value.trim(),
+
+phone:
+document.getElementById("phone").value.trim(),
+
+email:
+document.getElementById("email").value.trim(),
+
+guests:
+document.getElementById("guests").value,
+
+request:
+document.getElementById("message").value.trim(),
+
+date:"19 September 2026",
+
+time:"18:00 WIB",
+
+dress:"Black & Gold"
+
+};
+
+saveReservation(data);
+
+showSuccessPopup(data);
+
+console.log(data);
+
+}
+
+);
+
+}
+
+/*==================================================
+AUTO LOAD RESERVATION
+==================================================*/
+
+const lastReservation =
+getReservation();
+
+if(lastReservation){
+
+console.log(
+
+"Reservation Found",
+
+lastReservation
+
+);
+
+}
+
+/*==================================================
+PART 3 READY
+==================================================*/
+
+console.log("ARZEA Part 3 Loaded");
+
+/*======================================================
+ARZEA V7
+PART 4
+EMAILJS • QR CODE • SUCCESS SOUND • VIP TICKET
+======================================================*/
+
+/*==================================================
+EMAILJS INIT
+==================================================*/
+
+if (typeof emailjs !== "undefined") {
+
+    emailjs.init({
+        publicKey: "-EkYc26ebwGzYOUJW"
     });
 
 }
 
-/*======================================================
-PART 4
-EMAIL • QR • SUCCESS
-======================================================*/
-
-/*=========================
-EMAILJS
-=========================*/
-
-emailjs.init({
-    publicKey: "-EkYc26ebwGzYOUJW"
-});
+/*==================================================
+SEND EMAIL
+==================================================*/
 
 async function sendReservationEmail(data){
 
@@ -407,73 +669,80 @@ async function sendReservationEmail(data){
 
             {
 
-                reservation_id:data.id,
+                reservation_id : data.id,
 
-                guest_name:data.name,
+                guest_name : data.name,
 
-                guest_email:data.email,
+                guest_email : data.email,
 
-                guest_phone:data.phone,
+                guest_phone : data.phone,
 
-                guest_count:data.guests,
+                guest_count : data.guests,
 
-                reservation_date:data.date,
+                reservation_date : data.date,
 
-                reservation_time:data.time,
+                reservation_time : data.time,
 
-                dress_code:data.dress
+                dress_code : data.dress
 
             }
 
         );
 
-        console.log("Email berhasil dikirim");
+        console.log("✅ Email sent");
 
-    }catch(err){
+    }catch(error){
 
-        console.error(err);
+        console.error("EmailJS :", error);
 
     }
 
 }
 
-
-/*=========================
+/*==================================================
 SUCCESS SOUND
-=========================*/
+==================================================*/
 
 function playSuccessSound(){
 
-    const audio=new Audio("audio/success.mp3");
+    const audio = new Audio("audio/success.mp3");
 
-    audio.volume=0.35;
+    audio.volume = 0.35;
 
     audio.play().catch(()=>{});
 
 }
 
-
-/*=========================
+/*==================================================
 QR CODE
-=========================*/
+==================================================*/
 
 function generateQRCode(data){
 
-    const qr=document.getElementById("popupQRCode");
+    const qr =
+    document.getElementById("popupQRCode");
 
     if(!qr) return;
 
-    qr.innerHTML="";
+    qr.innerHTML = "";
 
     new QRCode(qr,{
 
-        text:JSON.stringify(data),
+        text: JSON.stringify({
+
+            id:data.id,
+
+            name:data.name,
+
+            guests:data.guests
+
+        }),
 
         width:150,
 
         height:150,
 
-        colorDark:"#C8A74E",
+        colorDark:"#111111",
 
         colorLight:"#ffffff",
 
@@ -483,31 +752,30 @@ function generateQRCode(data){
 
 }
 
-
-/*=========================
+/*==================================================
 UPGRADE POPUP
-=========================*/
+==================================================*/
 
-const oldShowPopup=showSuccessPopup;
+const oldPopup = showSuccessPopup;
 
-showSuccessPopup=function(data){
+showSuccessPopup = async function(data){
 
-    oldShowPopup(data);
-
-    playSuccessSound();
+    oldPopup(data);
 
     generateQRCode(data);
 
-    sendReservationEmail(data);
+    playSuccessSound();
+
+    await sendReservationEmail(data);
 
 };
 
+/*==================================================
+OPEN VIP TICKET
+==================================================*/
 
-/*=========================
-CONTINUE BUTTON
-=========================*/
-
-const continueBtn=document.getElementById("continueBtn");
+const continueBtn =
+document.getElementById("continueBtn");
 
 if(continueBtn){
 
@@ -519,14 +787,21 @@ if(continueBtn){
 
 }
 
+/*==================================================
+PART 4 READY
+==================================================*/
+
+console.log("ARZEA Part 4 Loaded");
+
 /*======================================================
+ARZEA V7
 PART 5
 FINAL UTILITIES
 ======================================================*/
 
-/*=========================
+/*==================================================
 RESET FORM
-=========================*/
+==================================================*/
 
 function resetReservationForm(){
 
@@ -538,37 +813,36 @@ function resetReservationForm(){
 
 }
 
-
-/*=========================
+/*==================================================
 BUTTON LOADING
-=========================*/
+==================================================*/
 
-const reserveButton=document.querySelector(".reserve-btn");
+const reserveButton =
+document.getElementById("reserveButton");
 
 if(reserveButton){
 
     reserveButton.addEventListener("click",()=>{
 
-        reserveButton.disabled=true;
+        reserveButton.disabled = true;
 
-        reserveButton.innerHTML="Processing...";
+        reserveButton.innerHTML = "Processing...";
 
         setTimeout(()=>{
 
-            reserveButton.disabled=false;
+            reserveButton.disabled = false;
 
-            reserveButton.innerHTML="Reserve Now";
+            reserveButton.innerHTML = "Reserve Now";
 
-        },2200);
+        },1800);
 
     });
 
 }
 
-
-/*=========================
+/*==================================================
 BACK TO TOP
-=========================*/
+==================================================*/
 
 const topButton=document.createElement("button");
 
@@ -579,35 +853,35 @@ topButton.innerHTML="↑";
 document.body.appendChild(topButton);
 
 topButton.style.cssText=`
+
 position:fixed;
-right:28px;
-bottom:28px;
-width:54px;
-height:54px;
+right:30px;
+bottom:30px;
+width:55px;
+height:55px;
 border:none;
 border-radius:50%;
-background:#C8A74E;
+background:#D4AF37;
 color:#111;
 font-size:22px;
 cursor:pointer;
 display:none;
-z-index:99999;
-box-shadow:0 10px 25px rgba(0,0,0,.35);
+z-index:999999;
+box-shadow:0 15px 35px rgba(0,0,0,.35);
+
 `;
 
 window.addEventListener("scroll",()=>{
 
-    topButton.style.display=
+    if(window.scrollY>500){
 
-    window.scrollY>450
+        topButton.style.display="block";
 
-    ?
+    }else{
 
-    "block"
+        topButton.style.display="none";
 
-    :
-
-    "none";
+    }
 
 });
 
@@ -623,46 +897,29 @@ topButton.onclick=()=>{
 
 };
 
-
-/*=========================
+/*==================================================
 PRELOAD IMAGES
-=========================*/
+==================================================*/
 
-const preloadImages=[
-
+[
+"images/logo.png",
 "images/hero.png",
-
 "images/indoor.png",
-
 "images/outdoor.jpeg",
-
 "images/meeting.jpg",
-
 "images/wagyu.jpg",
-
 "images/pasta.jpg",
-
 "images/prawn.jpg",
-
 "images/dessert.jpg",
-
 "images/matcha.jpg",
-
 "images/mocktail.jpg",
-
 "images/blush.jpg",
-
 "images/midnight.jpg",
-
 "images/mahalini.jpg",
-
 "images/nagita.jpg",
-
 "images/raim.jpg"
 
-];
-
-preloadImages.forEach(src=>{
+].forEach(src=>{
 
     const img=new Image();
 
@@ -670,33 +927,15 @@ preloadImages.forEach(src=>{
 
 });
 
-
-/*=========================
-SAVE RESERVATION
-=========================*/
-
-window.addEventListener("beforeunload",()=>{
-
-    const reservation=
-
-    localStorage.getItem("reservation");
-
-    if(reservation){
-
-        console.log("Reservation Saved");
-
-    }
-
-});
-
-
-/*=========================
+/*==================================================
 VISITOR COUNTER
-=========================*/
+==================================================*/
 
-let visitors=
+let visitors = Number(
 
-Number(localStorage.getItem("visitors")||0);
+localStorage.getItem("visitors") || 0
+
+);
 
 visitors++;
 
@@ -710,9 +949,78 @@ visitors
 
 console.log("Visitors :",visitors);
 
+/*==================================================
+AUTO OPEN TICKET
+==================================================*/
 
-/*=========================
+const continueButton =
+document.getElementById("continueBtn");
+
+if(continueButton){
+
+    continueButton.addEventListener("click",()=>{
+
+        window.location.href="ticket.html";
+
+    });
+
+}
+
+/*==================================================
+ESC CLOSE POPUP
+==================================================*/
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key==="Escape"){
+
+        const popup=document.getElementById("successPopup");
+
+        if(popup){
+
+            popup.style.display="none";
+
+        }
+
+    }
+
+});
+
+/*==================================================
 READY
-=========================*/
+==================================================*/
 
-console.log("ARZEA V6 READY ✨");
+console.log("===================================");
+
+console.log("ARZEA V7 FINAL READY");
+
+console.log("Popup ✔");
+
+console.log("EmailJS ✔");
+
+console.log("QR Code ✔");
+
+console.log("VIP Ticket ✔");
+
+console.log("Reservation ✔");
+
+console.log("===================================");
+
+
+/*==================================================
+DRONE PARALLAX
+==================================================*/
+
+const droneImage=document.querySelector(".drone-image");
+
+window.addEventListener("scroll",()=>{
+
+if(!droneImage) return;
+
+const y=window.scrollY;
+
+droneImage.style.transform=
+
+`scale(1.08) translateY(${y*0.12}px)`;
+
+});
