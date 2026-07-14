@@ -1,73 +1,100 @@
-// =====================================================
-// ARZEA LOUNGE & GARDEN
-// SCRIPT.JS PART 1
-// =====================================================
-
-// ==========================
-// EMAILJS
-// ==========================
+/*==================================================
+ARZEA V3
+script.js
+==================================================*/
 
 emailjs.init({
     publicKey: "-EkYc26ebwGzYOuJW"
 });
 
-// ==========================
-// COUNTDOWN
-// ==========================
+/*========================================
+LOADER
+========================================*/
 
-const eventDate = new Date("September 19, 2026 18:00:00").getTime();
+window.addEventListener("load",()=>{
 
-const dayEl = document.getElementById("days");
-const hourEl = document.getElementById("hours");
-const minuteEl = document.getElementById("minutes");
-const secondEl = document.getElementById("seconds");
+const loader=document.getElementById("loader");
 
-if(dayEl){
+setTimeout(()=>{
+
+loader.style.opacity="0";
+
+setTimeout(()=>{
+
+loader.style.display="none";
+
+},700);
+
+},1800);
+
+});
+
+
+/*========================================
+COUNTDOWN
+========================================*/
+
+const targetDate=new Date("2026-09-19T18:00:00+07:00").getTime();
+
+const day=document.getElementById("days");
+const hour=document.getElementById("hours");
+const minute=document.getElementById("minutes");
+const second=document.getElementById("seconds");
+
+if(day){
 
 setInterval(()=>{
 
-const now = new Date().getTime();
+const now=new Date().getTime();
 
-const distance = eventDate - now;
+const distance=targetDate-now;
 
-if(distance <= 0){
+if(distance<0){
 
-dayEl.textContent="00";
-hourEl.textContent="00";
-minuteEl.textContent="00";
-secondEl.textContent="00";
+day.innerHTML="00";
+hour.innerHTML="00";
+minute.innerHTML="00";
+second.innerHTML="00";
 
 return;
 
 }
 
-dayEl.textContent=Math.floor(distance/(1000*60*60*24));
+day.innerHTML=Math.floor(distance/86400000);
 
-hourEl.textContent=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+hour.innerHTML=Math.floor(distance%86400000/3600000);
 
-minuteEl.textContent=Math.floor((distance%(1000*60*60))/(1000*60));
+minute.innerHTML=Math.floor(distance%3600000/60000);
 
-secondEl.textContent=Math.floor((distance%(1000*60))/1000);
+second.innerHTML=Math.floor(distance%60000/1000);
 
 },1000);
 
 }
 
 
-
-// ==========================
-// RESERVATION FORM
-// ==========================
+/*========================================
+RESERVATION
+========================================*/
 
 const form=document.querySelector(".reserve-form");
 
 if(form){
 
-form.addEventListener("submit",function(e){
+form.addEventListener("submit",sendReservation);
+
+}
+/*========================================
+SEND RESERVATION
+========================================*/
+
+async function sendReservation(e){
 
 e.preventDefault();
 
-const name=form.querySelector('input[type="text"]').value.trim();
+const button=document.querySelector(".reserve-btn");
+
+const fullName=form.querySelector('input[type="text"]').value.trim();
 
 const phone=form.querySelector('input[type="tel"]').value.trim();
 
@@ -77,7 +104,7 @@ const guests=form.querySelector("select").value;
 
 const request=form.querySelector("textarea").value.trim();
 
-if(!name||!phone||!email){
+if(!fullName||!phone||!email){
 
 alert("Please complete all required fields.");
 
@@ -85,37 +112,29 @@ return;
 
 }
 
-const button=document.querySelector(".reserve-btn");
-
-button.classList.add("loading");
-
-button.innerHTML="Sending...";
-
-button.disabled=true;
-
 const reservationID=
 
 "ARZEA-"+
 
-new Date().getFullYear()+"-"+
+Date.now().toString().slice(-8);
 
-Math.floor(1000+Math.random()*9000);
+button.classList.add("loading");
 
-// ==========================
+button.disabled=true;
 
-// SEND EMAIL
+button.innerHTML="Sending...";
 
-// ==========================
+try{
 
-emailjs.send(
+await emailjs.send(
 
 "service_yp1tkqq",
 
-"template_ru3pmnr",
+"template_zp0batn",
 
 {
 
-name:name,
+name:fullName,
 
 phone:phone,
 
@@ -123,21 +142,39 @@ email:email,
 
 guests:guests,
 
-message:request,
-
-reservationID:reservationID
+message:request
 
 }
 
-)
+);
 
-.then(function(){
+await emailjs.send(
 
-// ==========================
+"service_yp1tkqq",
 
-// SAVE DATA
+"template_ru3pmnr",
 
-// ==========================
+{
+
+name:fullName,
+
+email:email,
+
+phone:phone,
+
+guests:guests,
+
+reservationID:reservationID,
+
+download_link:
+
+window.location.origin+
+
+"/ticket.html"
+
+}
+
+);
 
 localStorage.setItem(
 
@@ -147,7 +184,7 @@ JSON.stringify({
 
 id:reservationID,
 
-name:name,
+name:fullName,
 
 phone:phone,
 
@@ -159,27 +196,15 @@ guests:guests
 
 );
 
-// ==========================
-
-// BUTTON
-
-// ==========================
-
 button.classList.remove("loading");
 
 button.disabled=false;
 
 button.innerHTML="Reserve Now";
 
-// ==========================
-
-// POPUP
-
-// ==========================
-
 showSuccess(
 
-name,
+fullName,
 
 email,
 
@@ -189,11 +214,11 @@ reservationID
 
 );
 
-})
+}
 
-.catch(function(error){
+catch(err){
 
-console.error(error);
+console.error(err);
 
 button.classList.remove("loading");
 
@@ -201,19 +226,14 @@ button.disabled=false;
 
 button.innerHTML="Reserve Now";
 
-alert("❌ Failed to send reservation.");
-
-});
-
-});
+alert("Reservation failed. Please try again.");
 
 }
 
-// =====================================================
-
-// SUCCESS POPUP
-
-// =====================================================
+}
+/*========================================
+SUCCESS POPUP
+========================================*/
 
 function showSuccess(
 
@@ -236,9 +256,7 @@ popup.innerHTML=`
 <div class="popup-card">
 
 <img
-
 src="images/logo.png"
-
 class="popup-logo">
 
 <h2>
@@ -319,15 +337,25 @@ ${guests}
 
 <p class="scan-text">
 
-🖤 Scan this QR upon arrival
+Scan this QR upon arrival
 
 </p>
 
-<button id="closePopup">
+<div style="display:flex;gap:15px;justify-content:center;flex-wrap:wrap;">
 
-Done
+<button id="downloadTicketPopup">
+
+Download Ticket
 
 </button>
+
+<button id="closePopup">
+
+Continue
+
+</button>
+
+</div>
 
 </div>
 
@@ -335,11 +363,9 @@ Done
 
 document.body.appendChild(popup);
 
-// =====================================================
-// QR CODE
-// =====================================================
 
-setTimeout(function(){
+
+setTimeout(()=>{
 
 new QRCode(
 
@@ -347,23 +373,21 @@ document.getElementById("reservationQR"),
 
 {
 
-text:
+text:JSON.stringify({
 
-`ARZEA Lounge & Garden
+id:reservationID,
 
-Reservation ID : ${reservationID}
+name:name,
 
-Name : ${name}
+email:email,
 
-Email : ${email}
+guests:guests,
 
-Guests : ${guests}
+date:"19 September 2026",
 
-Date : 19 September 2026
+time:"18.00 WIB"
 
-Time : 18.00 WIB
-
-Dress Code : Elegant Black`,
+}),
 
 width:180,
 
@@ -379,72 +403,170 @@ correctLevel:QRCode.CorrectLevel.H
 
 );
 
-},200);
+},150);
 
 
-
-// =====================================================
-// DONE BUTTON
-// =====================================================
 
 document
-.getElementById("closePopup")
-.addEventListener("click",function(){
 
-window.location.href="ticket.html";
+.getElementById("downloadTicketPopup")
 
-});
+.onclick=function(){
 
-}
+window.open(
 
+"ticket.html",
 
-
-// =====================================================
-// SMOOTH SCROLL
-// =====================================================
-
-document
-.querySelectorAll('a[href^="#"]')
-.forEach(function(anchor){
-
-anchor.addEventListener("click",function(e){
-
-e.preventDefault();
-
-const target=document.querySelector(
-
-this.getAttribute("href")
+"_blank"
 
 );
 
-if(target){
+};
 
-target.scrollIntoView({
 
-behavior:"smooth"
 
-});
+document
+
+.getElementById("closePopup")
+
+.onclick=function(){
+
+window.location.href="ticket.html";
+
+};
+
+}
+
+/*========================================
+DOWNLOAD FROM POPUP
+========================================*/
+
+document.addEventListener("click",async function(e){
+
+if(e.target.id==="downloadTicketPopup"){
+
+const reservation=JSON.parse(
+
+localStorage.getItem("arzeaReservation")
+
+);
+
+if(!reservation){
+
+return;
+
+}
+
+window.open(
+
+"ticket.html",
+
+"_blank"
+
+);
 
 }
 
 });
 
+
+/*========================================
+NAVBAR SCROLL EFFECT
+========================================*/
+
+const navbar=document.querySelector(".navbar");
+
+window.addEventListener("scroll",()=>{
+
+if(window.scrollY>80){
+
+navbar.style.background="rgba(0,0,0,.82)";
+
+navbar.style.padding="16px 8%";
+
+navbar.style.boxShadow=
+
+"0 10px 40px rgba(0,0,0,.35)";
+
+}
+
+else{
+
+navbar.style.background="rgba(0,0,0,.35)";
+
+navbar.style.padding="22px 8%";
+
+navbar.style.boxShadow="none";
+
+}
+
 });
 
 
+/*========================================
+BUTTON RIPPLE
+========================================*/
 
-// =====================================================
-// PAGE LOADED
-// =====================================================
+document
 
-window.addEventListener("load",function(){
+.querySelectorAll(
 
-document.body.classList.add("loaded");
+".hero-btn,.reserve-btn"
+
+)
+
+.forEach(btn=>{
+
+btn.addEventListener("click",function(e){
+
+const circle=document.createElement("span");
+
+const d=Math.max(
+
+this.clientWidth,
+
+this.clientHeight
+
+);
+
+circle.style.width=d+"px";
+
+circle.style.height=d+"px";
+
+circle.style.left=
+
+e.offsetX-d/2+"px";
+
+circle.style.top=
+
+e.offsetY-d/2+"px";
+
+circle.className="ripple";
+
+this.appendChild(circle);
+
+setTimeout(()=>{
+
+circle.remove();
+
+},700);
+
+});
 
 });
 
 
+/*========================================
+SMOOTH APPEAR
+========================================*/
 
-// =====================================================
-// END SCRIPT
-// =====================================================
+window.addEventListener("load",()=>{
+
+document.body.style.opacity="1";
+
+});
+
+
+/*========================================
+END
+========================================*/

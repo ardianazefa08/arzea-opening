@@ -1,26 +1,41 @@
-/* =====================================================
-   ARZEA LOUNGE & GARDEN V2
-   STYLE.CSS
-   PART 1
-===================================================== */
+/*=====================================================
+ARZEA V3
+Luxury Black Gold Theme
+=====================================================*/
+
+:root{
+
+--gold:#D4AF37;
+--gold2:#f4d77a;
+--dark:#060606;
+--dark2:#111111;
+--white:#ffffff;
+--text:#d8d8d8;
+--glass:rgba(255,255,255,.05);
+
+}
 
 *{
+
 margin:0;
 padding:0;
 box-sizing:border-box;
+
 }
 
 html{
+
 scroll-behavior:smooth;
+
 }
 
 body{
 
 font-family:'Inter',sans-serif;
 
-background:#070707;
+background:var(--dark);
 
-color:#fff;
+color:white;
 
 overflow-x:hidden;
 
@@ -30,9 +45,9 @@ line-height:1.7;
 
 
 
-/* =====================================
+/*==============================
 BACKGROUND
-===================================== */
+==============================*/
 
 .background{
 
@@ -41,13 +56,15 @@ position:fixed;
 inset:0;
 
 background:
+
 radial-gradient(circle at top,
-rgba(212,175,55,.08),
+rgba(212,175,55,.10),
 transparent 45%),
+
 linear-gradient(
 180deg,
-#090909,
-#040404);
+#0a0a0a,
+#050505);
 
 z-index:-5;
 
@@ -57,26 +74,41 @@ z-index:-5;
 
 position:fixed;
 
-width:900px;
-
-height:900px;
-
 left:50%;
 
 top:-350px;
 
 transform:translateX(-50%);
 
+width:900px;
+
+height:900px;
+
 background:
+
 radial-gradient(circle,
+
 rgba(212,175,55,.18),
+
 transparent 70%);
 
 filter:blur(90px);
 
 z-index:-4;
 
-animation:glow 8s ease-in-out infinite;
+animation:glow 8s ease infinite;
+
+}
+
+#particles{
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+z-index:-3;
 
 }
 
@@ -84,10 +116,12 @@ animation:glow 8s ease-in-out infinite;
 
 0%,100%{
 
-opacity:.4;
+opacity:.45;
 
 transform:
+
 translateX(-50%)
+
 scale(1);
 
 }
@@ -97,7 +131,9 @@ scale(1);
 opacity:1;
 
 transform:
+
 translateX(-50%)
+
 scale(1.15);
 
 }
@@ -106,9 +142,75 @@ scale(1.15);
 
 
 
-/* =====================================
+/*==============================
+LOADER
+==============================*/
+
+#loader{
+
+position:fixed;
+
+inset:0;
+
+background:#050505;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:999999;
+
+transition:1s;
+
+}
+
+.loader-logo{
+
+text-align:center;
+
+animation:fadeUp 1s ease;
+
+}
+
+.loader-logo img{
+
+width:110px;
+
+margin-bottom:20px;
+
+animation:floatLogo 4s ease infinite;
+
+}
+
+.loader-logo h1{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:70px;
+
+letter-spacing:8px;
+
+color:var(--gold);
+
+}
+
+.loader-logo p{
+
+margin-top:8px;
+
+letter-spacing:6px;
+
+color:#bbb;
+
+}
+
+
+
+/*==============================
 NAVBAR
-===================================== */
+==============================*/
 
 .navbar{
 
@@ -128,15 +230,15 @@ justify-content:space-between;
 
 align-items:center;
 
-background:
-rgba(0,0,0,.45);
+background:rgba(0,0,0,.35);
 
 backdrop-filter:blur(18px);
 
-border-bottom:
-1px solid rgba(212,175,55,.10);
+border-bottom:1px solid rgba(212,175,55,.08);
 
-z-index:999;
+z-index:9999;
+
+transition:.4s;
 
 }
 
@@ -146,23 +248,21 @@ display:flex;
 
 align-items:center;
 
-gap:14px;
+gap:16px;
 
 }
 
 .logo{
 
-width:58px;
+width:60px;
 
-filter:
-drop-shadow(
-0 0 14px rgba(212,175,55,.25));
+filter:drop-shadow(0 0 14px rgba(212,175,55,.35));
 
 animation:floatLogo 4s ease infinite;
 
 }
 
-.logo-area h2{
+.logo-area h1{
 
 font-family:'Cormorant Garamond',serif;
 
@@ -170,15 +270,17 @@ font-size:34px;
 
 letter-spacing:5px;
 
-color:#d4af37;
+color:var(--gold);
 
 }
 
-.navbar nav{
+.navbar nav ul{
 
 display:flex;
 
-gap:38px;
+gap:40px;
+
+list-style:none;
 
 }
 
@@ -186,29 +288,57 @@ gap:38px;
 
 text-decoration:none;
 
-color:#fff;
+color:white;
 
 font-size:15px;
 
 transition:.35s;
 
+position:relative;
+
 }
 
 .navbar nav a:hover{
 
-color:#d4af37;
+color:var(--gold);
+
+}
+
+.navbar nav a::after{
+
+content:"";
+
+position:absolute;
+
+left:0;
+
+bottom:-8px;
+
+width:0;
+
+height:2px;
+
+background:var(--gold);
+
+transition:.35s;
+
+}
+
+.navbar nav a:hover::after{
+
+width:100%;
 
 }
 
 
 
-/* =====================================
+/*==============================
 HERO
-===================================== */
+==============================*/
 
 .hero{
 
-min-height:100vh;
+height:100vh;
 
 display:flex;
 
@@ -220,13 +350,13 @@ text-align:center;
 
 position:relative;
 
-padding:0 20px;
+overflow:hidden;
 
 background:
 
 linear-gradient(
 
-rgba(0,0,0,.58),
+rgba(0,0,0,.55),
 
 rgba(0,0,0,.72)
 
@@ -240,11 +370,23 @@ background-position:center;
 
 background-repeat:no-repeat;
 
+animation:heroZoom 25s linear infinite alternate;
+
 }
 
 .hero-overlay{
 
-display:none;
+position:absolute;
+
+inset:0;
+
+background:
+
+radial-gradient(circle,
+
+transparent,
+
+rgba(0,0,0,.35));
 
 }
 
@@ -252,21 +394,21 @@ display:none;
 
 position:relative;
 
-z-index:5;
+z-index:2;
 
 max-width:900px;
 
-animation:fadeUp 1s ease;
+animation:fadeUp 1.2s ease;
 
 }
 
 .hero-content h3{
 
-font-size:15px;
-
 letter-spacing:8px;
 
-color:#d4af37;
+font-size:15px;
+
+color:var(--gold);
 
 margin-bottom:18px;
 
@@ -276,9 +418,9 @@ margin-bottom:18px;
 
 font-family:'Cormorant Garamond',serif;
 
-font-size:108px;
+font-size:110px;
 
-letter-spacing:10px;
+letter-spacing:12px;
 
 line-height:1;
 
@@ -290,27 +432,29 @@ font-size:34px;
 
 font-weight:300;
 
-color:#d4af37;
+color:var(--gold);
 
-margin-top:8px;
+margin-top:10px;
 
 }
 
 .hero-content p{
 
-margin-top:28px;
+margin-top:25px;
 
 font-size:18px;
 
-color:#d7d7d7;
+color:#d8d8d8;
+
+max-width:700px;
+
+margin-inline:auto;
 
 }
 
-
-
-/* =====================================
-HERO BUTTON
-===================================== */
+/*=====================================================
+HERO BUTTONS
+=====================================================*/
 
 .hero-buttons{
 
@@ -322,7 +466,7 @@ align-items:center;
 
 gap:28px;
 
-margin-top:45px;
+margin-top:50px;
 
 flex-wrap:wrap;
 
@@ -336,23 +480,23 @@ justify-content:center;
 
 align-items:center;
 
-padding:18px 40px;
+padding:18px 42px;
 
-min-width:290px;
+min-width:300px;
 
 border-radius:999px;
 
-border:
-1px solid rgba(212,175,55,.35);
+border:1px solid rgba(212,175,55,.30);
 
-background:
-rgba(255,255,255,.04);
+background:rgba(255,255,255,.05);
 
-backdrop-filter:blur(14px);
+backdrop-filter:blur(18px);
 
-color:#d4af37;
+color:var(--gold);
 
 letter-spacing:3px;
+
+font-size:15px;
 
 }
 
@@ -364,27 +508,36 @@ justify-content:center;
 
 align-items:center;
 
-padding:18px 40px;
+padding:20px 48px;
 
-min-width:290px;
+min-width:300px;
 
 border-radius:999px;
 
-background:
-
-linear-gradient(
+background:linear-gradient(
 135deg,
-#f4d77a,
-#d4af37,
-#a87b19);
+var(--gold2),
+var(--gold),
+#9e7316
+);
 
 color:#111;
 
 font-weight:700;
 
+font-size:16px;
+
 text-decoration:none;
 
-transition:.35s;
+position:relative;
+
+overflow:hidden;
+
+transition:.4s;
+
+box-shadow:
+
+0 15px 40px rgba(212,175,55,.18);
 
 }
 
@@ -394,15 +547,139 @@ transform:translateY(-5px);
 
 box-shadow:
 
-0 18px 45px rgba(212,175,55,.28);
+0 25px 60px rgba(212,175,55,.30);
+
+}
+
+.hero-btn::before{
+
+content:"";
+
+position:absolute;
+
+top:-120%;
+
+left:-40%;
+
+width:45%;
+
+height:260%;
+
+background:
+
+linear-gradient(
+
+90deg,
+
+transparent,
+
+rgba(255,255,255,.35),
+
+transparent
+
+);
+
+transform:rotate(20deg);
+
+transition:1.2s;
+
+}
+
+.hero-btn:hover::before{
+
+left:170%;
 
 }
 
 
 
-/* =====================================
+/*=====================================================
+COUNTDOWN
+=====================================================*/
+
+.countdown-section{
+
+padding:120px 8%;
+
+text-align:center;
+
+}
+
+.timer{
+
+display:flex;
+
+justify-content:center;
+
+gap:28px;
+
+flex-wrap:wrap;
+
+margin-top:60px;
+
+}
+
+.timer div{
+
+width:150px;
+
+padding:28px;
+
+border-radius:24px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(212,175,55,.15);
+
+backdrop-filter:blur(18px);
+
+transition:.35s;
+
+}
+
+.timer div:hover{
+
+transform:translateY(-8px);
+
+border-color:var(--gold);
+
+box-shadow:
+
+0 20px 45px rgba(212,175,55,.18);
+
+}
+
+.timer span{
+
+display:block;
+
+font-size:52px;
+
+font-weight:700;
+
+color:var(--gold);
+
+margin-bottom:10px;
+
+}
+
+.timer p{
+
+font-size:13px;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+color:#d5d5d5;
+
+}
+
+
+
+/*=====================================================
 SECTION TITLE
-===================================== */
+=====================================================*/
 
 .section-title{
 
@@ -416,25 +693,167 @@ margin-bottom:65px;
 
 font-family:'Cormorant Garamond',serif;
 
-font-size:58px;
+font-size:60px;
 
-color:#d4af37;
+color:var(--gold);
+
+margin-bottom:18px;
 
 }
 
 .section-title p{
 
-margin-top:15px;
+color:#c5c5c5;
 
-color:#bdbdbd;
+font-size:17px;
 
 }
 
 
 
-/* =====================================
-ANIMATION
-===================================== */
+/*=====================================================
+ABOUT
+=====================================================*/
+
+.about{
+
+padding:120px 8%;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:70px;
+
+align-items:center;
+
+}
+
+.about-image{
+
+overflow:hidden;
+
+border-radius:30px;
+
+box-shadow:
+
+0 25px 60px rgba(0,0,0,.40);
+
+}
+
+.about-image img{
+
+width:100%;
+
+display:block;
+
+transition:.6s;
+
+}
+
+.about-image:hover img{
+
+transform:scale(1.08);
+
+}
+
+.about-content h2{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:52px;
+
+margin-bottom:25px;
+
+color:var(--gold);
+
+}
+
+.about-content p{
+
+font-size:17px;
+
+color:#d5d5d5;
+
+line-height:34px;
+
+margin-bottom:24px;
+
+}
+
+
+
+/*=====================================================
+FEATURE CARD
+=====================================================*/
+
+.about-features{
+
+display:grid;
+
+grid-template-columns:repeat(2,1fr);
+
+gap:18px;
+
+margin-top:40px;
+
+}
+
+.feature-card{
+
+padding:22px;
+
+border-radius:20px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(212,175,55,.12);
+
+backdrop-filter:blur(18px);
+
+transition:.35s;
+
+}
+
+.feature-card:hover{
+
+transform:translateY(-6px);
+
+border-color:var(--gold);
+
+box-shadow:
+
+0 20px 45px rgba(212,175,55,.18);
+
+}
+
+.feature-card h3{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:28px;
+
+color:var(--gold);
+
+margin-bottom:12px;
+
+}
+
+.feature-card p{
+
+font-size:15px;
+
+line-height:28px;
+
+color:#d0d0d0;
+
+}
+
+
+
+/*=====================================================
+ANIMATIONS
+=====================================================*/
 
 @keyframes fadeUp{
 
@@ -442,7 +861,7 @@ from{
 
 opacity:0;
 
-transform:translateY(45px);
+transform:translateY(40px);
 
 }
 
@@ -466,147 +885,31 @@ transform:translateY(0);
 
 50%{
 
-transform:translateY(-6px);
+transform:translateY(-8px);
 
 }
 
 }
 
-/* =====================================================
-   ABOUT
-===================================================== */
+@keyframes heroZoom{
 
-.about{
+0%{
 
-padding:120px 8%;
+background-size:100%;
 
 }
 
-.about-container{
+100%{
 
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:70px;
-
-align-items:center;
+background-size:110%;
 
 }
 
-.about-image{
-
-overflow:hidden;
-
-border-radius:30px;
-
-box-shadow:
-
-0 20px 60px rgba(0,0,0,.45);
-
 }
 
-.about-image img{
-
-width:100%;
-
-display:block;
-
-transition:.5s;
-
-}
-
-.about-image:hover img{
-
-transform:scale(1.06);
-
-}
-
-.about-text h3{
-
-font-family:'Cormorant Garamond',serif;
-
-font-size:42px;
-
-color:#d4af37;
-
-margin-bottom:28px;
-
-}
-
-.about-text p{
-
-font-size:17px;
-
-color:#d5d5d5;
-
-line-height:34px;
-
-margin-bottom:24px;
-
-}
-
-.about-features{
-
-display:grid;
-
-grid-template-columns:repeat(2,1fr);
-
-gap:18px;
-
-margin-top:40px;
-
-}
-
-.about-features div{
-
-display:flex;
-
-align-items:center;
-
-gap:14px;
-
-padding:18px;
-
-border-radius:18px;
-
-background:
-
-rgba(255,255,255,.04);
-
-border:
-
-1px solid rgba(212,175,55,.12);
-
-transition:.35s;
-
-}
-
-.about-features div:hover{
-
-transform:translateY(-5px);
-
-border-color:#d4af37;
-
-box-shadow:
-
-0 16px 35px rgba(212,175,55,.15);
-
-}
-
-.about-features i{
-
-font-size:22px;
-
-color:#d4af37;
-
-}
-
-
-
-/* =====================================================
-   GALLERY
-===================================================== */
+/*=====================================================
+GALLERY
+=====================================================*/
 
 .gallery{
 
@@ -618,26 +921,27 @@ padding:120px 8%;
 
 display:grid;
 
-grid-template-columns:
-repeat(auto-fit,minmax(320px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
 
-gap:28px;
+gap:30px;
 
 }
 
 .gallery-card{
 
+position:relative;
+
 overflow:hidden;
 
-border-radius:28px;
+border-radius:30px;
+
+border:1px solid rgba(212,175,55,.12);
 
 background:#111;
 
-border:
+transition:.45s;
 
-1px solid rgba(212,175,55,.12);
-
-transition:.4s;
+cursor:pointer;
 
 }
 
@@ -645,25 +949,25 @@ transition:.4s;
 
 width:100%;
 
-height:360px;
+height:380px;
 
 object-fit:cover;
 
-transition:.45s;
-
 display:block;
+
+transition:.6s;
 
 }
 
 .gallery-card:hover{
 
-transform:translateY(-8px);
+transform:translateY(-10px);
 
-border-color:#d4af37;
+border-color:var(--gold);
 
 box-shadow:
 
-0 25px 55px rgba(212,175,55,.18);
+0 25px 60px rgba(212,175,55,.20);
 
 }
 
@@ -673,126 +977,7 @@ transform:scale(1.08);
 
 }
 
-
-
-/* =====================================================
-   GUEST STAR
-===================================================== */
-
-.guest-star{
-
-padding:120px 8%;
-
-}
-
-.guest-grid{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(270px,1fr));
-
-gap:35px;
-
-}
-
-.guest-card{
-
-background:
-
-rgba(255,255,255,.04);
-
-border:
-
-1px solid rgba(212,175,55,.12);
-
-border-radius:28px;
-
-overflow:hidden;
-
-transition:.4s;
-
-backdrop-filter:blur(18px);
-
-}
-
-.guest-card:hover{
-
-transform:translateY(-10px);
-
-border-color:#d4af37;
-
-box-shadow:
-
-0 25px 55px rgba(212,175,55,.20);
-
-}
-
-.guest-card img{
-
-width:100%;
-
-height:360px;
-
-object-fit:cover;
-
-display:block;
-
-transition:.45s;
-
-}
-
-.guest-card:hover img{
-
-transform:scale(1.05);
-
-}
-
-.guest-info{
-
-padding:24px;
-
-text-align:center;
-
-}
-
-.guest-info h3{
-
-font-family:'Cormorant Garamond',serif;
-
-font-size:34px;
-
-margin-bottom:10px;
-
-}
-
-.guest-info span{
-
-color:#d4af37;
-
-letter-spacing:2px;
-
-font-size:13px;
-
-text-transform:uppercase;
-
-}
-
-
-
-/* =====================================================
-   SHINE EFFECT
-===================================================== */
-
-.gallery-card,
-.guest-card{
-
-position:relative;
-
-}
-
-.gallery-card::before,
-.guest-card::before{
+.gallery-card::before{
 
 content:"";
 
@@ -800,7 +985,7 @@ position:absolute;
 
 top:-120%;
 
-left:-45%;
+left:-40%;
 
 width:45%;
 
@@ -814,29 +999,131 @@ linear-gradient(
 
 transparent,
 
-rgba(255,255,255,.18),
+rgba(255,255,255,.22),
 
 transparent
 
 );
 
-transform:rotate(20deg);
+transform:rotate(22deg);
 
 transition:1.2s;
 
-pointer-events:none;
+z-index:2;
 
 }
 
-.gallery-card:hover::before,
-.guest-card:hover::before{
+.gallery-card:hover::before{
 
-left:160%;
+left:170%;
 
 }
-/* =====================================================
-   SIGNATURE MENU
-===================================================== */
+
+
+
+/*=====================================================
+GUEST STAR
+=====================================================*/
+
+.guest-star{
+
+padding:120px 8%;
+
+}
+
+.guest-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+
+gap:35px;
+
+}
+
+.guest-card{
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:30px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(212,175,55,.12);
+
+backdrop-filter:blur(18px);
+
+transition:.4s;
+
+text-align:center;
+
+}
+
+.guest-card:hover{
+
+transform:translateY(-10px);
+
+border-color:var(--gold);
+
+box-shadow:
+
+0 25px 60px rgba(212,175,55,.20);
+
+}
+
+.guest-card img{
+
+width:100%;
+
+height:380px;
+
+object-fit:cover;
+
+display:block;
+
+transition:.6s;
+
+}
+
+.guest-card:hover img{
+
+transform:scale(1.05);
+
+}
+
+.guest-card h3{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:34px;
+
+margin-top:24px;
+
+color:#fff;
+
+}
+
+.guest-card p{
+
+margin:12px 0 28px;
+
+font-size:13px;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+color:var(--gold);
+
+}
+
+
+
+/*=====================================================
+MENU
+=====================================================*/
 
 .menu{
 
@@ -860,7 +1147,7 @@ position:relative;
 
 overflow:hidden;
 
-border-radius:28px;
+border-radius:30px;
 
 background:rgba(255,255,255,.04);
 
@@ -868,7 +1155,7 @@ border:1px solid rgba(212,175,55,.12);
 
 backdrop-filter:blur(18px);
 
-transition:.4s;
+transition:.45s;
 
 }
 
@@ -876,11 +1163,11 @@ transition:.4s;
 
 transform:translateY(-10px);
 
-border-color:#d4af37;
+border-color:var(--gold);
 
 box-shadow:
 
-0 25px 60px rgba(212,175,55,.20);
+0 25px 60px rgba(212,175,55,.22);
 
 }
 
@@ -888,13 +1175,13 @@ box-shadow:
 
 width:100%;
 
-height:250px;
+height:260px;
 
 object-fit:cover;
 
 display:block;
 
-transition:.45s;
+transition:.6s;
 
 }
 
@@ -920,19 +1207,48 @@ color:#fff;
 
 .menu-card p{
 
-padding:0 25px 30px;
+padding:0 26px 30px;
 
 text-align:center;
 
+line-height:30px;
+
 font-size:15px;
 
-line-height:28px;
-
-color:#d0d0d0;
+color:#d6d6d6;
 
 }
 
-.menu-card::before{
+
+
+/*=====================================================
+DRINKS
+=====================================================*/
+
+.drinks{
+
+background:
+
+linear-gradient(
+
+180deg,
+
+rgba(212,175,55,.03),
+
+transparent
+
+);
+
+}
+
+
+
+/*=====================================================
+LUXURY SHINE
+=====================================================*/
+
+.menu-card::before,
+.guest-card::before{
 
 content:"";
 
@@ -954,7 +1270,7 @@ linear-gradient(
 
 transparent,
 
-rgba(255,255,255,.18),
+rgba(255,255,255,.20),
 
 transparent
 
@@ -968,155 +1284,22 @@ pointer-events:none;
 
 }
 
-.menu-card:hover::before{
+.menu-card:hover::before,
+.guest-card:hover::before{
 
-left:160%;
-
-}
-
-
-
-/* =====================================================
-   DRINKS
-===================================================== */
-
-.drinks{
-
-background:
-
-linear-gradient(
-
-180deg,
-
-rgba(212,175,55,.03),
-
-transparent
-
-);
+left:170%;
 
 }
 
 
 
-/* =====================================================
-   MEETING ROOM
-===================================================== */
-
-.meeting-room{
-
-padding:120px 8%;
-
-}
-
-.meeting-container{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-gap:70px;
-
-align-items:center;
-
-}
-
-.meeting-image{
-
-overflow:hidden;
-
-border-radius:28px;
-
-box-shadow:
-
-0 20px 60px rgba(0,0,0,.40);
-
-}
-
-.meeting-image img{
-
-width:100%;
-
-display:block;
-
-transition:.5s;
-
-}
-
-.meeting-image:hover img{
-
-transform:scale(1.06);
-
-}
-
-.meeting-content h3{
-
-font-family:'Cormorant Garamond',serif;
-
-font-size:42px;
-
-margin-bottom:25px;
-
-color:#d4af37;
-
-}
-
-.meeting-content p{
-
-font-size:17px;
-
-line-height:34px;
-
-color:#d3d3d3;
-
-margin-bottom:30px;
-
-}
-
-.meeting-content ul{
-
-list-style:none;
-
-display:grid;
-
-gap:18px;
-
-}
-
-.meeting-content li{
-
-padding:18px 24px;
-
-border-radius:18px;
-
-background:rgba(255,255,255,.04);
-
-border:1px solid rgba(212,175,55,.12);
-
-transition:.35s;
-
-}
-
-.meeting-content li:hover{
-
-transform:translateX(10px);
-
-border-color:#d4af37;
-
-box-shadow:
-
-0 15px 35px rgba(212,175,55,.16);
-
-}
-
-
-
-/* =====================================================
-   GOLD BORDER EFFECT
-===================================================== */
+/*=====================================================
+GOLD BORDER
+=====================================================*/
 
 .menu-card::after,
-.gallery-card::after,
-.guest-card::after{
+.guest-card::after,
+.gallery-card::after{
 
 content:"";
 
@@ -1124,7 +1307,7 @@ position:absolute;
 
 inset:0;
 
-border-radius:28px;
+border-radius:30px;
 
 padding:1px;
 
@@ -1159,16 +1342,127 @@ transition:.4s;
 }
 
 .menu-card:hover::after,
-.gallery-card:hover::after,
-.guest-card:hover::after{
+.guest-card:hover::after,
+.gallery-card:hover::after{
 
 opacity:1;
 
 }
+/*=====================================================
+MEETING ROOM
+=====================================================*/
 
-/* =====================================================
-   RESERVATION
-===================================================== */
+.meeting-room{
+
+padding:120px 8%;
+
+}
+
+.meeting-container{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:70px;
+
+align-items:center;
+
+}
+
+.meeting-image{
+
+overflow:hidden;
+
+border-radius:30px;
+
+border:1px solid rgba(212,175,55,.12);
+
+box-shadow:0 25px 60px rgba(0,0,0,.40);
+
+}
+
+.meeting-image img{
+
+width:100%;
+
+display:block;
+
+transition:.6s;
+
+}
+
+.meeting-image:hover img{
+
+transform:scale(1.08);
+
+}
+
+.meeting-content h2{
+
+font-family:'Cormorant Garamond',serif;
+
+font-size:52px;
+
+color:var(--gold);
+
+margin-bottom:25px;
+
+}
+
+.meeting-content p{
+
+font-size:17px;
+
+line-height:34px;
+
+color:#d5d5d5;
+
+margin-bottom:30px;
+
+}
+
+.meeting-content ul{
+
+list-style:none;
+
+display:grid;
+
+gap:18px;
+
+}
+
+.meeting-content li{
+
+padding:18px 24px;
+
+border-radius:18px;
+
+background:rgba(255,255,255,.04);
+
+border:1px solid rgba(212,175,55,.12);
+
+backdrop-filter:blur(18px);
+
+transition:.35s;
+
+}
+
+.meeting-content li:hover{
+
+transform:translateX(10px);
+
+border-color:var(--gold);
+
+box-shadow:0 18px 40px rgba(212,175,55,.16);
+
+}
+
+
+
+/*=====================================================
+RESERVATION
+=====================================================*/
 
 .reservation{
 
@@ -1208,15 +1502,13 @@ grid-column:1/3;
 
 width:100%;
 
-padding:20px 24px;
+padding:20px 22px;
 
-border-radius:18px;
+background:rgba(255,255,255,.05);
 
 border:1px solid rgba(212,175,55,.15);
 
-background:rgba(255,255,255,.04);
-
-backdrop-filter:blur(18px);
+border-radius:18px;
 
 color:#fff;
 
@@ -1227,6 +1519,8 @@ font-family:inherit;
 outline:none;
 
 transition:.35s;
+
+backdrop-filter:blur(18px);
 
 }
 
@@ -1241,7 +1535,7 @@ resize:none;
 .form-group input::placeholder,
 .form-group textarea::placeholder{
 
-color:#9c9c9c;
+color:#9e9e9e;
 
 }
 
@@ -1257,7 +1551,7 @@ cursor:pointer;
 .form-group textarea:focus,
 .form-group select:focus{
 
-border-color:#d4af37;
+border-color:var(--gold);
 
 box-shadow:
 
@@ -1277,24 +1571,33 @@ border:none;
 
 border-radius:999px;
 
-background:
-
-linear-gradient(
-135deg,
-#f4d77a,
-#d4af37,
-#a97918
-);
-
-color:#111;
+cursor:pointer;
 
 font-size:17px;
 
 font-weight:700;
 
-cursor:pointer;
+background:
+
+linear-gradient(
+
+135deg,
+
+var(--gold2),
+
+var(--gold),
+
+#9e7316
+
+);
+
+color:#111;
 
 transition:.35s;
+
+box-shadow:
+
+0 18px 45px rgba(212,175,55,.20);
 
 }
 
@@ -1304,15 +1607,15 @@ transform:translateY(-5px);
 
 box-shadow:
 
-0 18px 45px rgba(212,175,55,.28);
+0 28px 65px rgba(212,175,55,.32);
 
 }
 
 
 
-/* =====================================================
-   POPUP SUCCESS
-===================================================== */
+/*=====================================================
+SUCCESS POPUP
+=====================================================*/
 
 .reservation-popup{
 
@@ -1320,7 +1623,9 @@ position:fixed;
 
 inset:0;
 
-background:rgba(0,0,0,.75);
+background:rgba(0,0,0,.78);
+
+backdrop-filter:blur(10px);
 
 display:flex;
 
@@ -1328,11 +1633,11 @@ justify-content:center;
 
 align-items:center;
 
-z-index:99999;
-
 padding:20px;
 
-animation:fadeUp .4s ease;
+z-index:99999;
+
+animation:popupFade .35s ease;
 
 }
 
@@ -1340,11 +1645,11 @@ animation:fadeUp .4s ease;
 
 width:100%;
 
-max-width:520px;
+max-width:560px;
 
-background:#111;
+background:#101010;
 
-border-radius:28px;
+border-radius:30px;
 
 border:1px solid rgba(212,175,55,.18);
 
@@ -1354,7 +1659,9 @@ text-align:center;
 
 box-shadow:
 
-0 30px 70px rgba(0,0,0,.45);
+0 35px 80px rgba(0,0,0,.45);
+
+animation:popupScale .45s ease;
 
 }
 
@@ -1364,6 +1671,8 @@ width:90px;
 
 margin-bottom:20px;
 
+animation:floatLogo 4s ease infinite;
+
 }
 
 .popup-card h2{
@@ -1372,9 +1681,9 @@ font-family:'Cormorant Garamond',serif;
 
 font-size:42px;
 
-color:#d4af37;
+color:var(--gold);
 
-margin-bottom:15px;
+margin-bottom:12px;
 
 }
 
@@ -1384,7 +1693,7 @@ font-family:'Cormorant Garamond',serif;
 
 font-size:30px;
 
-margin:10px 0 30px;
+margin:10px 0 25px;
 
 }
 
@@ -1394,9 +1703,9 @@ display:grid;
 
 grid-template-columns:1fr 1fr;
 
-gap:15px;
+gap:14px;
 
-margin-bottom:30px;
+margin:30px 0;
 
 }
 
@@ -1410,9 +1719,9 @@ border-radius:14px;
 
 border:1px solid rgba(212,175,55,.10);
 
-font-size:14px;
-
 line-height:24px;
+
+font-size:14px;
 
 }
 
@@ -1428,30 +1737,39 @@ margin:30px 0;
 
 .scan-text{
 
-color:#d4af37;
+color:var(--gold);
 
-margin-bottom:25px;
+margin-bottom:20px;
 
 }
 
 #closePopup{
 
-padding:16px 45px;
+padding:16px 48px;
 
 border:none;
 
 border-radius:999px;
 
-background:linear-gradient(
-135deg,
-#f4d77a,
-#d4af37,
-#a97918
-);
+cursor:pointer;
 
 font-weight:700;
 
-cursor:pointer;
+font-size:16px;
+
+background:linear-gradient(
+
+135deg,
+
+var(--gold2),
+
+var(--gold),
+
+#9e7316
+
+);
+
+color:#111;
 
 transition:.35s;
 
@@ -1461,65 +1779,60 @@ transition:.35s;
 
 transform:translateY(-4px);
 
-}
+box-shadow:
 
-
-
-/* =====================================================
-   LOADING BUTTON
-===================================================== */
-
-.reserve-btn.loading{
-
-pointer-events:none;
-
-opacity:.85;
+0 20px 50px rgba(212,175,55,.28);
 
 }
 
-.reserve-btn.loading::after{
 
-content:"";
 
-display:inline-block;
+/*=====================================================
+POPUP ANIMATION
+=====================================================*/
 
-margin-left:12px;
+@keyframes popupFade{
 
-width:18px;
+from{
 
-height:18px;
-
-border-radius:50%;
-
-border:3px solid rgba(0,0,0,.25);
-
-border-top-color:#111;
-
-animation:spin .8s linear infinite;
-
-vertical-align:middle;
+opacity:0;
 
 }
-
-@keyframes spin{
 
 to{
 
-transform:rotate(360deg);
+opacity:1;
 
 }
 
 }
 
+@keyframes popupScale{
 
+0%{
 
-/* =====================================================
-   FOOTER
-===================================================== */
+opacity:0;
+
+transform:scale(.85);
+
+}
+
+100%{
+
+opacity:1;
+
+transform:scale(1);
+
+}
+
+}
+/*=====================================================
+FOOTER
+=====================================================*/
 
 footer{
 
-padding:90px 20px;
+padding:100px 20px;
 
 margin-top:120px;
 
@@ -1527,23 +1840,39 @@ text-align:center;
 
 border-top:1px solid rgba(212,175,55,.10);
 
+background:
+linear-gradient(
+180deg,
+transparent,
+rgba(212,175,55,.03)
+);
+
 }
 
 .footer-logo{
 
 width:90px;
 
-margin-bottom:20px;
+margin-bottom:25px;
+
+filter:drop-shadow(
+0 0 20px rgba(212,175,55,.35)
+);
 
 }
 
 .footer-line{
 
-width:120px;
+width:140px;
 
-height:1px;
+height:2px;
 
-background:#d4af37;
+background:linear-gradient(
+90deg,
+transparent,
+var(--gold),
+transparent
+);
 
 margin:25px auto;
 
@@ -1553,11 +1882,13 @@ footer h3{
 
 font-family:'Cormorant Garamond',serif;
 
-font-size:36px;
+font-size:38px;
 
-color:#d4af37;
+letter-spacing:3px;
 
-margin-bottom:12px;
+color:var(--gold);
+
+margin-bottom:15px;
 
 }
 
@@ -1571,23 +1902,61 @@ font-size:15px;
 
 }
 
-/* =====================================================
-   RESPONSIVE
-===================================================== */
+
+
+/*=====================================================
+LOADING BUTTON
+=====================================================*/
+
+.reserve-btn.loading{
+
+pointer-events:none;
+
+opacity:.8;
+
+}
+
+.reserve-btn.loading::after{
+
+content:"";
+
+display:inline-block;
+
+width:18px;
+
+height:18px;
+
+margin-left:12px;
+
+border-radius:50%;
+
+border:3px solid rgba(0,0,0,.2);
+
+border-top-color:#111;
+
+animation:spin .8s linear infinite;
+
+vertical-align:middle;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+
+/*=====================================================
+RESPONSIVE
+=====================================================*/
 
 @media(max-width:992px){
-
-.navbar{
-
-padding:20px 6%;
-
-}
-
-.navbar nav{
-
-gap:20px;
-
-}
 
 .hero-content h1{
 
@@ -1601,7 +1970,7 @@ font-size:28px;
 
 }
 
-.about-container,
+.about,
 .meeting-container{
 
 grid-template-columns:1fr;
@@ -1638,17 +2007,19 @@ grid-column:auto;
 
 flex-direction:column;
 
-gap:18px;
-
 padding:20px;
+
+gap:20px;
 
 }
 
-.navbar nav{
+.navbar nav ul{
 
 flex-wrap:wrap;
 
 justify-content:center;
+
+gap:18px;
 
 }
 
@@ -1660,7 +2031,7 @@ padding:120px 20px 80px;
 
 .hero-content h1{
 
-font-size:56px;
+font-size:54px;
 
 letter-spacing:5px;
 
@@ -1668,21 +2039,13 @@ letter-spacing:5px;
 
 .hero-content h2{
 
-font-size:24px;
-
-}
-
-.hero-content p{
-
-font-size:16px;
+font-size:22px;
 
 }
 
 .hero-buttons{
 
 flex-direction:column;
-
-gap:18px;
 
 }
 
@@ -1697,9 +2060,17 @@ min-width:unset;
 
 }
 
-.section-title h2{
+.timer{
 
-font-size:44px;
+gap:15px;
+
+}
+
+.timer div{
+
+width:120px;
+
+padding:20px;
 
 }
 
@@ -1729,18 +2100,6 @@ grid-template-columns:1fr;
 
 @media(max-width:480px){
 
-.logo{
-
-width:44px;
-
-}
-
-.logo-area h2{
-
-font-size:26px;
-
-}
-
 .hero-content h1{
 
 font-size:42px;
@@ -1763,30 +2122,29 @@ letter-spacing:4px;
 
 .section-title h2{
 
-font-size:36px;
+font-size:40px;
 
 }
 
-.about-text h3,
-.meeting-content h3{
+.logo{
 
-font-size:34px;
-
-}
-
-.about-features{
-
-grid-template-columns:1fr;
+width:48px;
 
 }
 
+.logo-area h1{
+
+font-size:28px;
+
+}
+
 }
 
 
 
-/* =====================================================
-   SCROLLBAR
-===================================================== */
+/*=====================================================
+SCROLLBAR
+=====================================================*/
 
 ::-webkit-scrollbar{
 
@@ -1802,7 +2160,7 @@ background:#080808;
 
 ::-webkit-scrollbar-thumb{
 
-background:#d4af37;
+background:var(--gold);
 
 border-radius:999px;
 
@@ -1810,13 +2168,13 @@ border-radius:999px;
 
 
 
-/* =====================================================
-   TEXT SELECTION
-===================================================== */
+/*=====================================================
+SELECTION
+=====================================================*/
 
 ::selection{
 
-background:#d4af37;
+background:var(--gold);
 
 color:#111;
 
@@ -1824,66 +2182,9 @@ color:#111;
 
 
 
-/* =====================================================
-   GOLD BUTTON SHINE
-===================================================== */
-
-.hero-btn,
-.reserve-btn{
-
-position:relative;
-
-overflow:hidden;
-
-}
-
-.hero-btn::before,
-.reserve-btn::before{
-
-content:"";
-
-position:absolute;
-
-top:-120%;
-
-left:-40%;
-
-width:45%;
-
-height:260%;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,.35),
-
-transparent
-
-);
-
-transform:rotate(22deg);
-
-transition:1.2s;
-
-}
-
-.hero-btn:hover::before,
-.reserve-btn:hover::before{
-
-left:170%;
-
-}
-
-
-
-/* =====================================================
-   IMAGE SETTINGS
-===================================================== */
+/*=====================================================
+SMOOTH
+=====================================================*/
 
 img{
 
@@ -1893,17 +2194,8 @@ user-select:none;
 
 }
 
-
-
-/* =====================================================
-   SMOOTH TRANSITION
-===================================================== */
-
 a,
-button,
-input,
-select,
-textarea{
+button{
 
 transition:.35s;
 
@@ -1911,12 +2203,91 @@ transition:.35s;
 
 
 
-/* =====================================================
-   BODY ANIMATION
-===================================================== */
+/*=====================================================
+BODY
+=====================================================*/
 
 body{
 
 animation:fadeUp .8s ease;
+
+}
+
+
+
+/*=====================================================
+GOLD PARTICLES
+=====================================================*/
+
+#particles::before,
+#particles::after{
+
+content:"";
+
+position:absolute;
+
+width:6px;
+
+height:6px;
+
+border-radius:50%;
+
+background:var(--gold);
+
+box-shadow:
+
+0 0 15px var(--gold);
+
+animation:particle 12s linear infinite;
+
+opacity:.6;
+
+}
+
+#particles::after{
+
+left:70%;
+
+animation-delay:6s;
+
+}
+
+@keyframes particle{
+
+0%{
+
+transform:
+
+translateY(110vh)
+
+translateX(0);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:.8;
+
+}
+
+80%{
+
+opacity:.6;
+
+}
+
+100%{
+
+transform:
+
+translateY(-20vh)
+
+translateX(80px);
+
+opacity:0;
+
+}
 
 }
