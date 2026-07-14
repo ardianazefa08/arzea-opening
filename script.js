@@ -80,14 +80,12 @@ emailjs.send(
         "service_yp1tkqq",
         "template_ru3pmnr",
         {
-        name: fullName,
-        reservationID: reservationID,
-        email: email,
-        phone: phone,
-        guests: guests
+            name: fullName,
+            reservationID: reservationID,
+            email: email,
+            phone: phone,
+            guests: guests
         }
-)
-}
     );
 
 })
@@ -105,7 +103,7 @@ emailjs.send(
         })
     );
 
-    window.location.href = "ticket.html";
+    showSuccess(fullName, guests, email);
 
 })
 
@@ -116,11 +114,8 @@ emailjs.send(
     alert("❌ Failed to send reservation.");
 
 });
-
-};
-
-
-function showSuccess(name, guests, email){
+});
+}
 
     const reservationID =
 "ARZEA-GO-260919-" +
@@ -213,7 +208,7 @@ Dress Code : Elegant Black`,
 
         };
 
-    }
+    
 
     async function downloadTicket(){
 
