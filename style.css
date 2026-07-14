@@ -1884,22 +1884,18 @@ box-shadow:
 SUCCESS POPUP
 ======================================================*/
 
-.reservation-popup{
+.success-popup{
 
 position:fixed;
-
 inset:0;
 
-display:flex;
+display:none;
 
 justify-content:center;
-
 align-items:center;
 
 background:rgba(0,0,0,.82);
-
 backdrop-filter:blur(12px);
-
 -webkit-backdrop-filter:blur(12px);
 
 padding:20px;
@@ -1908,7 +1904,7 @@ z-index:999999;
 
 }
 
-.popup-card{
+.success-card{
 
 width:100%;
 
@@ -1994,7 +1990,7 @@ margin:30px 0;
 
 }
 
-#reservationQR{
+#popupQRCode{
 
 background:white;
 

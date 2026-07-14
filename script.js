@@ -350,7 +350,7 @@ if (reservationForm) {
 
             id: generateReservationID(),
 
-            name: document.getElementById("name").value,
+            name: document.getElementById("fullName").value,
 
             email: document.getElementById("email").value,
 
@@ -358,7 +358,7 @@ if (reservationForm) {
 
             guests: document.getElementById("guests").value,
 
-            request: document.getElementById("request").value,
+            request: document.getElementById("message").value,
 
             date: "19 September 2026",
 
