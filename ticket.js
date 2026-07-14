@@ -127,71 +127,40 @@ correctLevel:QRCode.CorrectLevel.H
 DOWNLOAD PDF
 ========================================*/
 
-document
+document.getElementById("downloadTicket").onclick = async () => {
 
-.getElementById("downloadTicket")
+const card = document.getElementById("ticketCard");
 
-.addEventListener("click",async()=>{
-
-const card=document.getElementById("ticketCard");
-
-const canvas=await html2canvas(card,{
-
-scale:3,
-
-useCORS:true,
-
-backgroundColor:null
-
+const canvas = await html2canvas(card,{
+    scale:2,
+    useCORS:true,
+    allowTaint:true
 });
 
-const img=canvas.toDataURL("image/png");
+const img = canvas.toDataURL("image/png");
 
-const {jsPDF}=window.jspdf;
+const { jsPDF } = window.jspdf;
 
-const pdf=new jsPDF({
+const pdf = new jsPDF("p","mm","a4");
 
-orientation:"portrait",
+const pageWidth = pdf.internal.pageSize.getWidth();
 
-unit:"mm",
+const imgWidth = pageWidth - 20;
 
-format:"a4"
-
-});
-
-const pdfWidth=190;
-
-const pdfHeight=
-
-canvas.height*
-
-pdfWidth/
-
-canvas.width;
+const imgHeight = canvas.height * imgWidth / canvas.width;
 
 pdf.addImage(
-
-img,
-
-"PNG",
-
-10,
-
-10,
-
-pdfWidth,
-
-pdfHeight
-
+    img,
+    "PNG",
+    10,
+    10,
+    imgWidth,
+    imgHeight
 );
 
-pdf.save(
+pdf.save("ARZEA-VIP-TICKET.pdf");
 
-`${reservation.id}.pdf`
-
-);
-
-});
+};
 
 
 
@@ -199,33 +168,25 @@ pdf.save(
 DOWNLOAD PNG
 ========================================*/
 
-document
-
-.getElementById("downloadPNG")
-
-.addEventListener("click",async()=>{
+document.getElementById("downloadPNG").onclick = async ()=>{
 
 const card=document.getElementById("ticketCard");
 
 const canvas=await html2canvas(card,{
-
-scale:3,
-
-useCORS:true,
-
-backgroundColor:null
-
+    scale:2,
+    useCORS:true,
+    allowTaint:true
 });
 
-const link=document.createElement("a");
+const a=document.createElement("a");
 
-link.download=`${reservation.id}.png`;
+a.href=canvas.toDataURL("image/png");
 
-link.href=canvas.toDataURL("image/png");
+a.download="ARZEA-VIP-TICKET.png";
 
-link.click();
+a.click();
 
-});
+};
 
 
 
