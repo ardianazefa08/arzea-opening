@@ -561,15 +561,14 @@ window.addEventListener("click",(e)=>{
 RESERVATION FORM
 ==================================================*/
 
-if(reservationForm){
-
 reservationForm.addEventListener(
-
 "submit",
 
 function(e){
 
-e.preventDefault();
+    e.preventDefault();
+
+    alert("SUBMIT MASUK");
 
 const data={
 
@@ -608,7 +607,7 @@ console.log(data);
 
 );
 
-}
+
 
 /*==================================================
 AUTO LOAD RESERVATION
