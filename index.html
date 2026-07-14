@@ -4,31 +4,82 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>ARZEA Lounge & Garden | Grand Opening</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<meta name="description"
-content="Experience the exclusive Grand Opening of ARZEA Lounge & Garden on 19 September 2026.">
+<title>
+ARZEA Lounge & Garden
+</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta
+name="description"
+content="Grand Opening ARZEA Lounge & Garden">
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta
+name="theme-color"
+content="#0b0b0b">
 
-<link rel="stylesheet" href="style.css">
+<link rel="preconnect"
+href="https://fonts.googleapis.com">
 
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+<link rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+rel="stylesheet">
+
+<link rel="stylesheet"
+href="style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 
 </head>
 
 <body>
 
-<!-- =========================
+<!-- ==========================
+LOADER
+========================== -->
+
+<div id="loader">
+
+<div class="loader-content">
+
+<img
+src="images/logo.png"
+class="loader-logo"
+alt="ARZEA Logo">
+
+<h1>
+
+ARZEA
+
+</h1>
+
+<p>
+
+LOUNGE & GARDEN
+
+</p>
+
+<div class="loader-progress">
+
+<div class="loader-bar"></div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ==========================
 BACKGROUND
-========================= -->
+========================== -->
 
 <div class="background"></div>
 
@@ -36,27 +87,80 @@ BACKGROUND
 
 <div id="particles"></div>
 
-<!-- =========================
-LOADER
-========================= -->
 
-<div id="loader">
 
-<div class="loader-logo">
+<!-- ==========================
+MUSIC POPUP
+========================== -->
 
-<img src="images/logo.png">
+<div id="musicPopup" class="music-popup">
 
-<h1>ARZEA</h1>
+<div class="music-card">
 
-<p>Lounge & Garden</p>
+<img
+src="images/logo.png"
+class="music-logo"
+alt="Logo">
+
+<h2>
+
+Welcome to ARZEA
+
+</h2>
+
+<p>
+
+Experience our luxury ambience with background music.
+
+</p>
+
+<div class="music-actions">
+
+<button id="playMusic">
+
+🎵 Enter With Music
+
+</button>
+
+<button id="skipMusic">
+
+Continue Silent
+
+</button>
 
 </div>
 
 </div>
 
-<!-- =========================
-NAVBAR
-========================= -->
+</div>
+
+
+
+<audio
+id="bgMusic"
+loop>
+
+<source
+src="audio/lounge.mp3"
+type="audio/mpeg">
+
+</audio>
+
+
+
+<button
+id="musicToggle"
+aria-label="Toggle Music">
+
+🔊
+
+</button>
+
+
+
+<!-- ==========================
+HEADER
+========================== -->
 
 <header class="navbar">
 
@@ -64,15 +168,30 @@ NAVBAR
 
 <img
 src="images/logo.png"
-class="logo">
+class="logo"
+alt="Logo">
 
-<h1>ARZEA</h1>
+<h1>
+
+ARZEA
+
+</h1>
 
 </div>
 
 <nav>
 
 <ul>
+
+<li>
+
+<a href="#home">
+
+Home
+
+</a>
+
+</li>
 
 <li>
 
@@ -120,15 +239,19 @@ Reservation
 
 </header>
 
-<!-- =========================
-HERO
-========================= -->
 
-<section class="hero">
+
+<!-- ==========================
+HERO
+========================== -->
+
+<section
+id="home"
+class="hero">
 
 <div class="hero-overlay"></div>
 
-<div class="hero-content" data-aos="fade-up">
+<div class="hero-content">
 
 <h3>
 
@@ -150,7 +273,9 @@ Lounge & Garden
 
 <p>
 
-An Extraordinary Luxury Dining Experience
+Luxury Dining Experience
+
+Crafted for unforgettable moments.
 
 </p>
 
@@ -163,12 +288,10 @@ An Extraordinary Luxury Dining Experience
 </div>
 
 <a
-
 href="#reservation"
-
 class="hero-btn">
 
-Reserve Your Seat
+Reserve Now
 
 </a>
 
@@ -178,25 +301,31 @@ Reserve Your Seat
 
 </section>
 
-<!-- ==========================================
+<!-- ==========================
 COUNTDOWN
-========================================== -->
+========================== -->
 
 <section class="countdown-section">
 
-<div class="section-title" data-aos="fade-up">
+<div class="section-title">
 
-<h2>Countdown to Grand Opening</h2>
+<h2>
+
+Grand Opening Countdown
+
+</h2>
 
 <p>
-An unforgettable evening begins in
+
+Join us on our special opening night.
+
 </p>
 
 </div>
 
-<div class="timer" id="timer">
+<div class="timer">
 
-<div data-aos="zoom-in" data-aos-delay="100">
+<div>
 
 <span id="days">00</span>
 
@@ -204,7 +333,7 @@ An unforgettable evening begins in
 
 </div>
 
-<div data-aos="zoom-in" data-aos-delay="200">
+<div>
 
 <span id="hours">00</span>
 
@@ -212,7 +341,7 @@ An unforgettable evening begins in
 
 </div>
 
-<div data-aos="zoom-in" data-aos-delay="300">
+<div>
 
 <span id="minutes">00</span>
 
@@ -220,7 +349,7 @@ An unforgettable evening begins in
 
 </div>
 
-<div data-aos="zoom-in" data-aos-delay="400">
+<div>
 
 <span id="seconds">00</span>
 
@@ -234,11 +363,13 @@ An unforgettable evening begins in
 
 
 
-<!-- ==========================================
+<!-- ==========================
 ABOUT
-========================================== -->
+========================== -->
 
-<section id="about" class="about">
+<section
+id="about"
+class="about">
 
 <div
 class="about-image"
@@ -256,19 +387,19 @@ data-aos="fade-left">
 
 <h2>
 
-Luxury Dining Redefined
+Luxury Beyond Dining
 
 </h2>
 
 <p>
 
-ARZEA Lounge & Garden is designed as an elegant destination where architecture, culinary excellence, and premium hospitality blend into one unforgettable experience.
+ARZEA Lounge & Garden menghadirkan pengalaman bersantap mewah dengan desain interior elegan, taman yang asri, dan pelayanan premium untuk setiap tamu.
 
 </p>
 
 <p>
 
-Every detail has been carefully curated—from signature cuisine and handcrafted beverages to sophisticated interiors and tranquil outdoor gardens.
+Setiap sudut dirancang untuk memberikan kenyamanan, kehangatan, dan pengalaman yang berkesan.
 
 </p>
 
@@ -276,11 +407,21 @@ Every detail has been carefully curated—from signature cuisine and handcrafted
 
 <div class="feature-card">
 
-<h3>Luxury</h3>
+<div class="feature-icon">
+
+🍽️
+
+</div>
+
+<h3>
+
+Signature Cuisine
+
+</h3>
 
 <p>
 
-Premium ambience with elegant black & gold concept.
+Premium dishes crafted by our Executive Chef.
 
 </p>
 
@@ -288,11 +429,21 @@ Premium ambience with elegant black & gold concept.
 
 <div class="feature-card">
 
-<h3>Signature Menu</h3>
+<div class="feature-icon">
+
+🌿
+
+</div>
+
+<h3>
+
+Garden Ambience
+
+</h3>
 
 <p>
 
-Exclusive dishes crafted by experienced chefs.
+Beautiful outdoor atmosphere for every occasion.
 
 </p>
 
@@ -300,11 +451,21 @@ Exclusive dishes crafted by experienced chefs.
 
 <div class="feature-card">
 
-<h3>Private Lounge</h3>
+<div class="feature-icon">
+
+🥂
+
+</div>
+
+<h3>
+
+VIP Service
+
+</h3>
 
 <p>
 
-VIP meeting room for private gatherings and business events.
+Luxury hospitality with personalized service.
 
 </p>
 
@@ -312,11 +473,21 @@ VIP meeting room for private gatherings and business events.
 
 <div class="feature-card">
 
-<h3>Garden View</h3>
+<div class="feature-icon">
+
+✨
+
+</div>
+
+<h3>
+
+Elegant Interior
+
+</h3>
 
 <p>
 
-Relaxing outdoor atmosphere surrounded by greenery.
+Black & gold concept with timeless elegance.
 
 </p>
 
@@ -330,25 +501,339 @@ Relaxing outdoor atmosphere surrounded by greenery.
 
 
 
-<!-- ==========================================
-GUEST STAR
-========================================== -->
+<!-- ==========================
+PRIVATE ROOM
+========================== -->
 
-<section class="guest-star">
+<section class="meeting-room">
+
+<div class="meeting-container">
 
 <div
-class="section-title"
-data-aos="fade-up">
+class="meeting-content"
+data-aos="fade-right">
 
 <h2>
 
-Special Guest Stars
+Private Meeting Room
 
 </h2>
 
 <p>
 
-Celebrate our Grand Opening with Indonesia's beloved artists.
+Exclusive meeting room equipped with premium facilities for business meetings, private events, and executive gatherings.
+
+</p>
+
+<ul>
+
+<li>✔ Smart Presentation Display</li>
+
+<li>✔ High-Speed Wi-Fi</li>
+
+<li>✔ Complimentary Refreshments</li>
+
+<li>✔ Private Butler Service</li>
+
+</ul>
+
+</div>
+
+<div
+class="meeting-image"
+data-aos="fade-left">
+
+<img
+src="images/meeting.jpg"
+alt="Meeting Room">
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ==========================
+GALLERY
+========================== -->
+
+<section
+id="gallery"
+class="gallery">
+
+<div class="section-title">
+
+<h2>
+
+Gallery
+
+</h2>
+
+<p>
+
+Explore the atmosphere of ARZEA Lounge & Garden.
+
+</p>
+
+</div>
+
+<div class="gallery-grid">
+
+<div class="gallery-card" data-aos="zoom-in">
+
+<img
+src="images/outdoor.jpeg"
+alt="Outdoor">
+
+</div>
+
+<div
+class="gallery-card"
+data-aos="zoom-in"
+data-aos-delay="100">
+
+<img
+src="images/indoor.png"
+alt="Indoor">
+
+</div>
+
+<div
+class="gallery-card"
+data-aos="zoom-in"
+data-aos-delay="200">
+
+<img
+src="images/hero.png"
+alt="Restaurant">
+
+</div>
+
+<div
+class="gallery-card"
+data-aos="zoom-in"
+data-aos-delay="300">
+
+<img
+src="images/meeting.jpg"
+alt="Meeting Room">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================
+SIGNATURE MENU
+========================== -->
+
+<section
+id="menu"
+class="menu">
+
+<div class="section-title">
+
+<h2>
+
+Signature Menu
+
+</h2>
+
+<p>
+
+Created with passion by our Executive Chef.
+
+</p>
+
+</div>
+
+<div class="menu-grid">
+
+<div class="menu-card" data-aos="fade-up">
+
+<img src="images/wagyu.jpg" alt="Wagyu">
+
+<h3>
+
+Élysian Wagyu
+
+</h3>
+
+<p>
+
+Premium Japanese Wagyu served with black truffle sauce.
+
+</p>
+
+</div>
+
+<div
+class="menu-card"
+data-aos="fade-up"
+data-aos-delay="100">
+
+<img src="images/pasta.jpg" alt="Pasta">
+
+<h3>
+
+Truffle Velours Pasta
+
+</h3>
+
+<p>
+
+Fresh handmade pasta with creamy truffle sauce.
+
+</p>
+
+</div>
+
+<div
+class="menu-card"
+data-aos="fade-up"
+data-aos-delay="200">
+
+<img src="images/prawn.jpg" alt="Prawn">
+
+<h3>
+
+Golden Noir Prawn
+
+</h3>
+
+<p>
+
+Tiger prawn with signature butter herb sauce.
+
+</p>
+
+</div>
+
+<div
+class="menu-card"
+data-aos="fade-up"
+data-aos-delay="300">
+
+<img src="images/dessert.jpg" alt="Dessert">
+
+<h3>
+
+Fleur de Soleil
+
+</h3>
+
+<p>
+
+Luxury dessert with elegant presentation.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ==========================
+SIGNATURE DRINKS
+========================== -->
+
+<section class="menu drinks">
+
+<div class="section-title">
+
+<h2>
+
+Signature Drinks
+
+</h2>
+
+<p>
+
+Luxury beverages crafted exclusively for ARZEA.
+
+</p>
+
+</div>
+
+<div class="menu-grid">
+
+<div class="menu-card">
+
+<img src="images/matcha.jpg" alt="Matcha">
+
+<h3>
+
+Emerald Velvet Matcha
+
+</h3>
+
+</div>
+
+<div class="menu-card">
+
+<img src="images/mocktail.jpg" alt="Mocktail">
+
+<h3>
+
+Golden Hour Serenade
+
+</h3>
+
+</div>
+
+<div class="menu-card">
+
+<img src="images/blush.jpg" alt="Blush Royale">
+
+<h3>
+
+Blush Royale
+
+</h3>
+
+</div>
+
+<div class="menu-card">
+
+<img src="images/midnight.jpg" alt="Midnight">
+
+<h3>
+
+Midnight Arzea
+
+</h3>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ==========================
+GUEST STAR
+========================== -->
+
+<section class="guest-star">
+
+<div class="section-title">
+
+<h2>
+
+Guest Stars
+
+</h2>
+
+<p>
+
+Special performances on Grand Opening Night.
 
 </p>
 
@@ -356,14 +841,9 @@ Celebrate our Grand Opening with Indonesia's beloved artists.
 
 <div class="guest-grid">
 
-<div
-class="guest-card"
-data-aos="fade-up"
-data-aos-delay="100">
+<div class="guest-card">
 
-<img
-src="images/mahalini.jpg"
-alt="Mahalini">
+<img src="images/mahalini.jpg" alt="Mahalini">
 
 <h3>
 
@@ -379,14 +859,9 @@ Special Performance
 
 </div>
 
-<div
-class="guest-card"
-data-aos="fade-up"
-data-aos-delay="250">
+<div class="guest-card">
 
-<img
-src="images/nagita.jpg"
-alt="Nagita Slavina">
+<img src="images/nagita.jpg" alt="Nagita">
 
 <h3>
 
@@ -402,14 +877,9 @@ Special Guest
 
 </div>
 
-<div
-class="guest-card"
-data-aos="fade-up"
-data-aos-delay="400">
+<div class="guest-card">
 
-<img
-src="images/raim.jpg"
-alt="Raim Laode">
+<img src="images/raim.jpg" alt="Raim">
 
 <h3>
 
@@ -419,7 +889,7 @@ Raim Laode
 
 <p>
 
-Special Performance
+Live Performance
 
 </p>
 
@@ -429,243 +899,89 @@ Special Performance
 
 </section>
 
-<!-- ==========================================
-GALLERY
-========================================== -->
 
-<section id="gallery" class="gallery">
 
-<div class="section-title" data-aos="fade-up">
-
-<h2>Luxury Gallery</h2>
-
-<p>
-Discover every beautiful corner of ARZEA Lounge & Garden.
-</p>
-
-</div>
-
-<div class="gallery-grid">
-
-<div class="gallery-card" data-aos="zoom-in">
-<img src="images/outdoor.jpeg" alt="Outdoor">
-</div>
-
-<div class="gallery-card" data-aos="zoom-in" data-aos-delay="150">
-<img src="images/indoor.png" alt="Indoor">
-</div>
-
-<div class="gallery-card" data-aos="zoom-in" data-aos-delay="300">
-<img src="images/meeting room.png" alt="Meeting Room">
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ==========================================
-SIGNATURE MENU
-========================================== -->
-
-<section id="menu" class="menu">
-
-<div class="section-title" data-aos="fade-up">
-
-<h2>Signature Menu</h2>
-
-<p>
-Crafted using premium ingredients.
-</p>
-
-</div>
-
-<div class="menu-grid">
-
-<div class="menu-card" data-aos="fade-up">
-<img src="images/wagyu.jpg">
-<h3>Élysian Wagyu</h3>
-<p>Japanese A5 Wagyu with black truffle sauce.</p>
-</div>
-
-<div class="menu-card" data-aos="fade-up" data-aos-delay="100">
-<img src="images/pasta.jpg">
-<h3>Truffle Velours Pasta</h3>
-<p>Fresh handmade pasta with parmesan cream.</p>
-</div>
-
-<div class="menu-card" data-aos="fade-up" data-aos-delay="200">
-<img src="images/prawn.jpg">
-<h3>Golden Noir Prawn</h3>
-<p>King prawn with saffron butter.</p>
-</div>
-
-<div class="menu-card" data-aos="fade-up" data-aos-delay="300">
-<img src="images/dessert.jpg">
-<h3>Fleur de Soleil</h3>
-<p>Signature dessert finished with edible gold.</p>
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ==========================================
-SIGNATURE DRINKS
-========================================== -->
-
-<section class="menu drinks">
-
-<div class="section-title" data-aos="fade-up">
-
-<h2>Signature Drinks</h2>
-
-<p>
-Luxury handcrafted beverages.
-</p>
-
-</div>
-
-<div class="menu-grid">
-
-<div class="menu-card">
-<img src="images/drink1.jpg">
-<h3>Emerald Velvet Matcha</h3>
-<p>Premium ceremonial matcha.</p>
-</div>
-
-<div class="menu-card">
-<img src="images/drink2.jpg">
-<h3>Golden Hour Serenade</h3>
-<p>Sparkling citrus with edible gold.</p>
-</div>
-
-<div class="menu-card">
-<img src="images/drink3.jpg">
-<h3>Blush Royale</h3>
-<p>Berry floral signature drink.</p>
-</div>
-
-<div class="menu-card">
-<img src="images/drink4.jpg">
-<h3>Midnight ARZEA</h3>
-<p>Luxury charcoal mocktail.</p>
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ==========================================
-MEETING ROOM
-========================================== -->
-
-<section class="meeting-room">
-
-<div class="meeting-container">
-
-<div class="meeting-image" data-aos="fade-right">
-
-<img src="images/meeting room.png">
-
-</div>
-
-<div class="meeting-content" data-aos="fade-left">
-
-<h2>
-
-Private Meeting Room
-
-</h2>
-
-<p>
-
-Designed for executives, investors, private dining, and exclusive business meetings.
-
-</p>
-
-<ul>
-
-<li>Executive VIP Room</li>
-
-<li>Luxury Interior</li>
-
-<li>Private Butler</li>
-
-<li>High Speed WiFi</li>
-
-<li>Premium Dining Service</li>
-
-</ul>
-
-</div>
-
-</div>
-
-</section>
-
-
-
-<!-- ==========================================
+<!-- ==========================
 RESERVATION
-========================================== -->
+========================== -->
 
-<section id="reservation" class="reservation">
+<section
+id="reservation"
+class="reservation">
 
 <div class="section-title">
 
 <h2>
 
-Reserve Your Table
+Reserve Your Seat
 
 </h2>
 
 <p>
 
-Experience an unforgettable evening.
+Reserve your exclusive invitation now.
 
 </p>
 
 </div>
 
-<form class="reserve-form">
+<form
+id="reservationForm"
+class="reserve-form">
 
 <div class="form-group">
-<input type="text" placeholder="Full Name" required>
+
+<input
+id="fullName"
+type="text"
+placeholder="Full Name"
+required>
+
 </div>
 
 <div class="form-group">
-<input type="tel" placeholder="Phone Number" required>
+
+<input
+id="phone"
+type="tel"
+placeholder="Phone Number"
+required>
+
 </div>
 
 <div class="form-group">
-<input type="email" placeholder="Email Address" required>
+
+<input
+id="email"
+type="email"
+placeholder="Email Address"
+required>
+
 </div>
 
 <div class="form-group">
 
-<select required>
+<select
+id="guests"
+required>
 
-<option disabled selected>
+<option value="">
 
 Number of Guests
 
 </option>
 
+<option>1 Guest</option>
+
 <option>2 Guests</option>
+
+<option>3 Guests</option>
 
 <option>4 Guests</option>
 
+<option>5 Guests</option>
+
 <option>6 Guests</option>
-
-<option>8 Guests</option>
-
-<option>VIP Room</option>
 
 </select>
 
@@ -673,11 +989,14 @@ Number of Guests
 
 <div class="form-group full">
 
-<textarea placeholder="Special Request"></textarea>
+<textarea
+id="message"
+placeholder="Special Request (Optional)"></textarea>
 
 </div>
 
 <button
+id="reserveButton"
 type="submit"
 class="reserve-btn">
 
@@ -691,25 +1010,26 @@ Reserve Now
 
 
 
-<!-- ==========================================
+<!-- ==========================
 FOOTER
-========================================== -->
+========================== -->
 
 <footer>
 
 <img
 src="images/logo.png"
-class="footer-logo">
+class="footer-logo"
+alt="Logo">
 
 <h3>
 
-ARZEA Lounge & Garden
+ARZEA
 
 </h3>
 
 <p>
 
-Luxury • Lounge • Garden
+Luxury Lounge & Garden Experience
 
 </p>
 
@@ -717,15 +1037,8 @@ Luxury • Lounge • Garden
 
 <p>
 
-Grand Opening
-
-19 September 2026
-
-</p>
-
-<p>
-
-© 2026 ARZEA Lounge & Garden
+© 2026 ARZEA Lounge & Garden.
+All Rights Reserved.
 
 </p>
 
@@ -733,45 +1046,14 @@ Grand Opening
 
 
 
-<!-- ==========================================
-LIBRARIES
-========================================== -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-<script>
-
-emailjs.init({
-
-publicKey:"-EkYc26ebwGzYOuJW"
-
-});
-
-</script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-
-<script>
-
-AOS.init({
-
-duration:1000,
-
-once:true,
-
-offset:120
-
-});
-
-</script>
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
