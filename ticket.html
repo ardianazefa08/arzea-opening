@@ -2,13 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARZEA VIP Invitation</title>
 
-    <link rel="stylesheet" href="ticket.css">
+<meta charset="UTF-8">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<meta
+name="viewport"
+content="width=device-width,initial-scale=1.0">
+
+<title>
+
+ARZEA VIP Ticket
+
+</title>
+
+<link
+rel="stylesheet"
+href="ticket.css">
+
+<link
+rel="preconnect"
+href="https://fonts.googleapis.com">
+
+<link
+rel="preconnect"
+href="https://fonts.gstatic.com"
+crossorigin>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 </head>
 
 <body>
@@ -17,144 +42,293 @@
 
 <div class="ticket">
 
-    <!-- Watermark -->
-    <div class="watermark">
-        <img src="images/logo.png" alt="ARZEA">
-    </div>
+<div class="watermark">
 
-    <!-- Header -->
-    <div class="header">
-
-        <img class="logo" src="images/logo.png" alt="ARZEA">
-
-        <h1>ARZEA</h1>
-
-        <h2>LOUNGE & GARDEN</h2>
-
-        <div class="vip-badge">
-            VIP INVITATION
-        </div>
-
-    </div>
-
-    <!-- Welcome -->
-    <div class="welcome">
-
-        <p class="welcome-text">
-            Welcome,
-        </p>
-
-        <h3 id="guestName">
-            Guest Name
-        </h3>
-
-    </div>
-
-    <!-- Information -->
-    <div class="info">
-
-        <div class="row">
-    <span>Reservation ID</span>
-    <b id="reservationID"></b>
-</div>
-
-        <div class="row">
-            <span>Email</span>
-            <b id="guestEmail"></b>
-        </div>
-
-        <div class="row">
-            <span>Guests</span>
-            <b id="guestCount"></b>
-        </div>
-
-        <div class="row">
-            <span>Date</span>
-            <b>19 September 2026</b>
-        </div>
-
-        <div class="row">
-            <span>Time</span>
-            <b>18.00 WIB</b>
-        </div>
-
-        <div class="row">
-            <span>Dress Code</span>
-            <b>Elegant Black</b>
-        </div>
-
-    </div>
-
-    <!-- QR -->
-    <div class="qr-area">
-
-        <div id="qrcode"></div>
-
-        <p>
-            Present this QR Code upon arrival
-        </p>
-
-    </div>
-
-    <!-- Countdown -->
-    <div class="countdown-box">
-
-        <h4>Grand Opening Begins In</h4>
-
-        <div class="countdown">
-
-            <div>
-                <span id="days">00</span>
-                <small>Days</small>
-            </div>
-
-            <div>
-                <span id="hours">00</span>
-                <small>Hours</small>
-            </div>
-
-            <div>
-                <span id="minutes">00</span>
-                <small>Minutes</small>
-            </div>
-
-            <div>
-                <span id="seconds">00</span>
-                <small>Seconds</small>
-            </div>
-
-        </div>
-
-    </div>
-
-    <!-- Buttons -->
-    <div class="buttons">
-
-        <button onclick="window.print()">
-            Save as PDF
-        </button>
-
-        <a
-            class="calendar-btn"
-            target="_blank"
-            href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ARZEA+Grand+Opening&dates=20260919T110000Z/20260919T140000Z">
-
-            Add to Calendar
-
-        </a>
-
-    </div>
-
-    <!-- Footer -->
-    <div class="footer">
-
-        This invitation is personal and non-transferable.
-
-    </div>
+<img
+src="images/logo.png">
 
 </div>
+
+
+
+<div class="header">
+
+<img
+src="images/logo.png"
+class="logo">
+
+<h1>
+
+ARZEA
+
+</h1>
+
+<h2>
+
+LOUNGE & GARDEN
+
+</h2>
+
+<div class="vip">
+
+VIP INVITATION
+
+</div>
+
+</div>
+
+
+
+<div class="guest">
+
+<h3 id="guestName">
+
+Guest Name
+
+</h3>
+
+<p>
+
+We look forward to welcoming you.
+
+</p>
+
+</div>
+
+
+
+<div class="details">
+
+<div class="row">
+
+<span>
+
+Reservation ID
+
+</span>
+
+<b id="reservationID">
+
+ARZEA-0000
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>
+
+Email
+
+</span>
+
+<b id="guestEmail">
+
+-
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>
+
+Guests
+
+</span>
+
+<b id="guestGuests">
+
+-
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>
+
+Date
+
+</span>
+
+<b>
+
+19 September 2026
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>
+
+Time
+
+</span>
+
+<b>
+
+18.00 WIB
+
+</b>
+
+</div>
+
+<div class="row">
+
+<span>
+
+Dress Code
+
+</span>
+
+<b>
+
+Elegant Black
+
+</b>
+
+</div>
+
+</div>
+<!-- ===========================
+QR CODE
+=========================== -->
+
+<div class="qr-section">
+
+<div id="qrcode"></div>
+
+<p>
+
+Present this QR Code upon arrival
+
+</p>
+
+</div>
+
+
+
+<!-- ===========================
+COUNTDOWN
+=========================== -->
+
+<div class="countdown-box">
+
+<h3>
+
+Grand Opening Begins In
+
+</h3>
+
+<div class="countdown">
+
+<div>
+
+<span id="days">
+
+00
+
+</span>
+
+<small>Days</small>
+
+</div>
+
+<div>
+
+<span id="hours">
+
+00
+
+</span>
+
+<small>Hours</small>
+
+</div>
+
+<div>
+
+<span id="minutes">
+
+00
+
+</span>
+
+<small>Minutes</small>
+
+</div>
+
+<div>
+
+<span id="seconds">
+
+00
+
+</span>
+
+<small>Seconds</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<!-- ===========================
+BUTTONS
+=========================== -->
+
+<div class="ticket-buttons">
+
+<button
+onclick="window.print()">
+
+Save as PDF
+
+</button>
+
+<a
+
+class="calendar-btn"
+
+target="_blank"
+
+href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=ARZEA+Grand+Opening&dates=20260919T110000Z/20260919T140000Z">
+
+Add To Calendar
+
+</a>
+
+</div>
+
+
+
+<!-- ===========================
+FOOTER
+=========================== -->
+
+<div class="footer">
+
+This invitation is personal,
+exclusive,
+and non-transferable.
+
+</div>
+
+</div>
+
+
 
 <script src="ticket.js"></script>
 
 </body>
+
 </html>

@@ -1,22 +1,29 @@
-// ======================================================
-// ARZEA Lounge & Garden
-// script.js
+// ==========================================
+// ARZEA LOUNGE & GARDEN
+// SCRIPT.JS
 // PART 1
-// ======================================================
+// ==========================================
 
-// ===========================
-// Countdown
-// ===========================
+// ==========================
+// EMAILJS
+// ==========================
+
+emailjs.init({
+    publicKey: "-EkYc26ebwGzYOuJW"
+});
+
+// ==========================
+// COUNTDOWN
+// ==========================
 
 const targetDate = new Date("September 19, 2026 18:00:00").getTime();
 
-const days = document.getElementById("days");
-const hours = document.getElementById("hours");
-const minutes = document.getElementById("minutes");
-const seconds = document.getElementById("seconds");
-const timer = document.getElementById("timer");
+const dayEl = document.getElementById("days");
+const hourEl = document.getElementById("hours");
+const minuteEl = document.getElementById("minutes");
+const secondEl = document.getElementById("seconds");
 
-if (days && hours && minutes && seconds) {
+if (dayEl && hourEl && minuteEl && secondEl) {
 
     setInterval(() => {
 
@@ -26,37 +33,29 @@ if (days && hours && minutes && seconds) {
 
         if (distance <= 0) {
 
-            if (timer) {
-
-                timer.innerHTML =
-                "<h2>Grand Opening Has Started</h2>";
-
-            }
+            dayEl.textContent = "00";
+            hourEl.textContent = "00";
+            minuteEl.textContent = "00";
+            secondEl.textContent = "00";
 
             return;
 
         }
 
-        days.textContent =
+        dayEl.textContent =
         Math.floor(distance / (1000 * 60 * 60 * 24));
 
-        hours.textContent =
-        Math.floor(
-            (distance % (1000 * 60 * 60 * 24))
-            / (1000 * 60 * 60)
-        );
+        hourEl.textContent =
+        Math.floor((distance % (1000 * 60 * 60 * 24)) /
+        (1000 * 60 * 60));
 
-        minutes.textContent =
-        Math.floor(
-            (distance % (1000 * 60 * 60))
-            / (1000 * 60)
-        );
+        minuteEl.textContent =
+        Math.floor((distance % (1000 * 60 * 60)) /
+        (1000 * 60));
 
-        seconds.textContent =
-        Math.floor(
-            (distance % (1000 * 60))
-            / 1000
-        );
+        secondEl.textContent =
+        Math.floor((distance % (1000 * 60)) /
+        1000);
 
     },1000);
 
@@ -64,41 +63,31 @@ if (days && hours && minutes && seconds) {
 
 
 
-// ===========================
-// Reservation Form
-// ===========================
+// ==========================
+// RESERVATION FORM
+// ==========================
 
-const form =
-document.querySelector(".reserve-form");
+const form = document.querySelector(".reserve-form");
 
 if(form){
 
-form.addEventListener(
-"submit",
-
-function(e){
+form.addEventListener("submit",function(e){
 
 e.preventDefault();
 
 const fullName =
-form.querySelector(
-'input[placeholder="Full Name"]'
-).value.trim();
+form.querySelector('input[placeholder="Full Name"]').value.trim();
 
 const phone =
-form.querySelector(
-'input[placeholder="Phone Number"]'
-).value.trim();
+form.querySelector('input[placeholder="Phone Number"]').value.trim();
 
 const email =
-form.querySelector(
-'input[placeholder="Email Address"]'
-).value.trim();
+form.querySelector('input[placeholder="Email Address"]').value.trim();
 
 const guests =
 form.querySelector("select").value;
 
-const request =
+const message =
 form.querySelector("textarea").value.trim();
 
 if(
@@ -107,78 +96,64 @@ if(
 !email
 ){
 
-alert(
-"Please complete all required fields."
-);
+alert("Please complete all required fields.");
 
 return;
 
 }
+
+const button =
+form.querySelector(".reserve-btn");
+
+button.disabled = true;
+
+button.classList.add("loading");
+
+button.innerHTML = "Sending...";
 
 const reservationID =
 "ARZEA-" +
 new Date().getFullYear() +
 "-" +
 Math.floor(
-Math.random()*9000+1000
+1000 +
+Math.random()*9000
 );
-
-const reservationData={
-
-id:reservationID,
-
-name:fullName,
-
-phone:phone,
-
-email:email,
-
-guests:guests,
-
-request:request
-
-};
-
-localStorage.setItem(
-"arzeaReservation",
-JSON.stringify(
-reservationData
-)
-);
-
-// ===========================
-// Send Email
-// ===========================
+// ==========================
+// SEND EMAIL
+// ==========================
 
 emailjs.send(
     "service_yp1tkqq",
-    "template_zp0batn",
+    "template_ru3pmnr",
     {
         name: fullName,
-        phone: phone,
+        reservationID: reservationID,
         email: email,
+        phone: phone,
         guests: guests,
-        message: request
+        message: message
     }
 )
 
-.then(() => {
+.then(function(){
 
-    return emailjs.send(
-        "service_yp1tkqq",
-        "template_ru3pmnr",
-        {
+    localStorage.setItem(
+        "arzeaReservation",
+        JSON.stringify({
+
+            id: reservationID,
             name: fullName,
-            reservationID: reservationID,
-            email: email,
             phone: phone,
+            email: email,
             guests: guests
-        }
+
+        })
     );
 
-})
-
-.then(() => {
+    button.classList.remove("loading");
+    button.disabled = false;
+    button.innerHTML = "Reserve Now";
 
     showSuccess(
         fullName,
@@ -189,15 +164,15 @@ emailjs.send(
 
 })
 
-.catch((error) => {
+.catch(function(error){
 
-    console.error("EmailJS Error:", error);
+    console.error(error);
 
-    alert(
-        error.text ||
-        error.message ||
-        "Failed to send reservation."
-    );
+    button.classList.remove("loading");
+    button.disabled = false;
+    button.innerHTML = "Reserve Now";
+
+    alert("❌ Failed to send reservation.");
 
 });
 
@@ -207,32 +182,35 @@ emailjs.send(
 
 
 
-// ===========================
-// Success Popup
-// ===========================
+// ==========================
+// SUCCESS POPUP
+// ==========================
 
 function showSuccess(
+
 name,
 guests,
 email,
 reservationID
+
 ){
 
-const popup=document.createElement("div");
+const popup =
+document.createElement("div");
 
-popup.className="reservation-popup";
+popup.className =
+"reservation-popup";
 
-popup.innerHTML=`
+popup.innerHTML = `
 
 <div class="popup-card">
 
 <img
 src="images/logo.png"
-class="popup-logo">
+class="popup-logo"
+>
 
-<h2>
-Reservation Confirmed
-</h2>
+<h2>Reservation Confirmed</h2>
 
 <p>
 Thank you for choosing
@@ -244,17 +222,35 @@ ARZEA Lounge & Garden
 
 <div class="popup-info">
 
-<p><b>Reservation ID</b><br>${reservationID}</p>
+<p>
+<b>Reservation ID</b><br>
+${reservationID}
+</p>
 
-<p><b>Name</b><br>${name}</p>
+<p>
+<b>Name</b><br>
+${name}
+</p>
 
-<p><b>Email</b><br>${email}</p>
+<p>
+<b>Email</b><br>
+${email}
+</p>
 
-<p><b>Guests</b><br>${guests}</p>
+<p>
+<b>Guests</b><br>
+${guests}
+</p>
 
-<p><b>Date</b><br>19 September 2026</p>
+<p>
+<b>Date</b><br>
+19 September 2026
+</p>
 
-<p><b>Time</b><br>18.00 WIB</p>
+<p>
+<b>Time</b><br>
+18.00 WIB
+</p>
 
 </div>
 
@@ -270,26 +266,12 @@ ARZEA Lounge & Garden
 
 </p>
 
-<div class="dress-code">
-
-<b>Dress Code</b><br>
-
-Elegant Black Attire
-
-</div>
-
-<button id="closePopup">
+<button
+id="closePopup">
 
 Done
 
 </button>
-
-<p class="popup-footer">
-
-✨ We look forward to welcoming you at
-ARZEA Lounge & Garden
-
-</p>
 
 </div>
 
@@ -297,16 +279,20 @@ ARZEA Lounge & Garden
 
 document.body.appendChild(popup);
 
-// ===========================
-// QR Code
-// ===========================
+// ==========================
+// CREATE QR
+// ==========================
 
-setTimeout(() => {
+setTimeout(function(){
 
-    new QRCode(
-        document.getElementById("reservationQR"),
-        {
-            text:
+new QRCode(
+
+document.getElementById("reservationQR"),
+
+{
+
+text:
+
 `ARZEA Lounge & Garden
 
 Reservation ID : ${reservationID}
@@ -321,30 +307,37 @@ Date : 19 September 2026
 
 Time : 18.00 WIB
 
-Dress Code : Elegant Black Attire`,
+Dress Code : Elegant Black`,
 
-            width:180,
-            height:180,
-            colorDark:"#000000",
-            colorLight:"#ffffff",
-            correctLevel:QRCode.CorrectLevel.H
-        }
-    );
+width:180,
 
-},100);
+height:180,
+
+colorDark:"#000000",
+
+colorLight:"#ffffff",
+
+correctLevel:QRCode.CorrectLevel.H
+
+}
+
+);
+
+},150);
 
 
-// ===========================
-// Close Popup
-// ===========================
+
+// ==========================
+// DONE BUTTON
+// ==========================
 
 document
+
 .getElementById("closePopup")
+
 .onclick=function(){
 
-    popup.remove();
-
-    window.location.href="ticket.html";
+window.location.href="ticket.html";
 
 };
 
@@ -352,50 +345,64 @@ document
 
 
 
-// ===========================
-// Download Ticket
-// ===========================
+// ==========================
+// SMOOTH SCROLL
+// ==========================
 
-async function downloadTicket(){
+document
 
-const { jsPDF } = window.jspdf;
+.querySelectorAll('a[href^="#"]')
 
-const doc = new jsPDF({
-orientation:"landscape",
-unit:"mm",
-format:[90,180]
+.forEach(function(anchor){
+
+anchor.addEventListener(
+
+"click",
+
+function(e){
+
+e.preventDefault();
+
+const target=document.querySelector(
+
+this.getAttribute("href")
+
+);
+
+if(target){
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
 });
 
-doc.setFillColor(15,15,15);
-doc.rect(0,0,180,90,"F");
-
-doc.setDrawColor(212,175,55);
-doc.setLineWidth(1);
-doc.roundedRect(4,4,172,82,4,4);
-
-doc.setTextColor(212,175,55);
-doc.setFontSize(28);
-doc.text("ARZEA",90,20,{align:"center"});
-
-doc.setFontSize(12);
-doc.text("LOUNGE & GARDEN",90,28,{align:"center"});
-
-doc.setDrawColor(212,175,55);
-doc.line(20,35,160,35);
-
-doc.setTextColor(255);
-
-doc.setFontSize(18);
-doc.text("VIP INVITATION",90,47,{align:"center"});
-
-doc.setFontSize(11);
-doc.text("Grand Opening",20,60);
-doc.text("19 September 2026",20,68);
-doc.text("18.00 WIB",20,76);
-
-doc.text("Dress Code",105,60);
-doc.text("Elegant Black",105,68);
-
-doc.save("ARZEA-VIP-Ticket.pdf");
+}
 
 }
+
+);
+
+});
+
+
+
+// ==========================
+// PRELOAD IMAGES
+// ==========================
+
+window.addEventListener(
+
+"load",
+
+function(){
+
+document.body.classList.add("loaded");
+
+});
+
+
+
+// ==========================
+// END
+// ==========================
