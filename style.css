@@ -2690,3 +2690,111 @@ to{opacity:1;transform:translateY(0);filter:blur(0);}
 .hero-content > *{animation:none;opacity:1;}
 
 }
+
+/* ARZEA signature finish */
+::selection{background:var(--gold);color:#13100a;}
+
+body::before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:-7;
+opacity:.32;
+background-image:linear-gradient(rgba(248,231,162,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(248,231,162,.018) 1px,transparent 1px);
+background-size:72px 72px;
+mask-image:linear-gradient(to bottom,#000,transparent 48%);
+}
+
+.navbar{
+padding:16px 8%;
+background:linear-gradient(180deg,rgba(8,8,7,.9),rgba(8,8,7,.46));
+box-shadow:0 12px 46px rgba(0,0,0,.16);
+}
+
+.navbar::after{
+content:"";
+position:absolute;
+inset:auto 8% -1px;
+height:1px;
+background:linear-gradient(90deg,transparent,rgba(248,231,162,.56),transparent);
+}
+
+.hero-content h3{
+display:inline-flex;
+align-items:center;
+gap:13px;
+padding:9px 16px;
+border:1px solid rgba(248,231,162,.28);
+border-radius:999px;
+background:rgba(8,8,7,.24);
+box-shadow:inset 0 1px rgba(255,255,255,.08),0 12px 34px rgba(0,0,0,.15);
+backdrop-filter:blur(10px);
+}
+
+.hero-content h3::before,.hero-content h3::after{
+content:"";
+display:block;
+width:22px;
+height:1px;
+background:currentColor;
+}
+
+.hero-content h1{
+text-shadow:0 5px 0 rgba(255,255,255,.025),0 26px 70px rgba(0,0,0,.58);
+}
+
+.hero-date{
+box-shadow:inset 0 1px rgba(255,255,255,.11),0 14px 32px rgba(0,0,0,.2);
+}
+
+.hero-btn,.reserve-btn{
+position:relative;
+overflow:hidden;
+isolation:isolate;
+}
+
+.hero-btn::after,.reserve-btn::after{
+content:"";
+position:absolute;
+inset:0;
+z-index:-1;
+background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.46) 50%,transparent 76%);
+transform:translateX(-130%);
+transition:transform .65s ease;
+}
+
+.hero-btn:hover::after,.reserve-btn:hover::after{transform:translateX(130%);}
+
+.section-title h2{
+display:inline-block;
+position:relative;
+}
+
+.section-title h2::after{
+content:"";
+display:block;
+width:48px;
+height:1px;
+margin:14px auto 0;
+background:linear-gradient(90deg,transparent,var(--gold-light),transparent);
+}
+
+.reserve-form{
+padding:34px;
+border:1px solid rgba(248,231,162,.14);
+border-radius:30px;
+background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+box-shadow:0 30px 80px rgba(0,0,0,.24),inset 0 1px rgba(255,255,255,.07);
+}
+
+.form-group input,.form-group select,.form-group textarea{
+background:rgba(0,0,0,.22);
+box-shadow:inset 0 1px rgba(255,255,255,.035);
+}
+
+@media(max-width:768px){
+.navbar{padding:13px 6%;}
+.reserve-form{padding:22px 17px;border-radius:23px;}
+.hero-content h3{font-size:11px;letter-spacing:4px;padding:8px 12px;}
+}
