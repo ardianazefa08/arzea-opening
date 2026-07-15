@@ -2609,3 +2609,84 @@ font-size:17px;
 }
 
 }
+
+/* Reservation QR: fixed-size, centered presentation */
+#popupQRCode{
+
+width:186px;
+height:186px;
+margin:28px auto 8px;
+display:grid;
+place-items:center;
+background:#fff;
+padding:14px;
+border-radius:22px;
+box-shadow:0 18px 38px rgba(0,0,0,.36),0 0 0 1px rgba(248,231,162,.5);
+
+}
+
+#popupQRCode img,
+#popupQRCode canvas{
+
+display:block;
+width:100% !important;
+height:100% !important;
+
+}
+
+/* Preserve Nagita's portrait framing, including on hover. */
+.guest-card--nagita img{
+
+object-position:center 8%;
+transform:scale(1) !important;
+
+}
+
+/* Editorial motion: subtle enough to retain a luxury feel. */
+.hero::before{
+
+content:"";
+position:absolute;
+inset:0;
+z-index:1;
+pointer-events:none;
+background:linear-gradient(115deg,transparent 24%,rgba(248,231,162,.11) 50%,transparent 72%);
+transform:translateX(-110%);
+animation:heroLightPass 8s ease-in-out infinite 1.5s;
+
+}
+
+.hero-content > *{
+
+opacity:0;
+animation:luxuryReveal .85s cubic-bezier(.2,.8,.2,1) forwards;
+
+}
+
+.hero-content h3{animation-delay:.18s;}
+.hero-content h1{animation-delay:.32s;}
+.hero-content h2{animation-delay:.46s;}
+.hero-content p{animation-delay:.60s;}
+.hero-content .hero-buttons{animation-delay:.74s;}
+
+@keyframes luxuryReveal{
+
+from{opacity:0;transform:translateY(18px);filter:blur(5px);}
+to{opacity:1;transform:translateY(0);filter:blur(0);}
+
+}
+
+@keyframes heroLightPass{
+
+0%,18%{transform:translateX(-115%);opacity:0;}
+36%{opacity:1;}
+62%,100%{transform:translateX(115%);opacity:0;}
+
+}
+
+@media(prefers-reduced-motion:reduce){
+
+.hero::before,
+.hero-content > *{animation:none;opacity:1;}
+
+}
