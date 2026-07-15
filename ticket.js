@@ -6,11 +6,25 @@ PART 1
 
 document.addEventListener("DOMContentLoaded",()=>{
 
-const reservation=JSON.parse(
+let reservation=null;
 
-localStorage.getItem("reservation")
+try{
 
-);
+reservation=JSON.parse(localStorage.getItem("reservation"));
+
+}catch(error){
+
+console.error("Invalid reservation data:",error);
+
+}
+
+const ticketStatus=document.getElementById("ticketStatus");
+
+function setTicketStatus(message){
+
+if(ticketStatus) ticketStatus.textContent=message;
+
+}
 
 
 
@@ -56,6 +70,8 @@ reservation.guests;
 QR CODE
 ====================================*/
 
+if(typeof QRCode!=="undefined"){
+
 new QRCode(
 
 document.getElementById("qrcode"),
@@ -77,6 +93,12 @@ correctLevel:QRCode.CorrectLevel.H
 }
 
 );
+
+}else{
+
+setTicketStatus("QR code could not be loaded. Please refresh the page.");
+
+}
 
 
 
@@ -104,7 +126,21 @@ PDF
 
 const pdfBtn=document.getElementById("downloadPDF");
 
+if(pdfBtn){
+
 pdfBtn.addEventListener("click",async()=>{
+
+if(typeof html2canvas==="undefined" || !window.jspdf){
+
+setTicketStatus("PDF generator is still loading. Please try again in a moment.");
+
+return;
+
+}
+
+setTicketStatus("Creating PDF…");
+
+try{
 
 const card=document.getElementById("ticketCard");
 
@@ -152,7 +188,19 @@ reservation.id+".pdf"
 
 );
 
+setTicketStatus("PDF downloaded.");
+
+}catch(error){
+
+console.error("PDF download failed:",error);
+
+setTicketStatus("Could not create PDF. Please try again.");
+
+}
+
 });
+
+}
 
 /*====================================
 SAVE PNG
@@ -163,6 +211,18 @@ const pngBtn=document.getElementById("downloadPNG");
 if(pngBtn){
 
 pngBtn.addEventListener("click",async()=>{
+
+if(typeof html2canvas==="undefined"){
+
+setTicketStatus("Image generator is still loading. Please try again in a moment.");
+
+return;
+
+}
+
+setTicketStatus("Creating image…");
+
+try{
 
 const card=document.getElementById("ticketCard");
 
@@ -183,6 +243,16 @@ link.download=reservation.id+".png";
 link.href=canvas.toDataURL("image/png");
 
 link.click();
+
+setTicketStatus("Image downloaded.");
+
+}catch(error){
+
+console.error("Image download failed:",error);
+
+setTicketStatus("Could not create image. Please try again.");
+
+}
 
 });
 

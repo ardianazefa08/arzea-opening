@@ -1932,7 +1932,7 @@ margin-bottom:20px;
 
 }
 
-.popup-card h2{
+.success-card h2{
 
 font-family:'Cormorant Garamond',serif;
 
@@ -1944,7 +1944,7 @@ margin-bottom:15px;
 
 }
 
-.popup-card h3{
+.success-card h3{
 
 font-family:'Cormorant Garamond',serif;
 
@@ -1997,6 +1997,15 @@ background:white;
 padding:16px;
 
 border-radius:18px;
+
+}
+
+.email-status{
+
+min-height:24px;
+margin:20px 0;
+color:#d9d9d9;
+font-size:13px;
 
 }
 

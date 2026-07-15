@@ -561,14 +561,13 @@ window.addEventListener("click",(e)=>{
 RESERVATION FORM
 ==================================================*/
 
+if (reservationForm) {
 reservationForm.addEventListener(
 "submit",
 
-function(e){
+async function(e){
 
     e.preventDefault();
-
-    alert("SUBMIT MASUK");
 
 const data={
 
@@ -601,11 +600,28 @@ saveReservation(data);
 
 showSuccessPopup(data);
 
+const button = document.getElementById("reserveButton");
+
+if (button) {
+    button.disabled = true;
+    button.textContent = "Reservation confirmed";
+}
+
+try {
+    await sendReservationEmail(data);
+} finally {
+    if (button) {
+        button.disabled = false;
+        button.textContent = "Reserve Now";
+    }
+}
+
 console.log(data);
 
 }
 
 );
+}
 
 
 
@@ -644,6 +660,10 @@ EMAILJS • QR CODE • SUCCESS SOUND • VIP TICKET
 EMAILJS INIT
 ==================================================*/
 
+/*==================================================
+SEND EMAIL
+==================================================*/
+
 if (typeof emailjs !== "undefined") {
 
     emailjs.init({
@@ -652,57 +672,83 @@ if (typeof emailjs !== "undefined") {
 
 }
 
-/*==================================================
-SEND EMAIL
-==================================================*/
-
 async function sendReservationEmail(data){
+
+    const emailStatus = document.getElementById("emailStatus");
+
+    if (emailStatus) {
+        emailStatus.textContent = "Sending confirmation email…";
+    }
 
     try{
 
+        const response = await fetch("/api/send-reservation", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Email could not be sent.");
+        }
+
+        console.log("✅ Confirmation email sent", result.id);
+
+        if (emailStatus) emailStatus.textContent = "Confirmation email sent.";
+        return true;
+
+    }catch(serverError){
+
+        // Resend needs a verified sender domain. Use the configured EmailJS
+        // service as a working fallback until that domain is available.
+        if (typeof emailjs === "undefined") {
+            console.error("Reservation email:", serverError);
+            if (emailStatus) emailStatus.textContent = "Reservation saved, but the email service is unavailable.";
+            return false;
+        }
+
+        try {
+
         await emailjs.send(
-
             "service_yp1tkqq",
-
             "template_ru3pmnr",
-
             {
-    reservation_id : data.id,
-
-    guest_name : data.name,
-
-    guest_email : data.email,
-
-    guest_phone : data.phone,
-
-    guest_count : data.guests,
-
-    reservation_date : data.date,
-
-    reservation_time : data.time,
-
-    dress_code : data.dress,
-
-    special_request : data.request,
-
-    logo_url : "https://arzea-opening.vercel.app/images/logo.png",
-
-    hero_url : "https://arzea-opening.vercel.app/images/hero.png",
-
-    website_url : "https://arzea-opening.vercel.app/",
-
-    vip_ticket_url :
-    "https://arzea-opening.vercel.app/ticket.html?id=" +
-    encodeURIComponent(data.id)
-}
-
+                reservation_id: data.id,
+                guest_name: data.name,
+                guest_email: data.email,
+                to_email: data.email,
+                reply_to: data.email,
+                guest_phone: data.phone,
+                guest_count: data.guests,
+                reservation_date: data.date,
+                reservation_time: data.time,
+                dress_code: data.dress,
+                special_request: data.request,
+                logo_url: "https://arzea-opening.vercel.app/images/logo.png",
+                hero_url: "https://arzea-opening.vercel.app/images/hero.png",
+                website_url: "https://arzea-opening.vercel.app/",
+                vip_ticket_url: "https://arzea-opening.vercel.app/ticket.html?id=" + encodeURIComponent(data.id)
+            }
         );
 
-        console.log("✅ Email sent");
+        console.log("✅ Confirmation email sent through EmailJS");
+        if (emailStatus) emailStatus.textContent = "Confirmation email sent.";
+        return true;
 
-    }catch(error){
+        }catch(error){
 
         console.error("EmailJS :", error);
+        if (emailStatus) {
+            const detail = error && (error.text || error.message);
+            emailStatus.textContent = detail
+                ? "Email could not be sent: " + detail
+                : "Reservation saved, but the email could not be sent. Please contact ARZEA.";
+        }
+        return false;
+
+        }
 
     }
 
@@ -731,7 +777,7 @@ function generateQRCode(data){
     const qr =
     document.getElementById("popupQRCode");
 
-    if(!qr) return;
+    if(!qr || typeof QRCode === "undefined") return;
 
     qr.innerHTML = "";
 
@@ -767,15 +813,13 @@ UPGRADE POPUP
 
 const oldPopup = showSuccessPopup;
 
-showSuccessPopup = async function(data){
+showSuccessPopup = function(data){
 
     oldPopup(data);
 
     generateQRCode(data);
 
     playSuccessSound();
-
-    await sendReservationEmail(data);
 
 };
 
@@ -828,26 +872,6 @@ BUTTON LOADING
 
 const reserveButton =
 document.getElementById("reserveButton");
-
-if(reserveButton){
-
-    reserveButton.addEventListener("click",()=>{
-
-        reserveButton.disabled = true;
-
-        reserveButton.innerHTML = "Processing...";
-
-        setTimeout(()=>{
-
-            reserveButton.disabled = false;
-
-            reserveButton.innerHTML = "Reserve Now";
-
-        },1800);
-
-    });
-
-}
 
 /*==================================================
 BACK TO TOP
