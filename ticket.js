@@ -148,8 +148,96 @@ window.print();
 
 
 /*====================================
-PDF
+HIGH-QUALITY EXPORT
 ====================================*/
+
+async function captureTicket(){
+
+const card=document.getElementById("ticketCard");
+
+if(!card || typeof html2canvas==="undefined"){
+
+throw new Error("Ticket image generator is unavailable.");
+
+}
+
+// Wait for the logo and premium fonts, so the downloaded invitation matches
+// the card the guest sees on screen.
+if(document.fonts && document.fonts.ready){
+
+await document.fonts.ready;
+
+}
+
+await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
+
+return html2canvas(card,{
+
+scale:3,
+useCORS:true,
+allowTaint:false,
+backgroundColor:"#101010",
+imageTimeout:15000,
+scrollX:0,
+scrollY:-window.scrollY,
+// Always export the elegant desktop invitation, even when the guest opens
+// the ticket on a phone.
+windowWidth:1300,
+onclone:clonedDocument=>{
+
+const clonedCard=clonedDocument.getElementById("ticketCard");
+
+if(clonedCard){
+
+clonedCard.style.width="1200px";
+clonedCard.style.maxWidth="1200px";
+clonedCard.style.animation="none";
+clonedCard.style.transform="none";
+
+}
+
+const exportStyle=clonedDocument.createElement("style");
+exportStyle.textContent="*,*::before,*::after{animation:none!important;transition:none!important}";
+clonedDocument.head.appendChild(exportStyle);
+
+}
+
+});
+
+}
+
+function downloadCanvas(canvas,filename){
+
+return new Promise((resolve,reject)=>{
+
+canvas.toBlob(blob=>{
+
+if(!blob){
+
+reject(new Error("Could not create the image file."));
+
+return;
+
+}
+
+const link=document.createElement("a");
+const objectUrl=URL.createObjectURL(blob);
+
+link.href=objectUrl;
+link.download=filename;
+link.style.display="none";
+document.body.appendChild(link);
+link.click();
+link.remove();
+
+window.setTimeout(()=>URL.revokeObjectURL(objectUrl),1000);
+resolve();
+
+},"image/png");
+
+});
+
+}
 
 const pdfBtn=document.getElementById("downloadPDF");
 
@@ -169,29 +257,32 @@ setTicketStatus("Creating PDF…");
 
 try{
 
-const card=document.getElementById("ticketCard");
-
-const canvas=await html2canvas(card,{
-
-scale:2,
-
-useCORS:true
-
-});
+const canvas=await captureTicket();
 
 const img=canvas.toDataURL("image/png");
 
 const {jsPDF}=window.jspdf;
 
-const pdf=new jsPDF("p","mm","a4");
+const pdf=new jsPDF("l","mm","a4");
 
 const pageWidth=pdf.internal.pageSize.getWidth();
 
+const pageHeight=pdf.internal.pageSize.getHeight();
+
 const imgWidth=pageWidth-20;
 
-const imgHeight=
+let imgHeight=
 
 canvas.height*imgWidth/canvas.width;
+
+let renderWidth=imgWidth;
+
+if(imgHeight>pageHeight-20){
+
+imgHeight=pageHeight-20;
+renderWidth=canvas.width*imgHeight/canvas.height;
+
+}
 
 pdf.addImage(
 
@@ -199,11 +290,11 @@ img,
 
 "PNG",
 
-10,
+((pageWidth-renderWidth)/2),
 
 10,
 
-imgWidth,
+renderWidth,
 
 imgHeight
 
@@ -251,25 +342,9 @@ setTicketStatus("Creating image…");
 
 try{
 
-const card=document.getElementById("ticketCard");
+const canvas=await captureTicket();
 
-const canvas=await html2canvas(card,{
-
-scale:3,
-
-useCORS:true,
-
-backgroundColor:null
-
-});
-
-const link=document.createElement("a");
-
-link.download=reservation.id+".png";
-
-link.href=canvas.toDataURL("image/png");
-
-link.click();
+await downloadCanvas(canvas,reservation.id+".png");
 
 setTicketStatus("Image downloaded.");
 
