@@ -717,6 +717,8 @@ async function sendReservationEmail(data){
             {
                 reservation_id: data.id,
                 guest_name: data.name,
+                // The live EmailJS template uses {{email}} as its recipient.
+                email: data.email,
                 guest_email: data.email,
                 to_email: data.email,
                 reply_to: data.email,
