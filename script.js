@@ -731,7 +731,9 @@ async function sendReservationEmail(data){
                 logo_url: "https://arzea-opening.vercel.app/images/logo.png",
                 hero_url: "https://arzea-opening.vercel.app/images/hero.png",
                 website_url: "https://arzea-opening.vercel.app/",
-                vip_ticket_url: "https://arzea-opening.vercel.app/ticket.html?id=" + encodeURIComponent(data.id)
+                vip_ticket_url: "https://arzea-opening.vercel.app/ticket.html?id=" + encodeURIComponent(data.id) +
+                    "&name=" + encodeURIComponent(data.name) +
+                    "&guests=" + encodeURIComponent(data.guests)
             }
         );
 

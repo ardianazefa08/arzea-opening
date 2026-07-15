@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded",()=>{
 
 let reservation=null;
 
+const ticketParams=new URLSearchParams(window.location.search);
+
 try{
 
 reservation=JSON.parse(localStorage.getItem("reservation"));
@@ -15,6 +17,21 @@ reservation=JSON.parse(localStorage.getItem("reservation"));
 }catch(error){
 
 console.error("Invalid reservation data:",error);
+
+}
+
+// Email links are opened in a fresh browser with no local storage. Build a
+// safe ticket from the reservation ID in the link so the invitation remains
+// viewable from the inbox.
+if(!reservation && ticketParams.get("id")){
+
+reservation={
+
+id:ticketParams.get("id"),
+name:ticketParams.get("name") || "VIP Guest",
+guests:ticketParams.get("guests") || "1 Guest"
+
+};
 
 }
 

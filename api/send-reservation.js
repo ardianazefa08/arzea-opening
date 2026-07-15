@@ -31,7 +31,7 @@ export default async function handler(req, res) {
   const time = escapeHtml(data.time);
   const dress = escapeHtml(data.dress);
   const request = escapeHtml(data.request || "—");
-  const ticketUrl = `https://arzea-opening.vercel.app/ticket.html?id=${encodeURIComponent(data.id)}`;
+  const ticketUrl = `https://arzea-opening.vercel.app/ticket.html?id=${encodeURIComponent(data.id)}&name=${encodeURIComponent(data.name)}&guests=${encodeURIComponent(data.guests)}`;
 
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
