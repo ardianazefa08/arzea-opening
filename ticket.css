@@ -1140,3 +1140,47 @@ content:"";
 display:none;
 
 }
+
+/* Premium ticket finish */
+.ticket-card{
+
+background:linear-gradient(135deg,#171510,#0b0b0a 66%);
+border-color:rgba(248,231,162,.28);
+box-shadow:0 32px 90px rgba(0,0,0,.58),inset 0 1px rgba(255,255,255,.08);
+
+}
+
+.ticket-left{
+
+background:linear-gradient(135deg,rgba(212,175,55,.09),transparent 48%);
+
+}
+
+.ticket-left h1{
+
+font-weight:700;
+text-shadow:0 8px 32px rgba(0,0,0,.4);
+
+}
+
+.ticket-right{
+
+background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.18));
+
+}
+
+.info-item,
+.detail-box{
+
+border-color:rgba(248,231,162,.13);
+background:rgba(255,255,255,.035);
+
+}
+
+.ticket-buttons button,
+.ticket-buttons a{
+
+letter-spacing:.5px;
+box-shadow:0 12px 30px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.25);
+
+}
