@@ -87,15 +87,29 @@ reservation.guests;
 QR CODE
 ====================================*/
 
-if(typeof QRCode!=="undefined"){
+function renderTicketQRCode(){
 
-new QRCode(
+const qrElement=document.getElementById("qrcode");
 
-document.getElementById("qrcode"),
+if(!qrElement || typeof QRCode==="undefined"){
 
-{
+setTicketStatus("QR code could not be loaded. Please refresh the page.");
 
-text:JSON.stringify(reservation),
+return;
+
+}
+
+qrElement.innerHTML="";
+
+new QRCode(qrElement,{
+
+text:JSON.stringify({
+
+id:reservation.id,
+name:reservation.name,
+guests:reservation.guests
+
+}),
 
 width:180,
 
@@ -107,15 +121,11 @@ colorLight:"#ffffff",
 
 correctLevel:QRCode.CorrectLevel.H
 
-}
-
-);
-
-}else{
-
-setTicketStatus("QR code could not be loaded. Please refresh the page.");
+});
 
 }
+
+requestAnimationFrame(renderTicketQRCode);
 
 
 
